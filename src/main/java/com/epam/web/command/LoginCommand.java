@@ -1,17 +1,28 @@
 package com.epam.web.command;
 
+import com.epam.web.controller.Controller;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class LoginCommand implements Command {
 
     private final UserService service;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private static final String NAME = "name";
+    private static final String MAIN = "mainPage";
+    private static final String INVALID = "invalidLogin";
+    private final static String ERROR_MESSAGE = "errorMessage";
 
     public LoginCommand(UserService service) {
         this.service = service;
@@ -19,17 +30,28 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter(USERNAME);
+        String password = request.getParameter(PASSWORD);
 
         Optional<User> optionalUser = null;
         try {
             optionalUser = service.login(username, password);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
-        optionalUser.ifPresent(user -> request.getSession().setAttribute("name", user.getName()));
+        return login(request, optionalUser);
+    }
 
-        return CommandResult.redirect("/web_2021_war/controller?command=mainPage");
+    private CommandResult login(HttpServletRequest request, Optional<User> optionalUser) {
+        HttpSession session = request.getSession();
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            String name = user.getName();
+            session.setAttribute(NAME, name);
+            return CommandResult.redirect(MAIN);
+        } else {
+            session.setAttribute(ERROR_MESSAGE, true);
+            return CommandResult.redirect(INVALID);
+        }
     }
 }

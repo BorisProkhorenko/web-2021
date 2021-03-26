@@ -1,3 +1,7 @@
+.error {
+    color: red
+}
+
 button {
     transform: translateX(-50%);
     width: 100px;
@@ -45,6 +49,7 @@ p {
     margin-bottom: 24px;
     color: #FFFA00;
 }
+
 
 .form-group label {
     color: #FFFA00;
@@ -123,7 +128,7 @@ p {
 }
 
 .footer {
-    padding: 10px 0 10px 300px;
+    padding: 10px 0 10px 40%;
     margin-top: 25px;
     margin-bottom: 0;
     background: #FFFA00;
@@ -174,6 +179,28 @@ p {
 
 .vacancy form {
     padding-left: 90%;
+}
+
+@media (max-width: 767px) {
+    .vacancy form {
+        padding-left: 50%;
+    }
+}
+
+@media (max-width: 400px){
+    .container{
+        padding-left: 3em;
+    }
+    .menu {
+        width: 3em;
+        display: inline-block;
+        padding: 0;
+
+    }
+    .menu a{
+        -webkit-transform: rotate(-90deg);
+    }
+
 }
 
 

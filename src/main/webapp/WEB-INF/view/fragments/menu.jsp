@@ -3,5 +3,5 @@
 <nav class="menu">
     <a href="${pageContext.request.contextPath}/controller?command=mainPage">Vacancies</a>
     <a href="${pageContext.request.contextPath}/controller?command=cv">My CV</a>
-    <a href="${pageContext.request.contextPath}/controller?command=messages">Messages</a>
+    <a href="${pageContext.request.contextPath}/controller?command=applications">Applications</a>
 </nav>

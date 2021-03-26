@@ -10,6 +10,9 @@
     <form action="${pageContext.request.contextPath}/controller?command=login"
           method="POST">
         <h1>Login Form</h1>
+        <c:if test="${errorMessage == true}">
+            <h3 class="error">Invalid username or password</h3>
+        </c:if>
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="username" class="form-control" required>
@@ -20,6 +23,7 @@
         </div>
 
         <input type="submit" class="btn" value="Login"/>
+
     </form>
 </main>
 </body>

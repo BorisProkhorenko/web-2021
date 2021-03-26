@@ -14,6 +14,10 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
 
     private final CommandFactory commandFactory = new CommandFactory();
+    private final static String COMMAND = "command";
+    private final static String ERROR_MESSAGE = "errorMessage";
+    private final static String ERROR_PAGE = "error.jsp";
+    private final static String COMMAND_HEADER = "/controller?command=";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -26,9 +30,7 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        String commandType = request.getParameter("command");
-
+        String commandType = request.getParameter(COMMAND);
         Command command = commandFactory.create(commandType);
         String page;
         boolean isRedirect = false;
@@ -37,8 +39,8 @@ public class Controller extends HttpServlet {
             page = result.getPage();
             isRedirect = result.isRedirect();
         } catch (Exception e) {
-            request.setAttribute("errorMessage", e.getMessage());
-            page = "/error.jsp";
+            request.setAttribute(ERROR_MESSAGE, e.getMessage());
+            page = ERROR_PAGE;
         }
         if (isRedirect) {
             redirect(response, page);
@@ -54,6 +56,9 @@ public class Controller extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse response, String page) throws IOException {
-        response.sendRedirect(page);
+        String contextPath = getServletContext().getContextPath();
+        String pagePath = contextPath + COMMAND_HEADER + page;
+        response.sendRedirect(pagePath);
     }
+
 }
