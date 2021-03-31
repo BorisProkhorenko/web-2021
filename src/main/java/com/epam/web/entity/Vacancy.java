@@ -1,20 +1,27 @@
 package com.epam.web.entity;
 
-public class Vacancy {
+public class Vacancy implements Identifiable {
 
-    private String name;
-    private String salary;
-    private String responsibilities;
-    private String description;
-    private String requirements;
+    private final Long id;
+    private final String name;
+    private final String salary;
+    private final String responsibility;
+    private final String description;
+    private final String requirements;
 
 
-    public Vacancy(String name, String salary, String responsibilities, String description, String requirements) {
+    public Vacancy(Long id, String name, String salary, String responsibility, String description, String requirements) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
-        this.responsibilities = responsibilities;
+        this.responsibility = responsibility;
         this.description = description;
         this.requirements = requirements;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -25,8 +32,8 @@ public class Vacancy {
         return salary;
     }
 
-    public String getResponsibilities() {
-        return responsibilities;
+    public String getResponsibility() {
+        return responsibility;
     }
 
     public String getDescription() {
@@ -36,5 +43,6 @@ public class Vacancy {
     public String getRequirements() {
         return requirements;
     }
+
 
 }

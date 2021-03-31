@@ -19,7 +19,7 @@ public class LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
-    private static final String NAME = "name";
+    private static final String ID = "id";
     private static final String MAIN = "mainPage";
     private static final String INVALID = "invalidLogin";
     private final static String ERROR_MESSAGE = "errorMessage";
@@ -46,8 +46,8 @@ public class LoginCommand implements Command {
         HttpSession session = request.getSession();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            String name = user.getName();
-            session.setAttribute(NAME, name);
+            Long id = user.getId();
+            session.setAttribute(ID, id);
             return CommandResult.redirect(MAIN);
         } else {
             session.setAttribute(ERROR_MESSAGE, true);

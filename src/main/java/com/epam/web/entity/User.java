@@ -1,20 +1,41 @@
 package com.epam.web.entity;
 
-public class User {
-    private Long id;
-    private String name;
+import com.epam.web.enums.Role;
 
-    public User(Long id,String name) {
-        this.id=id;
-        this.name = name;
+public class User implements Identifiable {
+
+    private final Long id;
+    private final String username;
+    private final String password;
+    private final Role role;
+    private final boolean isBlocked;
+
+    public User(Long id, String username, String password, Role role, boolean isBlocked) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.isBlocked = isBlocked;
     }
 
-    public String getName() {
-
-        return name;
-    }
-
+    @Override
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
     }
 }

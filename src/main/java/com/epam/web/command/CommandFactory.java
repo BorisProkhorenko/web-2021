@@ -1,6 +1,6 @@
 package com.epam.web.command;
 
-import com.epam.web.dao.UserDaoImp;
+import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.service.UserService;
 
 public class CommandFactory {
@@ -19,7 +19,7 @@ public class CommandFactory {
     public Command create(String type){
         switch (type){
             case LOGIN:
-                return new LoginCommand(new UserService(new UserDaoImp()));
+                return new LoginCommand(new UserService());
             case INVALID_LOGIN:
                 return new ShowPageCommand(INDEX_PAGE);
             case MAIN:
