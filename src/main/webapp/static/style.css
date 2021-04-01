@@ -85,6 +85,13 @@ p {
     opacity: .7;
 }
 
+.login form .icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10%;
+}
+
 .header {
     display: flex;
     flex-direction: row;
@@ -189,17 +196,34 @@ p {
 
 @media (max-width: 400px){
     .container{
-        padding-left: 3em;
+        padding-left: 5em;
     }
     .menu {
-        width: 3em;
-        display: inline-block;
-        padding: 0;
+        width: 5em;
+
 
     }
     .menu a{
-        -webkit-transform: rotate(-90deg);
+        font-size: 15px;
+        padding-left: 2px;
     }
+
+    .header {
+        flex-direction: column;
+    }
+    .header-section{
+        flex-direction: column;
+        margin-left: 6em;
+    }
+
+    .headerLogo{
+        margin-left: 0;
+    }
+
+    .footer{
+        font-size: 20px;
+    }
+
 
 }
 

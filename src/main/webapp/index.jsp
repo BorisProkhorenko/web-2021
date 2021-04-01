@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${param.lang}" scope="session"/>
+<fmt:setBundle basename="language" scope="session"/>
+
+<html lang="${sessionScope.lang}">
 <head>
     <link rel="stylesheet" href="static/style.css"/>
 </head>
@@ -9,22 +15,35 @@
 <main class="login">
     <form action="${pageContext.request.contextPath}/controller?command=login"
           method="POST">
-        <h1>Login Form</h1>
+        <h1>
+            <fmt:message key="label.welcome"/>
+        </h1>
         <c:if test="${errorMessage == true}">
-            <h3 class="error">Invalid username or password</h3>
+            <h3 class="error">
+                <fmt:message key="label.loginFormErrorMessage"/>
+            </h3>
         </c:if>
         <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" required>
+            <label><fmt:message key="label.username"/></label>
+            <input type="text" name="username" class="form-control" required/>
         </div>
         <div class="form-group">
-            <label>Password</label>
-            <input type="text" name="password" class="form-control" required>
+            <label><fmt:message key="label.password"/></label>
+            <input type="text" name="password" class="form-control" required/>
         </div>
-
-        <input type="submit" class="btn" value="Login"/>
-
+        <fmt:message key="label.login" var="buttonValue"/>
+        <input type="submit" class="btn" value="${buttonValue}"/>
+        <div class="icons">
+            <a href="${pageContext.servletContext.contextPath}?lang=en"><img
+                    src="${pageContext.servletContext.contextPath}/icons/uk_icon.png" alt="df"></a>
+            <a href="${pageContext.servletContext.contextPath}?lang=de"><img
+                    src="${pageContext.servletContext.contextPath}/icons/germany_icon.png" alt="df"></a>
+            <a href="${pageContext.servletContext.contextPath}?lang=ru"><img
+                    src="${pageContext.servletContext.contextPath}/icons/russia_icon.png" alt="df"></a>
+        </div>
     </form>
+
+    <p>"${sessionScope}"</p>
 </main>
 </body>
 </html>

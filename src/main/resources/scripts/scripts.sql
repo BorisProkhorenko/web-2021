@@ -55,3 +55,17 @@ alter table response
 
 insert into user(id, username, password, role, is_blocked)
 values (1, 'admin', md5('admin'), 'admin', false);
+
+insert into vacancy(id, name, salary, responsibility, description, requirements)
+values(1, 'Java Developer', '-', 'responsibility', 'Description','We are looking for engineers who are motivated and can take ownership to drive innovative features with an emphasis on quality. Strong technical expertise in Java;');
+insert into vacancy(id, name, salary, responsibility, description, requirements)
+values(2, 'Python Developer', '3000-4000$', 'responsibility', 'Description','Good English communication skills. 4+ years of experience in web Back-end development Strong fundamental programming skills such as solid coding standard, design patterns.');
+
+insert into vacancy(id, name, salary, responsibility, description, requirements)
+values(3, 'GUI Designer', '1500$', 'responsibility', 'Description','Bachelor with UX/Visual Design, Human-Computer Interaction, Industrial Design or similar degrees preferred A minimum of 3 years of professional experience working in cross-disciplinary teams.');
+
+insert into vacancy(id, name, salary, responsibility, description, requirements)
+values(4, 'Salesforce Consultant', '-', 'responsibility', 'Description','excellent communication skills and proficiency in both English and Russian (C1 level)');
+
+insert into vacancy(id, name, salary, responsibility, description, requirements)
+values(5, 'HR Coordinator', '1500$', 'responsibility', 'Description','Proven experience as an HR coordinator or relevant human resources position');

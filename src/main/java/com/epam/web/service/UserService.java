@@ -25,7 +25,7 @@ public class UserService {
             Optional<User> user = userDao.findUserByUsernameAndPassword(username, password);
             helper.endTransaction();
             return user;
-        } catch (DaoException | SQLException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
 

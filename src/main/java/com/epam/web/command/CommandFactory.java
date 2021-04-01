@@ -1,6 +1,5 @@
 package com.epam.web.command;
 
-import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.service.UserService;
 
 public class CommandFactory {

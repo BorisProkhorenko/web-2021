@@ -31,6 +31,7 @@
         </div>
     </c:forEach>
 
+    <p>"${sessionScope}"</p>
 
 </main>
 <footer>
