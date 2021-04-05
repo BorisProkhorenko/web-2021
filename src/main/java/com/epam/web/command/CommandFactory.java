@@ -15,6 +15,7 @@ public class CommandFactory {
     private final static String CV_PAGE = "WEB-INF/view/cv.jsp";
     private final static String APPLICATIONS_PAGE = "WEB-INF/view/applications.jsp";
 
+
     public Command create(String type){
         switch (type){
             case LOGIN:

@@ -124,8 +124,9 @@ p {
     flex: 1;
 }
 
-.headerButton a:hover {
-    color: deepskyblue;
+.headerButton a:hover, button:hover {
+    color: deepskyblue ;
+    opacity: 1;
 }
 
 .header a {
@@ -133,6 +134,68 @@ p {
     text-decoration: none;
     color: #44036F;
 }
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #FFFA00;
+    color: #44036F;
+    border: none;
+    transform: none;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    text-transform: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #FFFA00;
+    color: #44036F;
+
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    color: deepskyblue;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+
+    border-top: 7px solid #44036F;
+}
+
 
 .footer {
     padding: 10px 0 10px 40%;
@@ -188,13 +251,13 @@ p {
     padding-left: 90%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 800px) {
     .vacancy form {
         padding-left: 50%;
     }
 }
 
-@media (max-width: 400px){
+@media (max-width: 700px){
     .container{
         padding-left: 5em;
     }

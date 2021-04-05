@@ -1,13 +1,11 @@
 package com.epam.web.command;
 
-import com.epam.web.controller.Controller;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,6 +42,9 @@ public class LoginCommand implements Command {
 
     private CommandResult login(HttpServletRequest request, Optional<User> optionalUser) {
         HttpSession session = request.getSession();
+        if (session.getAttribute("lang") == null) {
+            session.setAttribute("lang", "en");
+        }
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             Long id = user.getId();

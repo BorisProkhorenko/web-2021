@@ -1,7 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<html>
+<fmt:setLocale value="${sessionScope.lang}" scope="session"/>
+<fmt:setBundle basename="language" scope="session"/>
+
+<html lang="${sessionScope.lang}">
 <body>
 
 <jsp:include page="fragments/header.jsp"/>
@@ -22,10 +26,10 @@
             <br/>
             <b>${vacancy.salary}</b>
             <p>${vacancy.requirements}</p>
-            <form action="${pageContext.request.contextPath}/controller?command=logout"
+            <form action="#"
                   method="POST">
                 <button>
-                    Details
+                    <fmt:message key="label.details"/>
                 </button>
             </form>
         </div>

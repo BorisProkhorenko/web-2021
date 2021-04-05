@@ -2,12 +2,12 @@
 <html>
 <body>
 
-<header class="header">
-    <jsp:include page="fragments/header.jsp" />
-</header>
+
+<jsp:include page="fragments/header.jsp"/>
+
 
 <nav class="menu">
-    <jsp:include page="fragments/menu.jsp" />
+    <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
 <main class="container">
