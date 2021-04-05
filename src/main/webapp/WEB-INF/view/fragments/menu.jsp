@@ -12,8 +12,8 @@
     <a href="${pageContext.request.contextPath}/controller?command=cv">
         <fmt:message key="label.cv"/>
     </a>
-    <a href="${pageContext.request.contextPath}/controller?command=applications">
-        <fmt:message key="label.applications"/>
+    <a href="${pageContext.request.contextPath}/controller?command=responses">
+        <fmt:message key="label.responses"/>
     </a>
 </nav>
 </html>
