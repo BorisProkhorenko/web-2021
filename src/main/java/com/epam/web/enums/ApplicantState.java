@@ -1,8 +1,7 @@
 package com.epam.web.enums;
 
-import java.util.Optional;
 
-public enum ApplicantState {
+public enum ApplicantState{
 
     NEW("New"),
     PRELIMINARY("Preliminary"),
@@ -20,12 +19,13 @@ public enum ApplicantState {
         return value;
     }
 
-    public static Optional<ApplicantState> fromString(String text) {
+
+    public static ApplicantState fromString(String text) throws EnumParsingException {
         for (ApplicantState state : ApplicantState.values()) {
             if (state.value.equalsIgnoreCase(text)) {
-                return Optional.of(state);
+                return state;
             }
         }
-        return Optional.empty();
+        throw new EnumParsingException("Unknown state");
     }
 }

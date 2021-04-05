@@ -23,7 +23,7 @@ public class ResponseRowMapper implements RowMapper<Response>{
         Long id = resultSet.getLong(ID);
         String main = resultSet.getString(MAIN);
         String details = resultSet.getString(DETAILS);
-        String date = resultSet.getString(DATE);//TODO date not String
+        String date = resultSet.getString(DATE);//TODO: Date not String
         Long user_id = resultSet.getLong(USER_ID);
         Long vacancy_id = resultSet.getLong(VACANCY_ID);
         return new Response(id, main, details, date, user_id, vacancy_id);

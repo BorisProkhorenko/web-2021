@@ -16,4 +16,5 @@ public interface Dao<T extends Identifiable> {
 
     void removeById(Long id) throws DaoException;
 
+
 }

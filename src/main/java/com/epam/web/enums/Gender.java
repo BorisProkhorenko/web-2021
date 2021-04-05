@@ -1,6 +1,5 @@
 package com.epam.web.enums;
 
-import java.util.Optional;
 
 public enum Gender {
 
@@ -17,12 +16,13 @@ public enum Gender {
         return value;
     }
 
-    public static Optional<Gender> fromString(String text) {
+
+    public static Gender fromString(String text) throws EnumParsingException {
         for (Gender gender : Gender.values()) {
             if (gender.value.equalsIgnoreCase(text)) {
-                return Optional.of(gender);
+                return gender;
             }
         }
-        return Optional.empty();
+        throw new EnumParsingException("Unknown gender");
     }
 }

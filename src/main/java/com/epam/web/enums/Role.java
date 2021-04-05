@@ -1,8 +1,7 @@
 package com.epam.web.enums;
 
-import java.util.Optional;
 
-public enum Role {
+public enum Role  {
     ADMIN("Admin"),
     HR("HR"),
     APPLICANT("Applicant");
@@ -17,12 +16,12 @@ public enum Role {
         return value;
     }
 
-    public static Optional<Role> fromString(String text) {
+    public static Role fromString(String text) throws EnumParsingException {
         for (Role role : Role.values()) {
             if (role.value.equalsIgnoreCase(text)) {
-                return Optional.of(role);
+                return role;
             }
         }
-        return Optional.empty();
+        throw new EnumParsingException("Unknown role");
     }
 }

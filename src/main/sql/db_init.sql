@@ -1,3 +1,5 @@
+create database hr_database;
+
 create table User
 (
     id         bigint primary key,
@@ -9,7 +11,7 @@ create table User
     gender     enum("male","female"),
     age        int,
     photo      varchar(50),
-    contacts   varchar(50),
+    contacts   blob,
     education  varchar(255),
     experience varchar(255),
     skills     varchar(255)
@@ -31,7 +33,6 @@ create table User_Vacancy
     vacancy_id         bigint,
     state              enum("New", "Preliminary", "Technical", "Hired", "Rejected" ),
     preliminary_points int,
-    technical_points   int,
     primary key (vacancy_id, user_id)
 );
 

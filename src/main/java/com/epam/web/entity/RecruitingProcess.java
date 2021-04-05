@@ -8,14 +8,14 @@ public class RecruitingProcess implements Identifiable {
     private final Long vacancyId;
     private final ApplicantState state;
     private final Integer preliminaryPoints;
-    private final Integer technicalPoints;
 
-    public RecruitingProcess(Long userId, Long vacancyId, ApplicantState state, Integer preliminaryPoints, Integer technicalPoints) {
+
+    public RecruitingProcess(Long userId, Long vacancyId, ApplicantState state, Integer preliminaryPoints) {
         this.userId = userId;
         this.vacancyId = vacancyId;
         this.state = state;
         this.preliminaryPoints = preliminaryPoints;
-        this.technicalPoints = technicalPoints;
+
     }
 
     @Override
@@ -27,9 +27,6 @@ public class RecruitingProcess implements Identifiable {
         return vacancyId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 
     public ApplicantState getState() {
         return state;
@@ -39,7 +36,4 @@ public class RecruitingProcess implements Identifiable {
         return preliminaryPoints;
     }
 
-    public Integer getTechnicalPoints() {
-        return technicalPoints;
-    }
 }

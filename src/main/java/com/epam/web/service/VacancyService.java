@@ -4,7 +4,6 @@ import com.epam.web.dao.*;
 
 import com.epam.web.entity.Vacancy;
 
-import java.sql.SQLException;
 
 import java.util.List;
 

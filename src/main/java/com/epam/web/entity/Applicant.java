@@ -29,6 +29,23 @@ public class Applicant extends User {
         this.skills = skills;
     }
 
+    public Applicant(User user, String name, Gender gender, Integer age, String photo, String contacts,
+                     String education, String experience, String skills) {
+        super(user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                APPLICANT,
+                user.isBlocked());
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.photo = photo;
+        this.contacts = contacts;
+        this.education = education;
+        this.experience = experience;
+        this.skills = skills;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,4 +77,6 @@ public class Applicant extends User {
     public String getSkills() {
         return skills;
     }
+
+
 }

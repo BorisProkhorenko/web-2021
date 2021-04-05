@@ -3,6 +3,8 @@ package com.epam.web.mapper;
 import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Applicant;
 import com.epam.web.entity.User;
+import com.epam.web.enums.ApplicantState;
+import com.epam.web.enums.EnumParsingException;
 import com.epam.web.enums.Gender;
 import com.epam.web.enums.Role;
 
@@ -17,14 +19,7 @@ public class UserRowMapper implements RowMapper<User> {
     public final static String PASSWORD = "password";
     public final static String ROLE = "role";
     public final static String IS_BLOCKED = "is_blocked";
-    public final static String NAME = "name";
-    public final static String GENDER = "gender";
-    public final static String AGE = "age";
-    public final static String PHOTO = "photo";
-    public final static String CONTACTS = "contacts";
-    public final static String EDUCATION = "education";
-    public final static String EXPERIENCE = "experience";
-    public final static String SKILLS = "skills";
+
 
     @Override
     public User map(ResultSet resultSet) throws SQLException, DaoException {
@@ -34,43 +29,26 @@ public class UserRowMapper implements RowMapper<User> {
         boolean isBlocked = resultSet.getBoolean(IS_BLOCKED);
         String roleAsString = resultSet.getString(ROLE);
         Role role = getRoleFromString(roleAsString);
-        if (role == Role.APPLICANT) {
-            return mapApplicant(resultSet, id, username, password, isBlocked);
-        } else {
-            return new User(id, username, password, role, isBlocked);
-        }
+        User user = new User(id, username, password, role, isBlocked);
+        return createEntity(user, resultSet);
+
     }
 
-    private User mapApplicant(ResultSet resultSet, Long id, String username, String password, Boolean isBlocked)
-            throws SQLException, DaoException {
-        String name = resultSet.getString(NAME);
-        String sexAsString = resultSet.getString(GENDER);
-        Gender gender = getSexFromString(sexAsString);
-        Integer age = resultSet.getInt(AGE);
-        String photo = resultSet.getString(PHOTO);
-        String contacts = resultSet.getString(CONTACTS);
-        String education = resultSet.getString(EDUCATION);
-        String experience = resultSet.getString(EXPERIENCE);
-        String skills = resultSet.getString(SKILLS);
-        return new Applicant(id, username, password, isBlocked, name, gender, age, photo,
-                contacts, education, experience, skills);
+    protected User createEntity(User user, ResultSet resultSet) throws SQLException, DaoException {
+        if (user.getRole() == Role.APPLICANT) {
+            return new ApplicantRowMapper().createEntity(user, resultSet);
+        }
+        return user;
     }
+
 
     private Role getRoleFromString(String role) throws DaoException {
-        Optional<Role> optionalRole = Role.fromString(role);
-        if (optionalRole.isPresent()) {
-            return optionalRole.get();
-        } else {
-            throw new DaoException("Unknown role");
+        try {
+            return Role.fromString(role);
+        } catch (EnumParsingException e) {
+            throw new DaoException(e);
         }
     }
 
-    private Gender getSexFromString(String sex) throws DaoException {
-        Optional<Gender> optionalSex = Gender.fromString(sex);
-        if (optionalSex.isPresent()) {
-            return optionalSex.get();
-        } else {
-            throw new DaoException("Unknown sex");
-        }
-    }
+
 }

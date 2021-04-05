@@ -1,7 +1,6 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.Identifiable;
-import com.epam.web.extractor.StatementExtractor;
 import com.epam.web.mapper.RowMapper;
 
 
@@ -18,12 +17,10 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     private final Connection connection;
     private final RowMapper<T> mapper;
-    private final StatementExtractor<T> extractor;
 
-    protected AbstractDao(Connection connection, RowMapper<T> mapper, StatementExtractor<T> extractor) {
+    protected AbstractDao(Connection connection, RowMapper<T> mapper) {
         this.connection = connection;
         this.mapper = mapper;
-        this.extractor = extractor;
     }
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException {
@@ -104,17 +101,23 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    private void insert(T item) throws DaoException {
-        String query = extractor.getInsertQuery();
-        List<Object> params = extractor.extractParamsForInsertQuery(item);
-        executeForVoidResult(query, params);
+
+    public void insert(T item) throws DaoException {
+        List<Object> params = extractParams(item);
+        Long id = item.getId();
+        params.set(0, id);
+        executeForVoidResult(getInsertQuery(), params);
     }
 
-    private void update(T item) throws DaoException {
-        String query = extractor.getUpdateQuery();
-        List<Object> params = extractor.extractParamsForUpdateQuery(item);
-        executeForVoidResult(query, params);
+
+    public void update(T item) throws DaoException {
+        List<Object> params = extractParams(item);
+        Long id = item.getId();
+        params.add(id);
+        executeForVoidResult(getUpdateQuery(), params);
     }
+
+    protected abstract List<Object> extractParams(T item);
 
     @Override
     public void removeById(Long id) throws DaoException {
@@ -122,5 +125,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     }
 
     protected abstract String getTableName();
+    protected abstract String getUpdateQuery();
+    protected abstract String getInsertQuery();
 
 }
