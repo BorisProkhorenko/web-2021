@@ -13,19 +13,27 @@ public class ResponseDao extends AbstractDao<Response>{
 
     public final static String TABLE = "response";
 
-    private final static String INSERT_QUERY = "INSERT INTO RESPONSE(id, main, details, " +
+    private final static String INSERT_QUERY = "INSERT INTO RESPONSE(id, subject, details, " +
             "user_id, vacancy_id) values(?,?,?,?,?);";
 
-    private final static String UPDATE_QUERY = "UPDATE RESPONSE SET main=?, details=?, where id=?;";
+    private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=?, where id=?;";
+
+    private final static String SELECT_BY_USER_ID = "SELECT * FROM RESPONSE WHERE USER_ID=?";
+
     public ResponseDao(Connection connection) {
 
         super(connection, new ResponseRowMapper());
     }
 
+
+    public List<Response> getByUserId(Long id) throws DaoException {
+        return executeQuery(SELECT_BY_USER_ID, id);
+    }
+
     @Override
     protected List<Object> extractParams(Response item) {
         return Arrays.asList(
-                item.getMain(),
+                item.getSubject(),
                 item.getDetails());
     }
 

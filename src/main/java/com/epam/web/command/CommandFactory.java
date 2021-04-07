@@ -8,12 +8,16 @@ public class CommandFactory {
     private final static String MAIN = "mainPage";
     private final static String CV = "cv";
     private final static String RESPONSES = "responses";
+    private final static String RESPONSE_DETAILS = "responseDetails";
     private final static String LOGOUT = "logout";
+    private final static String VACANCY = "vacancy";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
     private final static String CV_PAGE = "WEB-INF/view/cv.jsp";
     private final static String RESPONSES_PAGE = "WEB-INF/view/responses.jsp";
+    private final static String RESPONSE_DETAILS_PAGE = "WEB-INF/view/responseDetails.jsp";
+    private final static String VACANCY_PAGE = "WEB-INF/view/vacancy.jsp";
 
 
     public Command create(String type){
@@ -28,6 +32,10 @@ public class CommandFactory {
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
                 return new ShowPageCommand(RESPONSES_PAGE);
+            case VACANCY:
+                return new ShowPageCommand(VACANCY_PAGE);
+            case RESPONSE_DETAILS:
+                return new ShowPageCommand(RESPONSE_DETAILS_PAGE);
             case LOGOUT:
                 return new LogoutCommand();
             default:

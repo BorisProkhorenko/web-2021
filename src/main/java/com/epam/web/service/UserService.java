@@ -1,21 +1,13 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.DaoException;
-import com.epam.web.dao.DaoHelper;
-import com.epam.web.dao.DaoHelperFactory;
-import com.epam.web.dao.UserDao;
+import com.epam.web.dao.*;
 import com.epam.web.entity.User;
 
-import java.sql.SQLException;
+
+import java.util.List;
 import java.util.Optional;
 
-public class UserService {
-
-    private final DaoHelperFactory daoHelperFactory;
-
-    public UserService() {
-        daoHelperFactory = new DaoHelperFactory();
-    }
+public class UserService extends AbstractService<User> {
 
     public Optional<User> login(String username, String password) throws ServiceException {
 
@@ -31,5 +23,13 @@ public class UserService {
 
     }
 
+    public List<User> getUsers() throws ServiceException {
+        return super.getAll();
+    }
 
+
+    @Override
+    protected String getDaoType() {
+        return DaoHelper.USER;
+    }
 }

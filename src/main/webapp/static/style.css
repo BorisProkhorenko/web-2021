@@ -8,11 +8,11 @@ button {
     height: 30px;
     border: none;
     outline: none;
-    background: #FFFA00;
+    background: black;
     cursor: pointer;
     font-size: 16px;
     text-transform: uppercase;
-    color: #44036F;
+    color: #FFFA00;
     border-radius: 4px;
     transition: .3s;
 }
@@ -39,7 +39,7 @@ p {
     width: 100%;
     height: 100%;
     padding: 20px;
-    background: #44036F;
+    background: black;
     border-radius: 4px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
 }
@@ -76,12 +76,12 @@ p {
     cursor: pointer;
     font-size: 16px;
     text-transform: uppercase;
-    color: #44036F;
+    color: black;
     border-radius: 4px;
     transition: .3s;
 }
 
-.login form .btn:hover {
+.login form .btn:hover{
     opacity: .7;
 }
 
@@ -97,8 +97,8 @@ p {
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
-    background: #FFFA00;
-    color: #44036F;
+    background: black;
+    color: whitesmoke;
     font-family: Lato, monospace;
 }
 
@@ -115,6 +115,7 @@ p {
 
 .headerLogo {
     margin-left: 200px;
+    color: #FFFA00;
     flex: 2;
     font-weight: bold;
 }
@@ -124,21 +125,23 @@ p {
     flex: 1;
 }
 
-.headerButton a:hover, button:hover {
-    color: deepskyblue ;
+.headerButton a:hover {
+    color: #FFFA00;
     opacity: 1;
 }
-
+.headerButton button:hover {
+    color: #FFFA00;
+    opacity: 1;
+}
 .header a {
     font-size: 20px;
     text-decoration: none;
-    color: #44036F;
+    color: whitesmoke;
 }
 
-/* Dropdown Button */
+
 .dropbtn {
-    background-color: #FFFA00;
-    color: #44036F;
+    color: whitesmoke;
     border: none;
     transform: none;
     width: 100px;
@@ -148,23 +151,23 @@ p {
     text-transform: none;
 }
 
-/* The container <div> - needed to position the dropdown content */
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
+
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 
-/* Links inside the dropdown */
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -172,19 +175,21 @@ p {
     display: block;
 }
 
-/* Change color of dropdown links on hover */
+
 .dropdown-content a:hover {
     background-color: #FFFA00;
-    color: #44036F;
+    color: black;
 
 }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
 .dropdown:hover .dropbtn {
-    color: deepskyblue;
+    color: #FFFA00;
 }
 
 .arrow-down {
@@ -193,7 +198,7 @@ p {
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
 
-    border-top: 7px solid #44036F;
+    border-top: 7px solid #FFFA00;
 }
 
 
@@ -201,59 +206,72 @@ p {
     padding: 10px 0 10px 40%;
     margin-top: 25px;
     margin-bottom: 0;
-    background: #FFFA00;
-    color: #44036F;
+    background: black;
+    color: #FFFA00;
     font-family: Lato, monospace;
     font-size: 25px;
 }
 
 /* The sidebar menu */
 .menu {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
-    background-color: #44036F;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: black;
+    overflow-x: hidden;
     padding-top: 20px;
 }
 
-/* The navigation menu links */
+
 .menu a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #A967D5;
+    color: whitesmoke;
     display: block;
 }
 
-/* When you mouse over the navigation links, change their color */
+
 .menu a:hover {
     color: #FFFA00;
 }
 
-.vacancy {
+.list-item {
     padding-top: 5px;
     margin-top: 15px;
-    color: white;
-    background-color: #44036F;
-    border: 4px solid darkviolet;
+    color: black;
+    background-color: whitesmoke;
+    border: 4px solid black;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
 }
 
-.vacancy strong, p, b {
+.list-item strong, p, b {
     padding-left: 5px;
 }
 
-.vacancy form {
+.list-item form {
     padding-left: 90%;
 }
 
+.photo-contacts-cv{
+    display: flex;
+    flex-direction: row;
+}
+
+.end-page-button button{
+    margin-left: 50%;
+    width: 150px;
+}
+
 @media (max-width: 800px) {
-    .vacancy form {
+    .list-item form {
         padding-left: 50%;
+    }
+    .photo-contacts-cv{
+        flex-direction: column;
     }
 }
 

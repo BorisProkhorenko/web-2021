@@ -1,17 +1,19 @@
 package com.epam.web.entity;
 
+import java.util.Date;
+
 public class Response implements Identifiable {
 
     private final Long id;
-    private final String main;
+    private final String subject;
     private final String details;
-    private final String date;
+    private final Date date;
     private final Long userId;
     private final Long vacancyId;
 
-    public Response(Long id, String main, String details, String date, Long userId, Long vacancyId) {
+    public Response(Long id, String subject, String details, Date date, Long userId, Long vacancyId) {
         this.id = id;
-        this.main = main;
+        this.subject = subject;
         this.details = details;
         this.date = date;
         this.userId = userId;
@@ -23,15 +25,15 @@ public class Response implements Identifiable {
         return id;
     }
 
-    public String getMain() {
-        return main;
+    public String getSubject() {
+        return subject;
     }
 
     public String getDetails() {
         return details;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

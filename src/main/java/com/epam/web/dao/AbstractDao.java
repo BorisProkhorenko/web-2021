@@ -92,6 +92,11 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     }
 
     @Override
+    public List<T> getAllById(Long id) throws DaoException {
+        return executeQuery(concatQuery(SELECT_ALL_FROM, WHERE_ID), id);
+
+    }
+    @Override
     public void save(T item) throws DaoException {
         Long id = item.getId();
         if (getById(id).isPresent()) {
