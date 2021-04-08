@@ -5,10 +5,11 @@ import com.epam.web.mapper.ResponseRowMapper;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResponseDao extends AbstractDao<Response>{
+public class ResponseDao extends AbstractDao<Response> {
 
 
     public final static String TABLE = "response";
@@ -38,16 +39,22 @@ public class ResponseDao extends AbstractDao<Response>{
     }
 
     @Override
-    public void insert(Response item) throws DaoException{
-        List<Object> params = extractParams(item);
+    public void save(Response item) throws DaoException {
+        ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long id = item.getId();
         Long userId = item.getUserId();
         Long vacancyId = item.getVacancyId();
-        params.set(0, id);
-        params.add(userId);
-        params.add(vacancyId);
-        executeForVoidResult(getInsertQuery(), params);
-}
+        if (getById(id).isPresent()) {
+            paramList.add(id);
+        } else {
+            paramList.set(0, id);
+            paramList.add(userId);
+            paramList.add(vacancyId);
+        }
+        Object[] params = paramList.toArray();
+        executeUpdate(getUpdateQuery(), params);
+    }
+
 
     @Override
     protected String getTableName() {

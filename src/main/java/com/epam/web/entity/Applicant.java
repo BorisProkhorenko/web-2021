@@ -78,5 +78,17 @@ public class Applicant extends User {
         return skills;
     }
 
-
+    @Override
+    public String toString() {
+        return "Applicant{" +
+                "name='" + name + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
+                ", photo='" + photo + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", education='" + education + '\'' +
+                ", experience='" + experience + '\'' +
+                ", skills='" + skills + '\'' +
+                '}';
+    }
 }

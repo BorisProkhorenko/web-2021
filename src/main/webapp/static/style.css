@@ -266,6 +266,60 @@ p {
     width: 150px;
 }
 
+/* edit form*/
+.edit-form input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.edit-form label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.edit-form input[type=submit] {
+    background-color: black;
+    color: #FFFA00;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    float: right;
+}
+
+.edit-form input[type=submit]:hover {
+    opacity: .7;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.big-size input{
+    height: 200px;
+}
+
 @media (max-width: 800px) {
     .list-item form {
         padding-left: 50%;
@@ -274,6 +328,8 @@ p {
         flex-direction: column;
     }
 }
+
+
 
 @media (max-width: 700px){
     .container{
@@ -303,6 +359,10 @@ p {
 
     .footer{
         font-size: 20px;
+    }
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
     }
 
 

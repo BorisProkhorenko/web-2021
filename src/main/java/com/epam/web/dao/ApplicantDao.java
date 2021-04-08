@@ -10,22 +10,16 @@ import java.util.List;
 
 public class ApplicantDao extends UserDao {
 
-    private final static String UPDATE_QUERY = "UPDATE USER SET username=?, password=MD5(?), role=?, is_blocked=?, " +
-            "name=?, sex=?, age=?, photo=?, contacts=?, education=?, experience=?, skills=? where id=?;";
+    private final static String UPDATE_QUERY = "UPDATE USER SET name=?, gender=?, age=?, photo=?, contacts=?, " +
+            "education=?, experience=?, skills=? where id=?";
 
     public ApplicantDao(Connection connection) {
         super(connection);
     }
 
-    @Override
-    protected List<Object> extractParams(User item) {
-        List<Object> userParams = super.extractParams(item);
-        List<Object> applicantParams = extractApplicantParams(item);
-        userParams.addAll(applicantParams);
-        return userParams;
-    }
 
-    private List<Object> extractApplicantParams(User item) {
+    @Override
+    protected List<Object> extractParams(User item){
         Applicant applicant = (Applicant) item;
         Gender gender = applicant.getGender();
         return Arrays.asList(
@@ -36,7 +30,11 @@ public class ApplicantDao extends UserDao {
                 applicant.getContacts(),
                 applicant.getEducation(),
                 applicant.getExperience(),
-                applicant.getSkills(),
-                applicant.getId());
+                applicant.getSkills());
+    }
+
+    @Override
+    protected String getUpdateQuery() {
+        return UPDATE_QUERY;
     }
 }

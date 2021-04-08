@@ -1,6 +1,7 @@
 package com.epam.web.service;
 
 import com.epam.web.dao.*;
+import com.epam.web.entity.Applicant;
 import com.epam.web.entity.User;
 
 

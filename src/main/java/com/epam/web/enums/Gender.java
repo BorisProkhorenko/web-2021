@@ -3,8 +3,8 @@ package com.epam.web.enums;
 
 public enum Gender {
 
-    MALE("male"),
-    FEMALE("female");
+    MALE("Male"),
+    FEMALE("Female");
 
     private final String value;
 

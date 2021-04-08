@@ -20,13 +20,13 @@
 
     <c:set var="vacancies" value="${VacancyService.vacancies}"/>
 
-    <c:forEach items="${vacancies}" var="vacancy">
+    <c:forEach items="${vacancies}" var="applicant">
         <div class="list-item">
-            <strong>${vacancy.name}</strong>
+            <strong>${applicant.name}</strong>
             <br/>
-            <b>${vacancy.salary}</b>
-            <p>${vacancy.requirements}</p>
-            <form action="${pageContext.request.contextPath}/controller?command=vacancy&id=${vacancy.id}"
+            <b>${applicant.salary}</b>
+            <p>${applicant.requirements}</p>
+            <form action="${pageContext.request.contextPath}/controller?command=vacancy&id=${applicant.id}"
                   method="POST">
                 <button>
                     <fmt:message key="label.details"/>

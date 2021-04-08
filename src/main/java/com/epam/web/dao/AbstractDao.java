@@ -59,9 +59,9 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     }
 
-    protected void executeForVoidResult(String query, Object... params) throws DaoException {
+    protected void executeUpdate(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params)) {
-            statement.executeQuery(query);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -96,41 +96,31 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         return executeQuery(concatQuery(SELECT_ALL_FROM, WHERE_ID), id);
 
     }
+
     @Override
     public void save(T item) throws DaoException {
+        ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long id = item.getId();
         if (getById(id).isPresent()) {
-            update(item);
+            paramList.add(id);
         } else {
-            insert(item);
+            paramList.set(0, id);
         }
-    }
-
-
-    public void insert(T item) throws DaoException {
-        List<Object> params = extractParams(item);
-        Long id = item.getId();
-        params.set(0, id);
-        executeForVoidResult(getInsertQuery(), params);
-    }
-
-
-    public void update(T item) throws DaoException {
-        List<Object> params = extractParams(item);
-        Long id = item.getId();
-        params.add(id);
-        executeForVoidResult(getUpdateQuery(), params);
+        Object[] params = paramList.toArray();
+        executeUpdate(getUpdateQuery(), params);
     }
 
     protected abstract List<Object> extractParams(T item);
 
     @Override
     public void removeById(Long id) throws DaoException {
-        executeForVoidResult(concatQuery(DELETE_FROM, WHERE_ID), id);
+        executeUpdate(concatQuery(DELETE_FROM, WHERE_ID), id);
     }
 
     protected abstract String getTableName();
+
     protected abstract String getUpdateQuery();
+
     protected abstract String getInsertQuery();
 
 }

@@ -1,11 +1,13 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.RecruitingProcess;
+import com.epam.web.entity.Response;
 import com.epam.web.enums.ApplicantState;
 import com.epam.web.mapper.RecruitingProcessRowMapper;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,13 +34,28 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
     }
 
     @Override
+    public void save(RecruitingProcess item) throws DaoException {
+        ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
+        Long userId = item.getId();
+        Long vacancyId = item.getVacancyId();
+        if (getById(userId).isPresent()) {//TODO USER_ID and Vacancy_ID
+            paramList.add(userId);
+            paramList.add(vacancyId);
+        } else {
+            paramList.set(0, userId);
+            paramList.set(1, vacancyId);
+        }
+        Object[] params = paramList.toArray();
+        executeUpdate(getUpdateQuery(), params);
+    }
+
     public void insert(RecruitingProcess item) throws DaoException{
         List<Object> params = extractParams(item);
         Long userId = item.getId();
         Long vacancyId = item.getVacancyId();
         params.set(0, userId);
         params.set(1, vacancyId);
-        executeForVoidResult(getInsertQuery(), params);
+        executeUpdate(getInsertQuery(), params);
     }
 
     public void update(RecruitingProcess item) throws DaoException {
@@ -47,7 +64,7 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
         Long vacancyId = item.getVacancyId();
         params.add(userId);
         params.add(vacancyId);
-        executeForVoidResult(getUpdateQuery(), params);
+        executeUpdate(getUpdateQuery(), params);
     }
 
     @Override

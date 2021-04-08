@@ -26,8 +26,8 @@
     <c:forEach items="${responses}" var="response">
         <div class="list-item">
             <c:set var="id" value="${response.vacancyId}"/>
-            <c:set var="vacancy" value="${VacancyService.getById(id)}"/>
-            <strong>${vacancy.name}</strong>
+            <c:set var="applicant" value="${VacancyService.getById(id)}"/>
+            <strong>${applicant.name}</strong>
             <br/>
             <b>
             <c:if test="${sessionScope.lang == 'en'}">

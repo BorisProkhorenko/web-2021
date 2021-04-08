@@ -20,18 +20,18 @@
     <jsp:useBean id="UserService" scope="request" class="com.epam.web.service.UserService"
                  type="com.epam.web.service.UserService"/>
 
-    <c:set var="vacancy" value="${UserService.getById(sessionScope.id)}"/>
+    <c:set var="applicant" value="${UserService.getById(sessionScope.id)}" scope="request"/>
     <c:set var="male" value="${Gender.MALE}"/>
     <c:set var="female" value="${Gender.FEMALE}"/>
 
     <div class="general-cv">
-        <h1>${vacancy.name}</h1>
-        <strong><fmt:message key="label.age"/>: ${vacancy.age}</strong>
+        <h1>${applicant.name}</h1>
+        <strong><fmt:message key="label.age"/>: ${applicant.age}</strong>
         <strong><fmt:message key="label.gender"/>:
-            <c:if test="${vacancy.gender == male}">
+            <c:if test="${applicant.gender == Male}">
                 <fmt:message key="label.male"/>
             </c:if>
-            <c:if test="${vacancy.gender == female}">
+            <c:if test="${applicant.gender == Female}">
                 <fmt:message key="label.female"/>
             </c:if>
         </strong>
@@ -40,19 +40,19 @@
         <img src="${pageContext.servletContext.contextPath}/icons/avatar.png" height="400" width="400">
         <div>
             <h3><fmt:message key="label.contacts"/>:</h3>
-            <p>${vacancy.contacts}</p>
+            <p>${applicant.contacts}</p>
         </div>
     </div>
     <div>
         <h3><fmt:message key="label.education"/>:</h3>
-        <p>${vacancy.education}</p>
+        <p>${applicant.education}</p>
         <h3><fmt:message key="label.experience"/>:</h3>
-        <p>${vacancy.experience}</p>
+        <p>${applicant.experience}</p>
         <h3><fmt:message key="label.skills"/>:</h3>
-        <p>${vacancy.skills}</p>
+        <p>${applicant.skills}</p>
     </div>
 
-    <form class="end-page-button" action="#" method="POST">
+    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editCv" method="post">
         <button>
             <fmt:message key="label.edit"/>
         </button>

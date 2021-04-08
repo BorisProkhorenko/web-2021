@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class DaoHelper implements AutoCloseable {
 
     private ProxyConnection connection;
-    public static final String USER="user";
-    public static final String VACANCY="vacancy";
-    public static final String RESPONSE="response";
-    public static final String RECRUITING_PROCESS="recruitingProcess";
+    public static final String USER = "user";
+    public static final String VACANCY = "vacancy";
+    public static final String RESPONSE = "response";
+    public static final String RECRUITING_PROCESS = "recruitingProcess";
 
     public DaoHelper(ProxyConnection connection) {
         this.connection = connection;
@@ -18,6 +18,10 @@ public class DaoHelper implements AutoCloseable {
 
     public UserDao createUserDao() {
         return new UserDao(connection);
+    }
+
+    public ApplicantDao createApplicantDao() {
+        return new ApplicantDao(connection);
     }
 
     public VacancyDao createVacancyDao() {
@@ -29,18 +33,18 @@ public class DaoHelper implements AutoCloseable {
     }
 
     public AbstractDao createDao(String daoType) throws DaoException {
-       switch (daoType){
-           case USER:
-               return new UserDao(connection);
-           case VACANCY:
-               return new VacancyDao(connection);
-           case RESPONSE:
-               return new ResponseDao(connection);
-           case RECRUITING_PROCESS:
-               return new RecruitingProcessDao(connection);
-           default:
-               throw new DaoException("Unknown DAO type");
-       }
+        switch (daoType) {
+            case USER:
+                return new UserDao(connection);
+            case VACANCY:
+                return new VacancyDao(connection);
+            case RESPONSE:
+                return new ResponseDao(connection);
+            case RECRUITING_PROCESS:
+                return new RecruitingProcessDao(connection);
+            default:
+                throw new DaoException("Unknown DAO type");
+        }
     }
 
     @Override

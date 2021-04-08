@@ -26,17 +26,17 @@
     <jsp:useBean id="VacancyService" scope="request" class="com.epam.web.service.VacancyService"
                  type="com.epam.web.service.VacancyService"/>
 
-    <c:set var="vacancy" value="${VacancyService.getById(vacancyId)}"/>
+    <c:set var="applicant" value="${VacancyService.getById(vacancyId)}"/>
 
     <c:set var="response" value="${ResponseService.getById(responseId)}"/>
 
-    <h1>${vacancy.name}</h1>
+    <h1>${applicant.name}</h1>
     <h3><fmt:message key="label.subject"/>:</h3>
     <p>${response.subject}</p>
     <h3><fmt:message key="label.details"/>:</h3>
     <p>${response.details}</p>
 
-    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=responses">
+    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=responses" method="post">
         <button>
             <fmt:message key="label.back"/>
         </button>

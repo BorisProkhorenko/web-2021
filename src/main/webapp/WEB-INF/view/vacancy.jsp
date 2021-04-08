@@ -22,18 +22,18 @@
     <jsp:useBean id="VacancyService" scope="request" class="com.epam.web.service.VacancyService"
                  type="com.epam.web.service.VacancyService"/>
 
-    <c:set var="vacancy" value="${VacancyService.getById(vacancyId)}"/>
+    <c:set var="applicant" value="${VacancyService.getById(vacancyId)}"/>
 
-        <h1>${vacancy.name}</h1>
-        <strong>${vacancy.salary}</strong>
+        <h1>${applicant.name}</h1>
+        <strong>${applicant.salary}</strong>
         <h3><fmt:message key="label.description"/>:</h3>
-        <p>${vacancy.description}</p>
+        <p>${applicant.description}</p>
         <h3><fmt:message key="label.responsibility"/>:</h3>
-        <p>${vacancy.responsibility}</p>
+        <p>${applicant.responsibility}</p>
         <h3><fmt:message key="label.requirements"/>:</h3>
-        <p>${vacancy.requirements}</p>.
+        <p>${applicant.requirements}</p>.
 
-    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=mainPage">
+    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=mainPage" method="post">
         <button>
             <fmt:message key="label.back"/>
         </button>

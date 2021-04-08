@@ -6,11 +6,11 @@
 
 <html lang="${sessionScope.lang}">
 <nav class="menu">
-    <a href="${pageContext.request.contextPath}/controller?command=mainPage">
-        <fmt:message key="label.vacancies"/>
-    </a>
     <a href="${pageContext.request.contextPath}/controller?command=cv">
         <fmt:message key="label.cv"/>
+    </a>
+    <a href="${pageContext.request.contextPath}/controller?command=mainPage">
+        <fmt:message key="label.vacancies"/>
     </a>
     <a href="${pageContext.request.contextPath}/controller?command=responses">
         <fmt:message key="label.responses"/>
