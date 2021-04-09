@@ -12,6 +12,10 @@ import java.util.Properties;
 public class ConnectionFactory {
 
     private final static String PROPERTY_FILE = "db.properties";
+    private final static String DRIVER = "db.driver";
+    private final static String URL = "db.url";
+    private final static String LOGIN = "db.login";
+    private final static String PASSWORD = "db.password";
 
     private String url;
     private String login;
@@ -31,12 +35,12 @@ public class ConnectionFactory {
         try {
             Properties properties = new PropertyLoader().load(PROPERTY_FILE);
 
-            String driver = properties.getProperty("db.driver");
+            String driver = properties.getProperty(DRIVER);
             Class.forName(driver);
 
-            url = properties.getProperty("db.url");
-            login = properties.getProperty("db.login");
-            password = properties.getProperty("db.password");
+            url = properties.getProperty(URL);
+            login = properties.getProperty(LOGIN);
+            password = properties.getProperty(PASSWORD);
 
         } catch (ClassNotFoundException | IOException e) {
             throw new ConnectionException(e);

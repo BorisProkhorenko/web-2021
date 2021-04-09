@@ -1,0 +1,35 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>Example TLD</short-name>
+
+    <tag>
+        <name>Hello</name>
+        <tag-class>com.epam.web.tag.HelloTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>items</name>
+            <required>true</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+
+        <attribute>
+            <name>itemsOnPage</name>
+            <required>true</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+        </attribute>
+
+        <variable>
+            <name-from-attribute>name</name-from-attribute>
+            <variable-class>java.lang.Integer</variable-class>
+        </variable>
+    </tag>
+
+
+</taglib>

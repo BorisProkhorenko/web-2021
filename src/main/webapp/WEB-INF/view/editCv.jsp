@@ -24,7 +24,7 @@
     <form action="${pageContext.request.contextPath}/controller?command=updateCv" class="edit-form" method="post">
         <div class="row">
             <div class="col-25">
-                <label for="name">Name</label>
+                <label for="name"><fmt:message key="label.name"/></label>
             </div>
             <div class="col-75">
                 <input type="text" id="name" name="name" value="${applicant.name}">
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="age">Age</label>
+                <label for="age"><fmt:message key="label.age"/></label>
             </div>
             <div class="col-75">
                 <input type="text" id="age" name="age" value="${applicant.age}">
@@ -40,18 +40,18 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="gender">Gender</label>
+                <label for="gender"><fmt:message key="label.gender"/></label>
             </div>
             <div class="col-75">
                 <select id="gender" name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male"><fmt:message key="label.male"/></option>
+                    <option value="female"><fmt:message key="label.female"/></option>
                 </select>
             </div>
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="contacts">Contacts</label>
+                <label for="contacts"><fmt:message key="label.contacts"/></label>
             </div>
             <div class="col-75 big-size">
                 <textarea id="contacts" name="contacts">${applicant.contacts}</textarea>
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="education">Education</label>
+                <label for="education"><fmt:message key="label.education"/></label>
             </div>
             <div class="col-75 big-size">
                 <textarea id="education" name="education">${applicant.education}</textarea>
@@ -67,7 +67,7 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="experience">Experience</label>
+                <label for="experience"><fmt:message key="label.experience"/></label>
             </div>
             <div class="col-75 big-size">
                 <textarea id="experience" name="experience">${applicant.experience}</textarea>
@@ -75,14 +75,14 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="skills">Skills</label>
+                <label for="skills"><fmt:message key="label.skills"/></label>
             </div>
             <div class="col-75 big-size">
                 <textarea id="skills" name="skills">${applicant.skills}</textarea>
             </div>
         </div>
-        <div class="row">
-            <input type="submit" value="Submit">
+        <div class="row"><fmt:message key="label.submit" var="buttonValue"/>
+            <input type="submit" value="${buttonValue}">
         </div>
     </form>
 </main>

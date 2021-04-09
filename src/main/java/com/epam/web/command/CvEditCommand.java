@@ -17,6 +17,15 @@ public class CvEditCommand implements Command {
 
     private final ApplicantService applicantService;
     private static final String CV = "cv";
+    private static final String ID = "id";
+    private static final String NAME = "name";
+    private static final String GENDER = "gender";
+    private static final String AGE = "age";
+    private static final String PHOTO = "photo";
+    private static final String CONTACTS = "contacts";
+    private static final String EDUCATION = "education";
+    private static final String EXPERIENCE = "experience";
+    private static final String SKILLS = "skills";
     private static final Logger LOGGER = LogManager.getLogger();
 
     public CvEditCommand(ApplicantService applicantService) {
@@ -26,17 +35,17 @@ public class CvEditCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute("id");
-        String name = request.getParameter("name");
-        Integer age = Integer.parseInt(request.getParameter("age"));
-        String contacts = request.getParameter("contacts");
-        String education = request.getParameter("education");
-        String experience = request.getParameter("experience");
-        String skills = request.getParameter("skills");
+        Long id = (Long) session.getAttribute(ID);
+        String name = request.getParameter(NAME);
+        Integer age = Integer.parseInt(request.getParameter(AGE));
+        String contacts = request.getParameter(CONTACTS);
+        String education = request.getParameter(EDUCATION);
+        String experience = request.getParameter(EXPERIENCE);
+        String skills = request.getParameter(SKILLS);
         try {
-            Gender gender = Gender.fromString(request.getParameter("gender"));
+            Gender gender = Gender.fromString(request.getParameter(GENDER));
             User user = applicantService.getById(id);
-            Applicant applicant = new Applicant(user, name, gender, age, "photo", contacts, education, experience, skills);
+            Applicant applicant = new Applicant(user, name, gender, age, PHOTO, contacts, education, experience, skills);
             applicantService.updateCv(applicant);
         } catch (ServiceException | EnumParsingException e) {
             LOGGER.error(e.getMessage());

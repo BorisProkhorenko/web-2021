@@ -35,13 +35,13 @@
         <input type="submit" class="btn" value="${buttonValue}"/>
         <div class="icons">
             <a href="${pageContext.servletContext.contextPath}?lang=en">
-                <img src="${pageContext.servletContext.contextPath}/icons/uk_icon.png" alt="df">
+                <img src="${pageContext.servletContext.contextPath}/icons/uk_icon.png" alt="en">
             </a>
             <a href="${pageContext.servletContext.contextPath}?lang=de">
-                <img src="${pageContext.servletContext.contextPath}/icons/germany_icon.png" alt="df">
+                <img src="${pageContext.servletContext.contextPath}/icons/germany_icon.png" alt="de">
             </a>
             <a href="${pageContext.servletContext.contextPath}?lang=ru">
-                <img src="${pageContext.servletContext.contextPath}/icons/russia_icon.png" alt="df">
+                <img src="${pageContext.servletContext.contextPath}/icons/russia_icon.png" alt="ru">
             </a>
         </div>
     </form>

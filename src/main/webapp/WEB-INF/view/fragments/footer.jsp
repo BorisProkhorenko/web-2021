@@ -3,7 +3,7 @@
 
 <body>
 <footer class="footer">
-    by Boris Prokhorenko
+    2021
 </footer>
 </body>
 </html>

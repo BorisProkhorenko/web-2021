@@ -42,9 +42,6 @@ public class LoginCommand implements Command {
 
     private CommandResult login(HttpServletRequest request, Optional<User> optionalUser) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("lang") == null) {
-            session.setAttribute("lang", "en");
-        }
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             Long id = user.getId();

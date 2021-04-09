@@ -14,6 +14,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     private final static String SELECT_ALL_FROM = "SELECT * FROM ";
     private final static String WHERE_ID = " WHERE ID = ? ";
     private final static String DELETE_FROM = " DELETE FROM ";
+    private final static String LIMIT = " LIMIT ?, ? ";
 
     private final Connection connection;
     private final RowMapper<T> mapper;
@@ -69,7 +70,8 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     private String concatQuery(String action, String condition) {
         String table = getTableName();
-        StringBuilder builder = new StringBuilder(action);
+        StringBuilder builder = new StringBuilder();
+        builder.append(action);
         builder.append(table);
         builder.append(condition);
         return builder.toString();
@@ -95,6 +97,10 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     public List<T> getAllById(Long id) throws DaoException {
         return executeQuery(concatQuery(SELECT_ALL_FROM, WHERE_ID), id);
 
+    }
+
+    public List<T> getWithLimit(Integer numSkipped, Integer limit) throws DaoException {
+        return executeQuery(concatQuery(SELECT_ALL_FROM, LIMIT), numSkipped, limit);
     }
 
     @Override
