@@ -14,6 +14,7 @@ public class CommandFactory {
     private final static String VACANCY = "vacancy";
     private final static String EDIT_CV = "editCv";
     private final static String UPDATE_CV = "updateCv";
+    private final static String PHOTO = "photo";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -45,6 +46,8 @@ public class CommandFactory {
                 return new LogoutCommand();
             case UPDATE_CV:
                 return new CvEditCommand(new ApplicantService());
+            case PHOTO:
+                return new UploadFileCommand(new ApplicantService());
             default:
                 throw new IllegalArgumentException("Unknown type of command" + type);
         }

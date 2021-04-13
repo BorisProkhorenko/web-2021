@@ -20,4 +20,15 @@ public class ApplicantService extends UserService {
         }
     }
 
+    public void updatePhoto(String photo, Long id) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            ApplicantDao applicantDao = helper.createApplicantDao();
+            applicantDao.updatePhoto(photo,id);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 }

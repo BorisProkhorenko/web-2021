@@ -14,10 +14,11 @@ import java.util.Optional;
 public class LoginCommand implements Command {
 
     private final UserService service;
-    private static final Logger LOGGER = LogManager.getLogger();
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String ID = "id";
+    private static final String PAGE = "pageIndex";
+    private static final String DEFAULT_PAGE = "1";
     private static final String MAIN = "mainPage";
     private static final String INVALID = "invalidLogin";
     private final static String ERROR_MESSAGE = "errorMessage";
@@ -46,6 +47,7 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             Long id = user.getId();
             session.setAttribute(ID, id);
+            session.setAttribute(PAGE,DEFAULT_PAGE);
             return CommandResult.redirect(MAIN);
         } else {
             session.setAttribute(ERROR_MESSAGE, true);

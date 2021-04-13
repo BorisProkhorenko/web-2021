@@ -19,6 +19,7 @@
     <param-value>en_US</param-value>
   </context-param>
 
+
   <filter>
     <filter-name>WebFilter</filter-name>
     <filter-class>com.epam.web.filter.SessionLocaleFilter</filter-class>

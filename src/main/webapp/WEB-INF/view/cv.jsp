@@ -37,12 +37,13 @@
         </strong>
     </div>
     <div class="photo-contacts-cv">
-        <img src="${pageContext.servletContext.contextPath}/icons/avatar.png" height="400" width="400">
+        <img src="${applicant.photo}" height="400" width="400">
         <div>
             <h3><fmt:message key="label.contacts"/>:</h3>
             <p>${applicant.contacts}</p>
         </div>
     </div>
+    <jsp:include page="fragments/uploadFile.jsp"/>
     <div>
         <h3><fmt:message key="label.education"/>:</h3>
         <p>${applicant.education}</p>

@@ -26,7 +26,6 @@ public class CvEditCommand implements Command {
     private static final String EDUCATION = "education";
     private static final String EXPERIENCE = "experience";
     private static final String SKILLS = "skills";
-    private static final Logger LOGGER = LogManager.getLogger();
 
     public CvEditCommand(ApplicantService applicantService) {
         this.applicantService = applicantService;
