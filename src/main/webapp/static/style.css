@@ -2,7 +2,7 @@
     color: red
 }
 
-button {
+button, .btn {
     transform: translateX(-50%);
     width: 100px;
     height: 30px;
@@ -229,7 +229,7 @@ p {
 }
 
 .footer {
-    padding: 10px 0 10px 50%;
+    padding: 10px 0 10px 57%;
     margin-top: 25px;
     margin-bottom: 0;
     background: black;
@@ -237,7 +237,6 @@ p {
     font-family: Lato, monospace;
     font-size: 25px;
 }
-
 /* The sidebar menu */
 .menu {
     height: 100%;
@@ -287,10 +286,24 @@ p {
     flex-direction: row;
 }
 
+.contacts{
+    margin-left: 5%;
+}
+
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 10% ;
+}
+.single-button{
+    margin-left: 50% ;
+}
 .end-page-button button {
-    margin-left: 50%;
     width: 150px;
 }
+
 
 /* edit form*/
 .edit-form input[type=text], select, textarea {
@@ -346,6 +359,8 @@ p {
     height: 200px;
 }
 
+
+
 @media (max-width: 800px) {
     .list-item form {
         padding-left: 50%;
@@ -365,7 +380,6 @@ p {
     .menu {
         width: 5em;
 
-
     }
 
     .menu a {
@@ -373,7 +387,7 @@ p {
         padding-left: 2px;
     }
 
-    .header {
+    .header, .pagination, .buttons {
         flex-direction: column;
     }
 
@@ -386,10 +400,6 @@ p {
         margin-left: 0;
     }
 
-    .pagination{
-        flex-direction: column;
-    }
-
     .footer {
         font-size: 20px;
     }
@@ -398,6 +408,7 @@ p {
         width: 100%;
         margin-top: 0;
     }
+
 
 
 }

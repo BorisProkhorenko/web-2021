@@ -28,22 +28,24 @@
         <h1>${applicant.name}</h1>
         <strong><fmt:message key="label.age"/>: ${applicant.age}</strong>
         <strong><fmt:message key="label.gender"/>:
-            <c:if test="${applicant.gender == Male}">
+            <c:if test="${applicant.gender == male}">
                 <fmt:message key="label.male"/>
             </c:if>
-            <c:if test="${applicant.gender == Female}">
+            <c:if test="${applicant.gender == female}">
                 <fmt:message key="label.female"/>
             </c:if>
         </strong>
     </div>
     <div class="photo-contacts-cv">
-        <img src="${applicant.photo}" height="400" width="400">
-        <div>
+        <div class="photo">
+            <img src="${applicant.photo}" height="400" width="400">
+            <jsp:include page="fragments/uploadFile.jsp"/>
+        </div>
+        <div class="contacts">
             <h3><fmt:message key="label.contacts"/>:</h3>
             <p>${applicant.contacts}</p>
         </div>
     </div>
-    <jsp:include page="fragments/uploadFile.jsp"/>
     <div>
         <h3><fmt:message key="label.education"/>:</h3>
         <p>${applicant.education}</p>
@@ -52,17 +54,17 @@
         <h3><fmt:message key="label.skills"/>:</h3>
         <p>${applicant.skills}</p>
     </div>
-
+<div class="single-button">
     <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editCv" method="post">
         <button>
             <fmt:message key="label.edit"/>
         </button>
     </form>
+</div>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>
-<p>"${sessionScope}"</p>
 </body>
 </html>
 

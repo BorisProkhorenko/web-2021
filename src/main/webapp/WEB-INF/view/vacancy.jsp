@@ -33,11 +33,18 @@
         <h3><fmt:message key="label.requirements"/>:</h3>
         <p>${applicant.requirements}</p>.
 
+<div class="buttons">
     <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=mainPage" method="post">
         <button>
             <fmt:message key="label.back"/>
         </button>
     </form>
+    <form class="end-page-button" action="#" method="post">
+        <button>
+            <fmt:message key="label.apply"/>
+        </button>
+    </form>
+</div>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>

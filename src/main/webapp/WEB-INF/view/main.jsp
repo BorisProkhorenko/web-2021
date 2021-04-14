@@ -41,7 +41,6 @@
     <paginator:display maxLinks="5" currPage="${pageIndex}" itemsCount="${VacancyService.all.size()}"
                        itemsOnPage="${VacancyService.vacanciesOnPage}" uri="${searchUri}" />
 </div>
-    <p>"${sessionScope}"</p>
 
 </main>
 <footer>

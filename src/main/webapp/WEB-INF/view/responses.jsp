@@ -46,9 +46,6 @@
             </form>
         </div>
     </c:forEach>
-
-    <p>"${sessionScope}"</p>
-
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>

@@ -3,7 +3,7 @@
 
 <body>
 <footer class="footer">
-    2021
+   <b>2021</b>
 </footer>
 </body>
 </html>
