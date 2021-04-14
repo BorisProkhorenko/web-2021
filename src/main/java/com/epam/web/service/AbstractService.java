@@ -35,7 +35,7 @@ public abstract class AbstractService<T extends Identifiable> {
             AbstractDao<T> dao = helper.createDao(getDaoType());
             Optional<T> item = dao.getById(id);
             helper.endTransaction();
-            if(item.isPresent()) {
+            if (item.isPresent()) {
                 return item.get();
             } else {
                 throw new ServiceException("Item not found");

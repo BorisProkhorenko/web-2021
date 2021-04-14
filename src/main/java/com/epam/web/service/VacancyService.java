@@ -16,7 +16,7 @@ public class VacancyService extends AbstractService<Vacancy> {
         int skipped = page * vacanciesOnPage;
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
-            VacancyDao dao = helper.createVacancyDao();
+            VacancyDao dao = (VacancyDao) helper.createDao(getDaoType());
             List<Vacancy> items = dao.getWithLimit(skipped, vacanciesOnPage);
             helper.endTransaction();
             return items;

@@ -1,15 +1,11 @@
 package com.epam.web.mapper;
 
-import com.epam.web.dao.DaoException;
-import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
-import com.epam.web.enums.Role;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class VacancyRowMapper implements RowMapper<Vacancy> {
-
 
     public final static String ID = "id";
     public final static String NAME = "name";

@@ -22,24 +22,21 @@ public class ApplicantRowMapper extends UserRowMapper {
 
     @Override
     protected User createEntity(User user, ResultSet resultSet) throws SQLException, DaoException {
-        String name = resultSet.getString(NAME);
-        String genderAsString = resultSet.getString(GENDER);
-        Gender gender = getGenderFromString(genderAsString);
-        Integer age = resultSet.getInt(AGE);
-        String photo = resultSet.getString(PHOTO);
-        String contacts = resultSet.getString(CONTACTS);
-        String education = resultSet.getString(EDUCATION);
-        String experience = resultSet.getString(EXPERIENCE);
-        String skills = resultSet.getString(SKILLS);
-        return new Applicant(user, name, gender, age, photo, contacts, education, experience, skills);
-    }
-
-
-    private Gender getGenderFromString(String gender) throws DaoException {
         try {
-            return Gender.fromString(gender);
+            String genderAsString = resultSet.getString(GENDER);
+            Gender gender = Gender.fromString(genderAsString);
+            String name = resultSet.getString(NAME);
+            Integer age = resultSet.getInt(AGE);
+            String photo = resultSet.getString(PHOTO);
+            String contacts = resultSet.getString(CONTACTS);
+            String education = resultSet.getString(EDUCATION);
+            String experience = resultSet.getString(EXPERIENCE);
+            String skills = resultSet.getString(SKILLS);
+            return new Applicant(user, name, gender, age, photo, contacts, education, experience, skills);
+
         } catch (EnumParsingException e) {
             throw new DaoException(e);
         }
     }
+
 }

@@ -3,8 +3,7 @@ package com.epam.web.command;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +46,7 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             Long id = user.getId();
             session.setAttribute(ID, id);
-            session.setAttribute(PAGE,DEFAULT_PAGE);
+            session.setAttribute(PAGE, DEFAULT_PAGE);
             return CommandResult.redirect(MAIN);
         } else {
             session.setAttribute(ERROR_MESSAGE, true);

@@ -22,7 +22,7 @@ public class ResponseService extends AbstractService<Response> {
     public List<Response> getResponsesByUserId(Long id) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
-            ResponseDao dao = helper.createResponseDao();
+            ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
             List<Response> items = dao.getByUserId(id);
             helper.endTransaction();
             return items;

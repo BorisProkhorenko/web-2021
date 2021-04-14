@@ -12,8 +12,8 @@ public class UserService extends AbstractService<User> {
     public Optional<User> login(String username, String password) throws ServiceException {
 
         try (DaoHelper helper = daoHelperFactory.create()) {
-          helper.startTransaction();
-            UserDao userDao = helper.createUserDao();
+            helper.startTransaction();
+            UserDao userDao = (UserDao) helper.createDao(getDaoType());
             Optional<User> user = userDao.findUserByUsernameAndPassword(username, password);
             helper.endTransaction();
             return user;

@@ -24,8 +24,8 @@ public class CommandFactory {
     private final static String VACANCY_PAGE = "WEB-INF/view/vacancy.jsp";
     private final static String EDIT_CV_PAGE = "WEB-INF/view/editCv.jsp";
 
-    public Command create(String type){
-        switch (type){
+    public Command create(String type) {
+        switch (type) {
             case LOGIN:
                 return new LoginCommand(new UserService());
             case INVALID_LOGIN:

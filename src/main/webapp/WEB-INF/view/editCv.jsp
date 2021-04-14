@@ -35,7 +35,7 @@
                 <label for="age"><fmt:message key="label.age"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="age" name="age" value="${applicant.age}">
+                <input type="text" id="age" name="age" pattern="[0-9]{1,3}" value="${applicant.age}">
             </div>
         </div>
         <div class="row">

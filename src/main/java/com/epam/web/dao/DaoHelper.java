@@ -8,6 +8,7 @@ public class DaoHelper implements AutoCloseable {
 
     private ProxyConnection connection;
     public static final String USER = "user";
+    public static final String APPLICANT = "applicant";
     public static final String VACANCY = "vacancy";
     public static final String RESPONSE = "response";
     public static final String RECRUITING_PROCESS = "recruitingProcess";
@@ -16,26 +17,12 @@ public class DaoHelper implements AutoCloseable {
         this.connection = connection;
     }
 
-    public UserDao createUserDao() {
-        return new UserDao(connection);
-    }
-
-    public ApplicantDao createApplicantDao() {
-        return new ApplicantDao(connection);
-    }
-
-    public VacancyDao createVacancyDao() {
-        return new VacancyDao(connection);
-    }
-
-    public ResponseDao createResponseDao() {
-        return new ResponseDao(connection);
-    }
-
     public AbstractDao createDao(String daoType) throws DaoException {
         switch (daoType) {
             case USER:
                 return new UserDao(connection);
+            case APPLICANT:
+                return new ApplicantDao(connection);
             case VACANCY:
                 return new VacancyDao(connection);
             case RESPONSE:

@@ -6,8 +6,6 @@ import com.epam.web.enums.EnumParsingException;
 import com.epam.web.enums.Gender;
 import com.epam.web.service.ApplicantService;
 import com.epam.web.service.ServiceException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

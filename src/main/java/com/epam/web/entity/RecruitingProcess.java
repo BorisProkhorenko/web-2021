@@ -2,7 +2,7 @@ package com.epam.web.entity;
 
 import com.epam.web.enums.ApplicantState;
 
-public class RecruitingProcess implements Identifiable {
+public class RecruitingProcess implements MultipleId{
 
     private final Long userId;
     private final Long vacancyId;
@@ -23,6 +23,12 @@ public class RecruitingProcess implements Identifiable {
         return userId;
     }
 
+
+    @Override
+    public Long getUserId() {
+        return userId;
+    }
+    @Override
     public Long getVacancyId() {
         return vacancyId;
     }

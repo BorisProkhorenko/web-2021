@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResponseDao extends AbstractDao<Response> {
+public class ResponseDao extends AbstractMultipleIdDao<Response> {
 
 
     public final static String TABLE = "response";

@@ -33,32 +33,18 @@ public class Controller extends HttpServlet {
         String commandType = request.getParameter(COMMAND);
         Command command = commandFactory.create(commandType);
         String page;
-        boolean isRedirect = false;
-        try {
-            CommandResult result = command.execute(request, response);
-            page = result.getPage();
-            isRedirect = result.isRedirect();
-        } catch (Exception e) {
-            request.setAttribute(ERROR_MESSAGE, e.getMessage());
-            page = ERROR_PAGE;
-        }
+        CommandResult result = command.execute(request, response);
+        page = result.getPage();
+        boolean isRedirect = result.isRedirect();
         if (isRedirect) {
-            redirect(response, page);
+            String contextPath = getServletContext().getContextPath();
+            String pagePath = contextPath + COMMAND_HEADER + page;
+            response.sendRedirect(pagePath);
         } else {
-            forward(request, response, page);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+            dispatcher.forward(request, response);
         }
     }
 
-    private void forward(HttpServletRequest request, HttpServletResponse response, String page)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
-    }
-
-    private void redirect(HttpServletResponse response, String page) throws IOException {
-        String contextPath = getServletContext().getContextPath();
-        String pagePath = contextPath + COMMAND_HEADER + page;
-        response.sendRedirect(pagePath);
-    }
 
 }

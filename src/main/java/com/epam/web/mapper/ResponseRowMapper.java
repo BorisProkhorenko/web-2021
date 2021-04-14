@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class ResponseRowMapper implements RowMapper<Response>{
+public class ResponseRowMapper implements RowMapper<Response> {
 
     public final static String ID = "id";
     public final static String SUBJECT = "subject";
@@ -27,7 +27,6 @@ public class ResponseRowMapper implements RowMapper<Response>{
         return new Response(id, subject, details, date, user_id, vacancy_id);
 
     }
-
 
 
 }

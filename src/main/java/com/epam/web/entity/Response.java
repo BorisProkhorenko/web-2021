@@ -2,7 +2,7 @@ package com.epam.web.entity;
 
 import java.util.Date;
 
-public class Response implements Identifiable {
+public class Response implements MultipleId {
 
     private final Long id;
     private final String subject;
@@ -37,10 +37,12 @@ public class Response implements Identifiable {
         return date;
     }
 
+    @Override
     public Long getUserId() {
         return userId;
     }
 
+    @Override
     public Long getVacancyId() {
         return vacancyId;
     }
