@@ -34,7 +34,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             }
             return entities;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(),e);
         }
 
     }
@@ -64,7 +64,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         try (PreparedStatement statement = createStatement(query, params)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(),e);
         }
     }
 
@@ -98,13 +98,15 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     public void save(T item) throws DaoException {
         ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long id = item.getId();
+        String query;
         if (getById(id).isPresent()) {
             paramList.add(id);
+            query = getUpdateQuery();
         } else {
-            paramList.set(0, id);
+            query = getInsertQuery();
         }
         Object[] params = paramList.toArray();
-        executeUpdate(getUpdateQuery(), params);
+        executeUpdate(query, params);
     }
 
     protected abstract List<Object> extractParams(T item);

@@ -15,38 +15,37 @@
 </nav>
 
 <main class="container">
-    <jsp:useBean id="ResponseService" scope="request" class="com.epam.web.service.ResponseService"
-                 type="com.epam.web.service.ResponseService"/>
 
-    <jsp:useBean id="VacancyService" scope="request" class="com.epam.web.service.VacancyService"
-                 type="com.epam.web.service.VacancyService"/>
 
-    <c:set var="responses" value="${ResponseService.getResponsesByUserId(sessionScope.id)}"/>
+    <c:import url="/controller?command=responseList"/>
 
-    <c:forEach items="${responses}" var="response">
+    <c:forEach items="${responseList}" var="response">
         <div class="list-item">
             <c:set var="id" value="${response.vacancyId}"/>
-            <c:set var="applicant" value="${VacancyService.getById(id)}"/>
-            <strong>${applicant.name}</strong>
+            <c:import url="/controller?command=getVacancy&id=${id}"/>
+            <strong>${vacancy.name}</strong>
             <br/>
             <b>
-            <c:if test="${sessionScope.lang == 'en'}">
-            <fmt:formatDate value="${response.date}" pattern="dd-MM-yyyy HH:mm" />
-            </c:if>
-            <c:if test="${sessionScope.lang != 'en'}">
-                <fmt:formatDate value="${response.date}" pattern="dd.MM.yyyy HH:mm" />
-            </c:if>
-          </b>
+                <c:if test="${sessionScope.lang == 'en'}">
+                    <fmt:formatDate value="${response.date}" pattern="dd-MM-yyyy HH:mm"/>
+                </c:if>
+                <c:if test="${sessionScope.lang != 'en'}">
+                    <fmt:formatDate value="${response.date}" pattern="dd.MM.yyyy HH:mm"/>
+                </c:if>
+            </b>
             <p>${response.subject}</p>
-            <form action="${pageContext.request.contextPath}/controller?command=responseDetails&id=${response.id}&vacancyId=${id}"
-                  method="POST">
-                <button>
-                    <fmt:message key="label.details"/>
-                </button>
-            </form>
+            <div class="single-button">
+                <form action="${pageContext.request.contextPath}/controller?command=responseDetails&id=${response.id}&vacancyId=${id}"
+                      method="POST">
+                    <button>
+                        <fmt:message key="label.details"/>
+                    </button>
+                </form>
+            </div>
         </div>
     </c:forEach>
 </main>
+<p>${sessionScope}</p>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>

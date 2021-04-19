@@ -4,6 +4,7 @@ import com.epam.web.enums.Role;
 
 public class User implements Identifiable {
 
+    public final static String TABLE_NAME = "user";
     private final Long id;
     private final String username;
     private final String password;

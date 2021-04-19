@@ -12,7 +12,6 @@ import java.util.List;
 
 public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProcess> {
 
-    public final static String TABLE = "user_vacancy";
 
     private final static String INSERT_QUERY = "INSERT INTO VACANCY(user_id, vacancy_id, state, preliminary_points, " +
             "values(?,?,?,?,?);";
@@ -28,7 +27,7 @@ public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProces
     protected List<Object> extractParams(RecruitingProcess item) {
         ApplicantState state = item.getState();
         return Arrays.asList(
-                state.getValue(),
+                state.toString(),
                 item.getPreliminaryPoints());
     }
 
@@ -37,20 +36,23 @@ public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProces
         ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long userId = item.getId();
         Long vacancyId = item.getVacancyId();
+        String query;
         if (getById(userId, vacancyId).isPresent()) {
             paramList.add(userId);
             paramList.add(vacancyId);
+            query = getUpdateQuery();
         } else {
             paramList.set(0, userId);
             paramList.set(1, vacancyId);
+            query = getInsertQuery();
         }
         Object[] params = paramList.toArray();
-        executeUpdate(getUpdateQuery(), params);
+        executeUpdate(query, params);
     }
 
     @Override
     protected String getTableName() {
-        return TABLE;
+        return RecruitingProcess.TABLE_NAME;
     }
 
     @Override

@@ -12,9 +12,7 @@ import java.util.List;
 public class ResponseDao extends AbstractMultipleIdDao<Response> {
 
 
-    public final static String TABLE = "response";
-
-    private final static String INSERT_QUERY = "INSERT INTO RESPONSE(id, subject, details, " +
+    private final static String INSERT_QUERY = "INSERT INTO RESPONSE(subject, details, " +
             "user_id, vacancy_id) values(?,?,?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=?, where id=?;";
@@ -44,21 +42,23 @@ public class ResponseDao extends AbstractMultipleIdDao<Response> {
         Long id = item.getId();
         Long userId = item.getUserId();
         Long vacancyId = item.getVacancyId();
+        String query;
         if (getById(id).isPresent()) {
             paramList.add(id);
+            query = getUpdateQuery();
         } else {
-            paramList.set(0, id);
             paramList.add(userId);
             paramList.add(vacancyId);
+            query = getInsertQuery();
         }
         Object[] params = paramList.toArray();
-        executeUpdate(getUpdateQuery(), params);
+        executeUpdate(query, params);
     }
 
 
     @Override
     protected String getTableName() {
-        return TABLE;
+        return Response.TABLE_NAME;
     }
 
     @Override

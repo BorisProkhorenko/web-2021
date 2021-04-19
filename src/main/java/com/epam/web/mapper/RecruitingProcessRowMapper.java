@@ -3,7 +3,7 @@ package com.epam.web.mapper;
 import com.epam.web.dao.DaoException;
 import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.enums.ApplicantState;
-import com.epam.web.enums.EnumParsingException;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,17 +19,12 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
     @Override
     public RecruitingProcess map(ResultSet resultSet) throws SQLException, DaoException {
 
-        try {
             Long user_id = resultSet.getLong(USER_ID);
             Long vacancy_id = resultSet.getLong(VACANCY_ID);
             String stateAsString = resultSet.getString(STATE);
             ApplicantState state = ApplicantState.fromString(stateAsString);
             Integer preliminaryPoints = resultSet.getInt(PRELIMINARY_POINTS);
             return new RecruitingProcess(user_id, vacancy_id, state, preliminaryPoints);
-
-        } catch (EnumParsingException e) {
-            throw new DaoException(e);
-        }
     }
 
 }

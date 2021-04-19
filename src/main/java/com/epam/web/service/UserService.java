@@ -11,11 +11,9 @@ public class UserService extends AbstractService<User> {
 
     public Optional<User> login(String username, String password) throws ServiceException {
 
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
             UserDao userDao = (UserDao) helper.createDao(getDaoType());
             Optional<User> user = userDao.findUserByUsernameAndPassword(username, password);
-            helper.endTransaction();
             return user;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -27,9 +25,8 @@ public class UserService extends AbstractService<User> {
         return super.getAll();
     }
 
-
     @Override
     protected String getDaoType() {
-        return DaoHelper.USER;
+        return User.TABLE_NAME;
     }
 }

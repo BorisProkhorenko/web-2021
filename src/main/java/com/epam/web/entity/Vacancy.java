@@ -2,6 +2,7 @@ package com.epam.web.entity;
 
 public class Vacancy implements Identifiable {
 
+    public final static String TABLE_NAME = "vacancy";
     private final Long id;
     private final String name;
     private final String salary;

@@ -2,7 +2,6 @@ package com.epam.web.mapper;
 
 import com.epam.web.dao.DaoException;
 import com.epam.web.entity.User;
-import com.epam.web.enums.EnumParsingException;
 import com.epam.web.enums.Role;
 
 import java.sql.ResultSet;
@@ -20,26 +19,25 @@ public class UserRowMapper implements RowMapper<User> {
     @Override
     public User map(ResultSet resultSet) throws SQLException, DaoException {
 
-        try {
-            Long id = resultSet.getLong(ID);
-            String username = resultSet.getString(USERNAME);
-            String password = resultSet.getString(PASSWORD);
-            boolean isBlocked = resultSet.getBoolean(IS_BLOCKED);
-            String roleAsString = resultSet.getString(ROLE);
-            Role role = Role.fromString(roleAsString);
-            User user = new User(id, username, password, role, isBlocked);
-            return createEntity(user, resultSet);
+        Long id = resultSet.getLong(ID);
+        String username = resultSet.getString(USERNAME);
+        String password = resultSet.getString(PASSWORD);
+        boolean isBlocked = resultSet.getBoolean(IS_BLOCKED);
+        String roleAsString = resultSet.getString(ROLE);
+        Role role = Role.fromString(roleAsString);
+        return createEntity(id, username, password, role, isBlocked, resultSet);
 
-        } catch (EnumParsingException e) {
-            throw new DaoException(e);
-        }
     }
 
-    protected User createEntity(User user, ResultSet resultSet) throws SQLException, DaoException {
-        if (user.getRole() == Role.APPLICANT) {
-            return new ApplicantRowMapper().createEntity(user, resultSet);
+    protected User createEntity(Long id, String username, String password, Role role, boolean isBlocked,
+                                ResultSet resultSet) throws SQLException {
+
+        if (role == Role.APPLICANT) {
+            ApplicantRowMapper applicantRowMapper = new ApplicantRowMapper();
+            return applicantRowMapper.createEntity(id, username, password, role, isBlocked, resultSet);
+        } else {
+            return new User(id, username, password, role, isBlocked);
         }
-        return user;
     }
 
 

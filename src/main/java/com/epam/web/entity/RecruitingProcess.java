@@ -4,6 +4,8 @@ import com.epam.web.enums.ApplicantState;
 
 public class RecruitingProcess implements MultipleId{
 
+    public final static String TABLE_NAME = "user_vacancy";
+
     private final Long userId;
     private final Long vacancyId;
     private final ApplicantState state;
@@ -22,7 +24,6 @@ public class RecruitingProcess implements MultipleId{
     public Long getId() {
         return userId;
     }
-
 
     @Override
     public Long getUserId() {

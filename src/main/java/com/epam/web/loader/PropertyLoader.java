@@ -13,6 +13,6 @@ public class PropertyLoader {
             properties.load(inputStream);
         }
             return properties;
-
     }
+
 }

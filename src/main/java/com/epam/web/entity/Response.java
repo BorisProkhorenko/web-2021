@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Response implements MultipleId {
 
+    public final static String TABLE_NAME = "response";
+
     private final Long id;
     private final String subject;
     private final String details;

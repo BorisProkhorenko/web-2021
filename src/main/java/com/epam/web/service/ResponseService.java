@@ -1,10 +1,10 @@
 package com.epam.web.service;
 
 
-import com.epam.web.dao.AbstractDao;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.DaoHelper;
 
+import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.dao.ResponseDao;
 import com.epam.web.entity.Response;
 
@@ -14,17 +14,10 @@ import java.util.List;
 
 public class ResponseService extends AbstractService<Response> {
 
-
-    public List<Response> getResponses() throws ServiceException {
-        return super.getAll();
-    }
-
     public List<Response> getResponsesByUserId(Long id) throws ServiceException {
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
             ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
             List<Response> items = dao.getByUserId(id);
-            helper.endTransaction();
             return items;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -33,6 +26,6 @@ public class ResponseService extends AbstractService<Response> {
 
     @Override
     protected String getDaoType() {
-        return DaoHelper.RESPONSE;
+        return Response.TABLE_NAME;
     }
 }

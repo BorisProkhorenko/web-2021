@@ -1,28 +1,23 @@
 package com.epam.web.enums;
 
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Gender {
 
-    MALE("Male"),
-    FEMALE("Female");
-
-    private final String value;
-
-    Gender(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    MALE,
+    FEMALE;
 
 
-    public static Gender fromString(String text) throws EnumParsingException {
-        for (Gender gender : Gender.values()) {
-            if (gender.value.equalsIgnoreCase(text)) {
-                return gender;
-            }
+    public static Gender fromString(String text) {
+        Optional<Gender> optionalGender = Arrays.stream(Gender.values())
+                .filter(gender -> gender.toString().equalsIgnoreCase(text))
+                .findAny();
+        if (optionalGender.isPresent()) {
+            return optionalGender.get();
+        } else {
+            throw new IllegalArgumentException("Unknown gender");
         }
-        throw new EnumParsingException("Unknown gender");
     }
 }

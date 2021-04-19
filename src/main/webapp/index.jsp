@@ -45,8 +45,6 @@
             </a>
         </div>
     </form>
-
-    <p>"${sessionScope}"</p>
 </main>
 </body>
 </html>

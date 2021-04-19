@@ -5,8 +5,8 @@ import com.epam.web.enums.Role;
 
 public class Applicant extends User {
 
-    private final static Role APPLICANT = Role.APPLICANT;
-
+    private final static Role ROLE = Role.APPLICANT;
+    public static final String APPLICANT = "applicant";
     private final String name;
     private final Gender gender;
     private final Integer age;
@@ -18,7 +18,7 @@ public class Applicant extends User {
 
     public Applicant(Long id, String username, String password, boolean isBlocked, String name, Gender gender,
                      Integer age, String photo, String contacts, String education, String experience, String skills) {
-        super(id, username, password, APPLICANT, isBlocked);
+        super(id, username, password, ROLE, isBlocked);
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -34,7 +34,7 @@ public class Applicant extends User {
         super(user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-                APPLICANT,
+                ROLE,
                 user.isBlocked());
         this.name = name;
         this.gender = gender;
@@ -78,17 +78,5 @@ public class Applicant extends User {
         return skills;
     }
 
-    @Override
-    public String toString() {
-        return "Applicant{" +
-                "name='" + name + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", photo='" + photo + '\'' +
-                ", contacts='" + contacts + '\'' +
-                ", education='" + education + '\'' +
-                ", experience='" + experience + '\'' +
-                ", skills='" + skills + '\'' +
-                '}';
-    }
+
 }

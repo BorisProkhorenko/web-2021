@@ -26,7 +26,7 @@ public class ApplicantDao extends UserDao {
         Gender gender = applicant.getGender();
         return Arrays.asList(
                 applicant.getName(),
-                gender.getValue(),
+                gender.toString(),
                 applicant.getAge(),
                 applicant.getContacts(),
                 applicant.getEducation(),

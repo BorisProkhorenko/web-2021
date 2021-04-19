@@ -3,8 +3,8 @@ package com.epam.web.mapper;
 import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Applicant;
 import com.epam.web.entity.User;
-import com.epam.web.enums.EnumParsingException;
 import com.epam.web.enums.Gender;
+import com.epam.web.enums.Role;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,22 +21,21 @@ public class ApplicantRowMapper extends UserRowMapper {
 
 
     @Override
-    protected User createEntity(User user, ResultSet resultSet) throws SQLException, DaoException {
-        try {
-            String genderAsString = resultSet.getString(GENDER);
-            Gender gender = Gender.fromString(genderAsString);
-            String name = resultSet.getString(NAME);
-            Integer age = resultSet.getInt(AGE);
-            String photo = resultSet.getString(PHOTO);
-            String contacts = resultSet.getString(CONTACTS);
-            String education = resultSet.getString(EDUCATION);
-            String experience = resultSet.getString(EXPERIENCE);
-            String skills = resultSet.getString(SKILLS);
-            return new Applicant(user, name, gender, age, photo, contacts, education, experience, skills);
+    protected User createEntity(Long id, String username, String password, Role role, boolean isBlocked,
+                                ResultSet resultSet) throws SQLException {
 
-        } catch (EnumParsingException e) {
-            throw new DaoException(e);
-        }
+        String genderAsString = resultSet.getString(GENDER);
+        Gender gender = Gender.fromString(genderAsString);
+        String name = resultSet.getString(NAME);
+        Integer age = resultSet.getInt(AGE);
+        String photo = resultSet.getString(PHOTO);
+        String contacts = resultSet.getString(CONTACTS);
+        String education = resultSet.getString(EDUCATION);
+        String experience = resultSet.getString(EXPERIENCE);
+        String skills = resultSet.getString(SKILLS);
+        return new Applicant(id, username, password, isBlocked, name, gender, age, photo, contacts, education,
+                experience, skills);
+
     }
 
 }

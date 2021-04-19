@@ -8,17 +8,16 @@ import java.util.List;
 
 public class VacancyService extends AbstractService<Vacancy> {
 
-    private final int vacanciesOnPage = 2;
+    private final static int vacanciesOnPage = 2;
+
 
 
     public List<Vacancy> getVacanciesByPage(int page) throws ServiceException {
         page--;
         int skipped = page * vacanciesOnPage;
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
             VacancyDao dao = (VacancyDao) helper.createDao(getDaoType());
             List<Vacancy> items = dao.getWithLimit(skipped, vacanciesOnPage);
-            helper.endTransaction();
             return items;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -29,9 +28,9 @@ public class VacancyService extends AbstractService<Vacancy> {
         return vacanciesOnPage;
     }
 
+
     @Override
     protected String getDaoType() {
-        return DaoHelper.VACANCY;
+        return Vacancy.TABLE_NAME;
     }
-
 }

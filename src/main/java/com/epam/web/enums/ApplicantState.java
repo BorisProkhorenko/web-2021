@@ -1,31 +1,27 @@
 package com.epam.web.enums;
 
 
-public enum ApplicantState{
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-    NEW("New"),
-    PRELIMINARY("Preliminary"),
-    TECHNICAL("Technical"),
-    HIRED("Hired"),
-    REJECTED("Rejected");
+public enum ApplicantState {
 
-    private final String value;
-
-    ApplicantState(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    NEW,
+    PRELIMINARY,
+    TECHNICAL,
+    HIRED,
+    REJECTED;
 
 
-    public static ApplicantState fromString(String text) throws EnumParsingException {
-        for (ApplicantState state : ApplicantState.values()) {
-            if (state.value.equalsIgnoreCase(text)) {
-                return state;
-            }
+    public static ApplicantState fromString(String text) {
+        Optional<ApplicantState> optionalState = Arrays.stream(ApplicantState.values())
+                .filter(state -> state.toString().equalsIgnoreCase(text))
+                .findAny();
+        if (optionalState.isPresent()) {
+            return optionalState.get();
+        } else {
+            throw new IllegalArgumentException("Unknown state");
         }
-        throw new EnumParsingException("Unknown state");
     }
 }

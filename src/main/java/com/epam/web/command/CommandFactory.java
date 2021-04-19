@@ -1,7 +1,11 @@
 package com.epam.web.command;
 
 import com.epam.web.service.ApplicantService;
+import com.epam.web.service.ResponseService;
 import com.epam.web.service.UserService;
+import com.epam.web.service.VacancyService;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class CommandFactory {
     private final static String LOGIN = "login";
@@ -15,6 +19,12 @@ public class CommandFactory {
     private final static String EDIT_CV = "editCv";
     private final static String UPDATE_CV = "updateCv";
     private final static String PHOTO = "photo";
+    private final static String VACANCY_LIST = "vacancyList";
+    private final static String RESPONSE_LIST = "responseList";
+    private final static String GET_VACANCY = "getVacancy";
+    private final static String GET_USER = "getUser";
+    private final static String GET_RESPONSE = "getResponse";
+    private final static String IMAGE = "image";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -32,6 +42,16 @@ public class CommandFactory {
                 return new ShowPageCommand(INDEX_PAGE);
             case MAIN:
                 return new ShowPageCommand(MAIN_PAGE);
+            case VACANCY_LIST:
+                return new GetVacanciesByPageCommand(new VacancyService());
+            case RESPONSE_LIST:
+                return new GetResponsesByUserCommand(new ResponseService());
+            case GET_VACANCY:
+                return new GetVacancyCommand(new VacancyService());
+            case GET_USER:
+                return new GetUserCommand(new UserService());
+            case GET_RESPONSE:
+                return new GetResponseCommand(new ResponseService());
             case CV:
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
@@ -46,8 +66,11 @@ public class CommandFactory {
                 return new LogoutCommand();
             case UPDATE_CV:
                 return new CvEditCommand(new ApplicantService());
+            case IMAGE:
+                return new GetPhotoCommand(new ApplicantService());
             case PHOTO:
-                return new UploadFileCommand(new ApplicantService());
+                ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
+                return new UploadFileCommand(new ApplicantService(), servletFileUpload);
             default:
                 throw new IllegalArgumentException("Unknown type of command" + type);
         }

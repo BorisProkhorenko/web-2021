@@ -9,32 +9,28 @@ import java.util.Optional;
 
 public abstract class AbstractService<T extends Identifiable> {
 
-    protected final DaoHelperFactory daoHelperFactory;
+    private final DaoHelperFactory daoHelperFactory;
 
-    public AbstractService() {
+    public AbstractService(){
         daoHelperFactory = new DaoHelperFactory();
     }
 
     public List<T> getAll() throws ServiceException {
 
         try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
             AbstractDao<T> dao = helper.createDao(getDaoType());
             List<T> items = dao.getAll();
-            helper.endTransaction();
             return items;
         } catch (DaoException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage(),e);
         }
     }
 
     public T getById(Long id) throws ServiceException {
 
         try (DaoHelper helper = daoHelperFactory.create()) {
-            helper.startTransaction();
             AbstractDao<T> dao = helper.createDao(getDaoType());
             Optional<T> item = dao.getById(id);
-            helper.endTransaction();
             if (item.isPresent()) {
                 return item.get();
             } else {
@@ -46,4 +42,8 @@ public abstract class AbstractService<T extends Identifiable> {
     }
 
     protected abstract String getDaoType();
+
+    protected DaoHelperFactory getDaoHelperFactory(){
+        return daoHelperFactory;
+    }
 }

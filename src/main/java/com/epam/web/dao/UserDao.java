@@ -11,12 +11,11 @@ import java.util.Optional;
 
 public class UserDao extends AbstractDao<User> {
 
-    public final static String TABLE = "user";
 
     private final static String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM USER WHERE USERNAME = ?" +
             " AND PASSWORD = MD5(?)";
 
-    private final static String INSERT_QUERY = "INSERT INTO USER(id, username, password, role, is_blocked)" +
+    private final static String INSERT_QUERY = "INSERT INTO USER(username, password, role, is_blocked)" +
             " values(?,?,MD5(?),?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE USER SET username=?, password=MD5(?), role=?, is_blocked=?, " +
@@ -39,13 +38,13 @@ public class UserDao extends AbstractDao<User> {
         return Arrays.asList(
                 item.getUsername(),
                 item.getPassword(),
-                role.getValue(),
+                role.toString(),
                 item.isBlocked());
     }
 
     @Override
     protected String getTableName() {
-        return TABLE;
+        return User.TABLE_NAME;
     }
 
     @Override

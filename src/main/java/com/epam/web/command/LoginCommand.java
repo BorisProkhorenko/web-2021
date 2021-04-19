@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.entity.User;
+import com.epam.web.enums.Role;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
@@ -16,6 +17,7 @@ public class LoginCommand implements Command {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String ID = "id";
+    private static final String ROLE = "role";
     private static final String PAGE = "pageIndex";
     private static final String DEFAULT_PAGE = "1";
     private static final String MAIN = "mainPage";
@@ -27,25 +29,17 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String username = request.getParameter(USERNAME);
         String password = request.getParameter(PASSWORD);
-
-        Optional<User> optionalUser = null;
-        try {
-            optionalUser = service.login(username, password);
-        } catch (ServiceException e) {
-            LOGGER.error(e.getMessage());
-        }
-        return login(request, optionalUser);
-    }
-
-    private CommandResult login(HttpServletRequest request, Optional<User> optionalUser) {
+        Optional<User> optionalUser = service.login(username, password);
         HttpSession session = request.getSession();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             Long id = user.getId();
+            Role role = user.getRole();
             session.setAttribute(ID, id);
+            session.setAttribute(ROLE, role);
             session.setAttribute(PAGE, DEFAULT_PAGE);
             return CommandResult.redirect(MAIN);
         } else {
@@ -53,4 +47,5 @@ public class LoginCommand implements Command {
             return CommandResult.redirect(INVALID);
         }
     }
+    
 }

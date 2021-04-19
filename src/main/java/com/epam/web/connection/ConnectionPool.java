@@ -22,7 +22,7 @@ public class ConnectionPool {
     private final ConnectionFactory connectionFactory;
     private final Semaphore connectionsSemaphore;
 
-    private ConnectionPool() throws ConnectionException {
+    private ConnectionPool() throws ConnectionPoolException {
         availableConnections = new ArrayDeque<>();
         connectionsInUse = new ArrayDeque<>();
         connectionsSemaphore = new Semaphore(POOL_SIZE);
@@ -56,7 +56,7 @@ public class ConnectionPool {
                 availableConnections.add(proxyConnection);
             }
         } catch (SQLException e) {
-            throw new ConnectionException(e);
+            throw new ConnectionPoolException(e.getMessage(),e);
         }
     }
 
@@ -85,7 +85,7 @@ public class ConnectionPool {
             return connection;
 
         } catch (InterruptedException e) {
-            throw new ConnectionException(e);
+            throw new ConnectionPoolException(e.getMessage(),e);
 
         } finally {
             connectionsLock.unlock();

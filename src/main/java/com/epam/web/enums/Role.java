@@ -1,27 +1,23 @@
 package com.epam.web.enums;
 
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Role  {
-    ADMIN("Admin"),
-    HR("HR"),
-    APPLICANT("Applicant");
+    ADMIN,
+    HR,
+    APPLICANT;
 
-    private final String value;
-
-    Role(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public static Role fromString(String text) throws EnumParsingException {
-        for (Role role : Role.values()) {
-            if (role.value.equalsIgnoreCase(text)) {
-                return role;
-            }
+    public static Role fromString(String text) {
+        Optional<Role> optionalGender = Arrays.stream(Role.values())
+                .filter(role -> role.toString().equalsIgnoreCase(text))
+                .findAny();
+        if (optionalGender.isPresent()) {
+            return optionalGender.get();
+        } else {
+            throw new IllegalArgumentException("Unknown role");
         }
-        throw new EnumParsingException("Unknown role");
+
     }
 }

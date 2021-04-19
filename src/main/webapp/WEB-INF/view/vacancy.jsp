@@ -12,26 +12,24 @@
 <body>
 
 <jsp:include page="fragments/header.jsp"/>
+<c:if test="${sessionScope.role == 'APPLICANT'}">
+    <nav class="menu">
+        <jsp:include page="fragments/menu.jsp"/>
+    </nav>
+    <c:set var="mainClass" value="container"/>
+</c:if>
 
+<main class="${mainClass}">
+    <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
 
-<nav class="menu">
-    <jsp:include page="fragments/menu.jsp"/>
-</nav>
-
-<main class="container">
-    <jsp:useBean id="VacancyService" scope="request" class="com.epam.web.service.VacancyService"
-                 type="com.epam.web.service.VacancyService"/>
-
-    <c:set var="applicant" value="${VacancyService.getById(vacancyId)}"/>
-
-        <h1>${applicant.name}</h1>
-        <strong>${applicant.salary}</strong>
+        <h1>${vacancy.name}</h1>
+        <strong>${vacancy.salary}</strong>
         <h3><fmt:message key="label.description"/>:</h3>
-        <p>${applicant.description}</p>
+        <p>${vacancy.description}</p>
         <h3><fmt:message key="label.responsibility"/>:</h3>
-        <p>${applicant.responsibility}</p>
+        <p>${vacancy.responsibility}</p>
         <h3><fmt:message key="label.requirements"/>:</h3>
-        <p>${applicant.requirements}</p>.
+        <p>${vacancy.requirements}</p>.
 
 <div class="buttons">
     <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=mainPage" method="post">
@@ -39,11 +37,29 @@
             <fmt:message key="label.back"/>
         </button>
     </form>
+<c:if test="${sessionScope.role == 'APPLICANT'}">
     <form class="end-page-button" action="#" method="post">
         <button>
             <fmt:message key="label.apply"/>
         </button>
     </form>
+</c:if>
+
+    <c:if test="${sessionScope.role == 'HR'}">
+        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editVacancy&id=${vacancy.id}"
+              method="post">
+            <button>
+                <fmt:message key="label.edit"/>
+            </button>
+        </form>
+
+        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=deleteVacancy&id=${vacancy.id}"
+              method="post">
+            <button>
+                Delete
+            </button>
+        </form>
+    </c:if>
 </div>
 </main>
 <footer>

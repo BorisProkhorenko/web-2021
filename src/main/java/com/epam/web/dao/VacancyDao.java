@@ -12,9 +12,8 @@ import java.util.List;
 
 public class VacancyDao extends AbstractDao<Vacancy> {
 
-    public final static String TABLE = "vacancy";
 
-    private final static String INSERT_QUERY = "INSERT INTO VACANCY(id, name, salary, responsibility, description, " +
+    private final static String INSERT_QUERY = "INSERT INTO VACANCY( name, salary, responsibility, description, " +
             "requirements) values(?,?,?,?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE VACANCY SET name=?, salary=?, responsibility=?, description=?, " +
@@ -37,7 +36,7 @@ public class VacancyDao extends AbstractDao<Vacancy> {
 
     @Override
     protected String getTableName() {
-        return TABLE;
+        return Vacancy.TABLE_NAME;
     }
 
     @Override

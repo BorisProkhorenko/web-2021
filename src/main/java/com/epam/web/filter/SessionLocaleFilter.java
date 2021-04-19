@@ -26,8 +26,10 @@ public class SessionLocaleFilter implements Filter {
         }
         chain.doFilter(request, response);
     }
+
     @Override
     public void destroy() {}
+
     @Override
     public void init(FilterConfig arg0){}
 }

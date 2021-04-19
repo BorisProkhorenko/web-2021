@@ -29,4 +29,12 @@
     <filter-name>WebFilter</filter-name>
     <servlet-name>main</servlet-name>
   </filter-mapping>
+
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload</param-name>
+    <param-value>
+      C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\data
+    </param-value>
+  </context-param>
 </web-app>

@@ -1,17 +1,14 @@
 package com.epam.web.dao;
 
 import com.epam.web.connection.ProxyConnection;
+import com.epam.web.entity.*;
+import com.epam.web.service.ApplicantService;
 
 import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
 
     private ProxyConnection connection;
-    public static final String USER = "user";
-    public static final String APPLICANT = "applicant";
-    public static final String VACANCY = "vacancy";
-    public static final String RESPONSE = "response";
-    public static final String RECRUITING_PROCESS = "recruitingProcess";
 
     public DaoHelper(ProxyConnection connection) {
         this.connection = connection;
@@ -19,15 +16,15 @@ public class DaoHelper implements AutoCloseable {
 
     public AbstractDao createDao(String daoType) throws DaoException {
         switch (daoType) {
-            case USER:
+            case User.TABLE_NAME:
                 return new UserDao(connection);
-            case APPLICANT:
+            case Applicant.APPLICANT:
                 return new ApplicantDao(connection);
-            case VACANCY:
+            case Vacancy.TABLE_NAME:
                 return new VacancyDao(connection);
-            case RESPONSE:
+            case Response.TABLE_NAME:
                 return new ResponseDao(connection);
-            case RECRUITING_PROCESS:
+            case RecruitingProcess.TABLE_NAME:
                 return new RecruitingProcessDao(connection);
             default:
                 throw new DaoException("Unknown DAO type");
@@ -43,7 +40,7 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(),e);
         }
     }
 

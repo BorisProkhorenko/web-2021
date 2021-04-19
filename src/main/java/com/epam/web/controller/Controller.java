@@ -3,6 +3,8 @@ package com.epam.web.controller;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandFactory;
 import com.epam.web.command.CommandResult;
+import com.epam.web.service.ServiceException;
+import org.apache.commons.fileupload.FileUploadException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,9 +35,16 @@ public class Controller extends HttpServlet {
         String commandType = request.getParameter(COMMAND);
         Command command = commandFactory.create(commandType);
         String page;
-        CommandResult result = command.execute(request, response);
-        page = result.getPage();
-        boolean isRedirect = result.isRedirect();
+        boolean isRedirect = false;
+        try {
+            CommandResult result = command.execute(request, response);
+            page = result.getPage();
+            isRedirect = result.isRedirect();
+        } catch (Exception e) {
+            request.setAttribute(ERROR_MESSAGE, e.getMessage());
+            page = ERROR_PAGE;
+        }
+
         if (isRedirect) {
             String contextPath = getServletContext().getContextPath();
             String pagePath = contextPath + COMMAND_HEADER + page;

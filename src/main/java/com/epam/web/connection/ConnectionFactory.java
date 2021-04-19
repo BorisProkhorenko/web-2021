@@ -22,7 +22,7 @@ public class ConnectionFactory {
     private String password;
 
     public ConnectionFactory() {
-        initializeProperties();
+        init();
     }
 
     public Connection create() throws SQLException {
@@ -30,7 +30,7 @@ public class ConnectionFactory {
         return DriverManager.getConnection(url, login, password);
     }
 
-    private void initializeProperties() {
+    private void init() {
 
         try {
             Properties properties = new PropertyLoader().load(PROPERTY_FILE);
@@ -43,7 +43,7 @@ public class ConnectionFactory {
             password = properties.getProperty(PASSWORD);
 
         } catch (ClassNotFoundException | IOException e) {
-            throw new ConnectionException(e);
+            throw new ConnectionPoolException(e.getMessage(),e);
         }
     }
 }

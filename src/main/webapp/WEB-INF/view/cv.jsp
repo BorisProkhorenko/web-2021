@@ -17,42 +17,41 @@
 </nav>
 
 <main class="container">
-    <jsp:useBean id="UserService" scope="request" class="com.epam.web.service.UserService"
-                 type="com.epam.web.service.UserService"/>
+    <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 
-    <c:set var="applicant" value="${UserService.getById(sessionScope.id)}" scope="request"/>
     <c:set var="male" value="${Gender.MALE}"/>
     <c:set var="female" value="${Gender.FEMALE}"/>
 
     <div class="general-cv">
-        <h1>${applicant.name}</h1>
-        <strong><fmt:message key="label.age"/>: ${applicant.age}</strong>
+        <h1>${user.name}</h1>
+        <strong><fmt:message key="label.age"/>: ${user.age}</strong>
         <strong><fmt:message key="label.gender"/>:
-            <c:if test="${applicant.gender == male}">
+            <c:if test="${user.gender == male}">
                 <fmt:message key="label.male"/>
             </c:if>
-            <c:if test="${applicant.gender == female}">
+            <c:if test="${user.gender == female}">
                 <fmt:message key="label.female"/>
             </c:if>
         </strong>
     </div>
     <div class="photo-contacts-cv">
         <div class="photo">
-            <img src="${applicant.photo}" height="400" width="400">
+
+            <img src="${pageContext.request.contextPath}/controller?command=image&id=${sessionScope.id}" height="400" width="400">
             <jsp:include page="fragments/uploadFile.jsp"/>
         </div>
         <div class="contacts">
             <h3><fmt:message key="label.contacts"/>:</h3>
-            <p>${applicant.contacts}</p>
+            <p>${user.contacts}</p>
         </div>
     </div>
     <div>
         <h3><fmt:message key="label.education"/>:</h3>
-        <p>${applicant.education}</p>
+        <p>${user.education}</p>
         <h3><fmt:message key="label.experience"/>:</h3>
-        <p>${applicant.experience}</p>
+        <p>${user.experience}</p>
         <h3><fmt:message key="label.skills"/>:</h3>
-        <p>${applicant.skills}</p>
+        <p>${user.skills}</p>
     </div>
 <div class="single-button">
     <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editCv" method="post">

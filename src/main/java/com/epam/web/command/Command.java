@@ -1,5 +1,7 @@
 package com.epam.web.command;
 
+import com.epam.web.service.ServiceException;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,5 +12,5 @@ import java.io.IOException;
 
 public interface Command {
     Logger LOGGER = LogManager.getLogger();
-    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
+    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServiceException, FileUploadException;
 }

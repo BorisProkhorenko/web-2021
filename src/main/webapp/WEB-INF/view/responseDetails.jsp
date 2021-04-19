@@ -20,21 +20,18 @@
 </nav>
 
 <main class="container">
-    <jsp:useBean id="ResponseService" scope="request" class="com.epam.web.service.ResponseService"
-                 type="com.epam.web.service.ResponseService"/>
 
-    <jsp:useBean id="VacancyService" scope="request" class="com.epam.web.service.VacancyService"
-                 type="com.epam.web.service.VacancyService"/>
 
-    <c:set var="applicant" value="${VacancyService.getById(vacancyId)}"/>
 
-    <c:set var="response" value="${ResponseService.getById(responseId)}"/>
 
-    <h1>${applicant.name}</h1>
+    <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
+    <c:import url="/controller?command=getResponse&id=${responseId}"/>
+
+    <h1>${vacancy.name}</h1>
     <h3><fmt:message key="label.subject"/>:</h3>
-    <p>${response.subject}</p>
+    <p>${jobResponse.subject}</p>
     <h3><fmt:message key="label.details"/>:</h3>
-    <p>${response.details}</p>
+    <p>${jobResponse.details}</p>
     <div class="single-button">
         <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=responses"
               method="post">
