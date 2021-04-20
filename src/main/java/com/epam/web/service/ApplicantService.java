@@ -20,15 +20,6 @@ public class ApplicantService extends UserService {
     private static final String JPG = "jpg";
 
 
-    public void updateCv(Applicant applicant) throws ServiceException {
-        try (DaoHelper helper = getDaoHelperFactory().create()) {
-            ApplicantDao applicantDao = (ApplicantDao) helper.createDao(getDaoType());
-            applicantDao.save(applicant);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
-    }
-
     public void updatePhoto(String photo, Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             ApplicantDao applicantDao = (ApplicantDao) helper.createDao(getDaoType());

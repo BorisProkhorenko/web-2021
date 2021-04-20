@@ -10,13 +10,11 @@
 
 <jsp:include page="fragments/header.jsp"/>
 
-
 <nav class="menu">
     <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
-<body>
-<main class="container">
+<main class="applicant-container">
     <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 
     <form action="${pageContext.request.contextPath}/controller?command=updateCv" class="edit-form" method="post">

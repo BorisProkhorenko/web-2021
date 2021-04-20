@@ -15,11 +15,12 @@
     <nav class="menu">
         <jsp:include page="fragments/menu.jsp"/>
     </nav>
-    <main class="container">
+    <main class="applicant-container">
         <jsp:include page="fragments/vacancies.jsp"/>
     </main>
 </c:if>
 <c:if test="${sessionScope.role == 'HR'}">
+    <br/>
     <div class="single-button">
         <form action="${pageContext.request.contextPath}/controller?command=createVacancy"
               method="POST">
@@ -28,13 +29,12 @@
             </button>
         </form>
     </div>
-    <main>
+    <main class="container">
         <jsp:include page="fragments/vacancies.jsp"/>
     </main>
 </c:if>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>
-
 </body>
 </html>

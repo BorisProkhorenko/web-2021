@@ -17,11 +17,11 @@ public class GetVacancyCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String idStr =  request.getParameter("id");
-        Long id = Long.parseLong(idStr);
+        String idParam =  request.getParameter("id");
+        Long id = Long.parseLong(idParam);
         Vacancy vacancy = service.getById(id);
         request.setAttribute("vacancy", vacancy);
-        return null;
+        return CommandResult.redirect("empty");
     }
 
 

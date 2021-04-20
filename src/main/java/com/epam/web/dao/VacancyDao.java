@@ -13,8 +13,8 @@ import java.util.List;
 public class VacancyDao extends AbstractDao<Vacancy> {
 
 
-    private final static String INSERT_QUERY = "INSERT INTO VACANCY( name, salary, responsibility, description, " +
-            "requirements) values(?,?,?,?,?,?);";
+    private final static String INSERT_QUERY = "INSERT INTO VACANCY(name, salary, responsibility, description, " +
+            "requirements) values(?,?,?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE VACANCY SET name=?, salary=?, responsibility=?, description=?, " +
             "requirements=? where id=?;";

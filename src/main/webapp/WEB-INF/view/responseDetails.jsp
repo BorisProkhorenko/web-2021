@@ -19,11 +19,7 @@
     <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
-<main class="container">
-
-
-
-
+<main class="applicant-container">
     <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
     <c:import url="/controller?command=getResponse&id=${responseId}"/>
 

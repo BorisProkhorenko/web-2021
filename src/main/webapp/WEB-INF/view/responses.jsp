@@ -14,7 +14,7 @@
     <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
-<main class="container">
+<main class="applicant-container">
 
 
     <c:import url="/controller?command=responseList"/>
@@ -45,10 +45,8 @@
         </div>
     </c:forEach>
 </main>
-<p>${sessionScope}</p>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>
-
 </body>
 </html>

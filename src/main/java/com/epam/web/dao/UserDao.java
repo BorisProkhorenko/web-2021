@@ -16,7 +16,7 @@ public class UserDao extends AbstractDao<User> {
             " AND PASSWORD = MD5(?)";
 
     private final static String INSERT_QUERY = "INSERT INTO USER(username, password, role, is_blocked)" +
-            " values(?,?,MD5(?),?,?);";
+            " values(?,?,MD5(?),?);";
 
     private final static String UPDATE_QUERY = "UPDATE USER SET username=?, password=MD5(?), role=?, is_blocked=?, " +
             "where id=?;";

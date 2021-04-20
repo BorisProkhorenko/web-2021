@@ -16,10 +16,10 @@ public class GetResponseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String idStr =  request.getParameter("id");
-        Long id = Long.parseLong(idStr);
+        String idParam =  request.getParameter("id");
+        Long id = Long.parseLong(idParam);
         Response jobResponse = service.getById(id);
         request.setAttribute("jobResponse", jobResponse);
-        return null;
+        return CommandResult.redirect("empty");
     }
 }

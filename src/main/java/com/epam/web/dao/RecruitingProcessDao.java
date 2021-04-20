@@ -14,7 +14,7 @@ public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProces
 
 
     private final static String INSERT_QUERY = "INSERT INTO VACANCY(user_id, vacancy_id, state, preliminary_points, " +
-            "values(?,?,?,?,?);";
+            "values(?,?,?,?);";
     private final static String UPDATE_QUERY = "UPDATE VACANCY SET state=?, preliminary_points=?, " +
             "where user_id=? AND vacancy_id;";
 

@@ -13,7 +13,7 @@ public class ResponseDao extends AbstractMultipleIdDao<Response> {
 
 
     private final static String INSERT_QUERY = "INSERT INTO RESPONSE(subject, details, " +
-            "user_id, vacancy_id) values(?,?,?,?,?);";
+            "user_id, vacancy_id) values(?,?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=?, where id=?;";
 

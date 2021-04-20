@@ -1,6 +1,7 @@
 package com.epam.web.service;
 
 import com.epam.web.dao.*;
+import com.epam.web.entity.Applicant;
 import com.epam.web.entity.Identifiable;
 
 
@@ -38,6 +39,24 @@ public abstract class AbstractService<T extends Identifiable> {
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+    }
+
+    public void update(T item) throws ServiceException {
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
+            AbstractDao<T> dao = helper.createDao(getDaoType());
+            dao.save(item);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(),e);
+        }
+    }
+
+    public void deleteById(Long id) throws ServiceException {
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
+            AbstractDao<T> dao = helper.createDao(getDaoType());
+            dao.removeById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(),e);
         }
     }
 

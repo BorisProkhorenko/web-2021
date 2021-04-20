@@ -11,12 +11,20 @@
 
 <jsp:include page="fragments/header.jsp"/>
 
-
 <nav class="menu">
     <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
-<main class="container">
+<c:set var="cvClass" value="container"/>
+<c:if test="${sessionScope.role == 'APPLICANT'}">
+    <nav class="menu">
+        <jsp:include page="fragments/menu.jsp"/>
+    </nav>
+    <c:set var="cvClass" value="applicant-container"/>
+</c:if>
+
+<main class="${cvClass}">
+
     <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 
     <c:set var="male" value="${Gender.MALE}"/>

@@ -1,6 +1,12 @@
 .error {
     color: red
 }
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
 a{
 text-decoration: none;
 }
@@ -27,8 +33,11 @@ p {
     margin-block-end: 2px;
 }
 
-.container {
+.applicant-container {
     padding-left: 170px;
+}
+.container, .applicant-container{
+    min-height: 100%;
 }
 
 .login {
@@ -98,7 +107,6 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px;
     background: black;
     color: whitesmoke;
     font-family: Lato, monospace;

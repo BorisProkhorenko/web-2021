@@ -7,21 +7,20 @@
 <fmt:setLocale value="${sessionScope.lang}" scope="session"/>
 <fmt:setBundle basename="language" scope="session"/>
 
-
 <html lang="${sessionScope.lang}">
+<c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
 <body>
-
 <jsp:include page="fragments/header.jsp"/>
+
+<c:set var="mainClass" value="container" scope="page"/>
 <c:if test="${sessionScope.role == 'APPLICANT'}">
     <nav class="menu">
         <jsp:include page="fragments/menu.jsp"/>
     </nav>
-    <c:set var="mainClass" value="container"/>
+    <c:set var="mainClass" value="applicant-container" scope="page"/>
 </c:if>
 
 <main class="${mainClass}">
-    <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
-
         <h1>${vacancy.name}</h1>
         <strong>${vacancy.salary}</strong>
         <h3><fmt:message key="label.description"/>:</h3>
@@ -46,14 +45,14 @@
 </c:if>
 
     <c:if test="${sessionScope.role == 'HR'}">
-        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editVacancy&id=${vacancy.id}"
+        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editVacancy"
               method="post">
             <button>
                 <fmt:message key="label.edit"/>
             </button>
         </form>
 
-        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=deleteVacancy&id=${vacancy.id}"
+        <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=deleteVacancy"
               method="post">
             <button>
                 Delete
@@ -65,7 +64,6 @@
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>
-<p>"${sessionScope}"</p>
 </body>
 </html>
 
