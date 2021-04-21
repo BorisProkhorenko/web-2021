@@ -6,6 +6,7 @@ USE hr_database;
 SET
 GLOBAL time_zone = '+0:00';
 
+
 create table User
 (
     id         bigint primary key NOT NULL AUTO_INCREMENT,
@@ -16,7 +17,7 @@ create table User
     name       varchar(45),
     gender     enum("male","female"),
     age        int,
-    photo      varchar(255),
+    photo      varchar(50),
     contacts   varchar(1000),
     education  varchar(1000),
     experience varchar(1000),
@@ -34,12 +35,11 @@ create table Vacancy
 );
 
 create table User_Vacancy
-(
-    user_id            bigint,
-    vacancy_id         bigint,
-    state              enum("New", "Preliminary", "Technical", "Hired", "Rejected" ),
-    preliminary_points int,
-    primary key (vacancy_id, user_id)
+(	id                 bigint primary key NOT NULL AUTO_INCREMENT,
+     user_id            bigint,
+     vacancy_id         bigint,
+     state              enum("New", "Preliminary", "Technical", "Hired", "Rejected" ),
+     preliminary_points int
 );
 
 create table Response
@@ -48,8 +48,7 @@ create table Response
     date       timestamp DEFAULT CURRENT_TIMESTAMP,
     subject    varchar(255),
     details    varchar(1000),
-    user_id    bigint,
-    vacancy_id bigint
+    user_vacancy_id    bigint
 );
 
 alter table user_vacancy
@@ -57,8 +56,8 @@ alter table user_vacancy
 add foreign key(user_id) references user(id);
 
 alter table response
-    add foreign key (vacancy_id) references user_vacancy (vacancy_id),
-add foreign key(user_id) references user_vacancy(user_id);
+    add foreign key (user_vacancy_id) references user_vacancy (id);
+
 
 insert into user( username, password, role, is_blocked)
 values ( 'admin', md5('admin'), 'admin', false);
@@ -86,7 +85,7 @@ values ( 'HR Coordinator', '1500$', 'responsibility', 'Description',
          'Proven experience as an HR coordinator or relevant human resources position');
 
 insert into user_vacancy(user_id, vacancy_id, state, preliminary_points)
-values (2, 1, 'New', 100);
+values (3, 1, 'New', 100);
 
-insert into response(subject, details, vacancy_id, user_id)
-values ( 'Some offer', 'details', 1, 2);
+insert into response(subject, details, user_vacancy_id)
+values ('Some offer', 'details', 1);
