@@ -6,7 +6,7 @@
     <h2>Error</h2>
     <c:if test="${errorMessage != null}">
         <div style="color:#FF0000">
-                ${param.errorMessage}
+                ${errorMessage}
         </div>
     </c:if>
 </main>

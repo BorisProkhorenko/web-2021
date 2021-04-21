@@ -2,6 +2,7 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.entity.Identifiable;
+import com.epam.web.entity.User;
 
 
 import java.util.List;
@@ -69,4 +70,5 @@ public abstract class AbstractService<T extends Identifiable> {
     protected DaoHelperFactory getDaoHelperFactory(){
         return daoHelperFactory;
     }
+
 }

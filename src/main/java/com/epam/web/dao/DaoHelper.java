@@ -2,6 +2,8 @@ package com.epam.web.dao;
 
 import com.epam.web.connection.ProxyConnection;
 import com.epam.web.entity.*;
+import com.epam.web.mapper.UserRowMapper;
+import com.epam.web.mapper.VacancyRowMapper;
 import com.epam.web.service.ApplicantService;
 
 import java.sql.SQLException;

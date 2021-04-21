@@ -10,8 +10,9 @@
 
 <jsp:include page="fragments/header.jsp"/>
 <main class="container">
-    <c:import url="/controller?command=getVacancy&id=${sessionScope.vacancyId}"/>
-
+    <c:if test="${sessionScope.vacancyId > 0}">
+        <c:import url="/controller?command=getVacancy&id=${sessionScope.vacancyId}"/>
+    </c:if>
     <form action="${pageContext.request.contextPath}/controller?command=updateVacancy" class="edit-form" method="post">
         <div class="row">
             <div class="col-25">

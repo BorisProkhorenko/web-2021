@@ -2,7 +2,7 @@ package com.epam.web.entity;
 
 import java.util.Date;
 
-public class Response implements MultipleId {
+public class Response implements Identifiable {
 
     public final static String TABLE_NAME = "response";
 
@@ -10,16 +10,14 @@ public class Response implements MultipleId {
     private final String subject;
     private final String details;
     private final Date date;
-    private final Long userId;
-    private final Long vacancyId;
+    private final RecruitingProcess recruitingProcess;
 
-    public Response(Long id, String subject, String details, Date date, Long userId, Long vacancyId) {
+    public Response(Long id, String subject, String details, Date date, RecruitingProcess recruitingProcess) {
         this.id = id;
         this.subject = subject;
         this.details = details;
         this.date = date;
-        this.userId = userId;
-        this.vacancyId = vacancyId;
+        this.recruitingProcess = recruitingProcess;
     }
 
     @Override
@@ -39,13 +37,7 @@ public class Response implements MultipleId {
         return date;
     }
 
-    @Override
-    public Long getUserId() {
-        return userId;
-    }
-
-    @Override
-    public Long getVacancyId() {
-        return vacancyId;
+    public RecruitingProcess getRecruitingProcess() {
+        return recruitingProcess;
     }
 }

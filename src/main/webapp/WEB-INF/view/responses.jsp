@@ -21,8 +21,7 @@
 
     <c:forEach items="${responseList}" var="response">
         <div class="list-item">
-            <c:set var="id" value="${response.vacancyId}"/>
-            <c:import url="/controller?command=getVacancy&id=${id}"/>
+            <c:set var="vacancy" value="${response.recruitingProcess.vacancy}"/>
             <strong>${vacancy.name}</strong>
             <br/>
             <b>

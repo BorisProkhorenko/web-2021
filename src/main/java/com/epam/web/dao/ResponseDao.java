@@ -1,6 +1,9 @@
 package com.epam.web.dao;
 
+import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
+import com.epam.web.entity.User;
+import com.epam.web.entity.Vacancy;
 import com.epam.web.mapper.ResponseRowMapper;
 
 
@@ -9,19 +12,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResponseDao extends AbstractMultipleIdDao<Response> {
+public class ResponseDao extends AbstractDao<Response> {
 
 
     private final static String INSERT_QUERY = "INSERT INTO RESPONSE(subject, details, " +
-            "user_id, vacancy_id) values(?,?,?,?);";
+            "user_vacancy_id) values(?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=?, where id=?;";
 
-    private final static String SELECT_BY_USER_ID = "SELECT * FROM RESPONSE WHERE USER_ID=?";
+    private final static String SELECT_BY_USER_ID = "select * from response join user_vacancy on user_vacancy.user_id=?" +
+            " and response.user_vacancy_id=user_vacancy.id;";
 
     public ResponseDao(Connection connection) {
 
-        super(connection, new ResponseRowMapper());
+        super(connection, new ResponseRowMapper(connection));
     }
 
 
@@ -40,15 +44,14 @@ public class ResponseDao extends AbstractMultipleIdDao<Response> {
     public void save(Response item) throws DaoException {
         ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long id = item.getId();
-        Long userId = item.getUserId();
-        Long vacancyId = item.getVacancyId();
+        RecruitingProcess process = item.getRecruitingProcess();
+        Long processId = process.getId();
         String query;
         if (getById(id).isPresent()) {
             paramList.add(id);
             query = getUpdateQuery();
         } else {
-            paramList.add(userId);
-            paramList.add(vacancyId);
+            paramList.add(processId);
             query = getInsertQuery();
         }
         Object[] params = paramList.toArray();

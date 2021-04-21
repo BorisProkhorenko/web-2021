@@ -9,9 +9,11 @@
 <body>
 
 <jsp:include page="fragments/header.jsp"/>
+
+<c:import url="/controller?command=applicantList"/>
 <main class="container">
 
-
+    <h1>Vacancy name</h1>
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th>Name</th>
@@ -22,15 +24,20 @@
             <th>Responses</th>
             <th>Edit</th>
         </tr>
-        <tr>
-            <td>Ячейка 1</td>
-            <td>Ячейка 2</td>
-            <td>Ячейка 3</td>
-            <td>Ячейка 4</td>
-            <td>Ячейка 5</td>
-            <td>Ячейка 6</td>
-            <td>Ячейка 7</td>
-        </tr>
+        <c:forEach items="${applicantList}" var="applicantInProcess">
+            <c:set var="applicant" value="${applicantInProcess.user}"/>
+
+            <tr>
+                <td>${applicant.name}</td>
+                <td>${applicant.age}</td>
+                <td>${applicantInProcess.state}</td>
+                <td>${applicantInProcess.preliminaryPoints}</td>
+                <td>To cv</td>
+                <td>To responses</td>
+                <td>Edit</td>
+            </tr>
+
+        </c:forEach>
     </table>
 </main>
 <footer>

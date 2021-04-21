@@ -1,10 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.DaoHelperFactory;
-import com.epam.web.service.ApplicantService;
-import com.epam.web.service.ResponseService;
-import com.epam.web.service.UserService;
-import com.epam.web.service.VacancyService;
+import com.epam.web.service.*;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -31,6 +28,8 @@ public class CommandFactory {
     private final static String GET_USER = "getUser";
     private final static String GET_RESPONSE = "getResponse";
     private final static String IMAGE = "image";
+    private final static String APPLICANTS = "applicants";
+    private final static String APPLICANT_LIST = "applicantList";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -41,6 +40,7 @@ public class CommandFactory {
     private final static String EDIT_CV_PAGE = "WEB-INF/view/editCv.jsp";
     private final static String EDIT_VACANCY_PAGE = "WEB-INF/view/editVacancy.jsp";
     private final static String EMPTY_PAGE = "WEB-INF/view/fragments/empty.jsp";
+    private final static String APPLICANTS_PAGE = "WEB-INF/view/applicants.jsp";
     private final DaoHelperFactory daoHelperFactory;
 
     public CommandFactory(DaoHelperFactory daoHelperFactory) {
@@ -62,6 +62,8 @@ public class CommandFactory {
                 return new GetVacanciesByPageCommand(new VacancyService(daoHelperFactory));
             case RESPONSE_LIST:
                 return new GetResponsesByUserCommand(new ResponseService(daoHelperFactory));
+            case APPLICANT_LIST:
+                return new GetApplicantsByVacancyCommand(new RecruitingProcessService(daoHelperFactory));
             case GET_VACANCY:
                 return new GetVacancyCommand(new VacancyService(daoHelperFactory));
             case GET_USER:
@@ -76,6 +78,8 @@ public class CommandFactory {
                 return new ShowPageCommand(VACANCY_PAGE);
             case RESPONSE_DETAILS:
                 return new ShowPageCommand(RESPONSE_DETAILS_PAGE);
+            case APPLICANTS:
+                return new ShowPageCommand(APPLICANTS_PAGE);
             case LOGOUT:
                 return new LogoutCommand();
             case EDIT_CV:

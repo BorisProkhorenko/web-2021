@@ -1,8 +1,12 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.RecruitingProcess;
+import com.epam.web.entity.User;
+import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 import com.epam.web.mapper.RecruitingProcessRowMapper;
+import com.epam.web.mapper.UserRowMapper;
+import com.epam.web.mapper.VacancyRowMapper;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -10,17 +14,18 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProcess> {
+public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
 
 
-    private final static String INSERT_QUERY = "INSERT INTO VACANCY(user_id, vacancy_id, state, preliminary_points, " +
-            "values(?,?,?,?);";
-    private final static String UPDATE_QUERY = "UPDATE VACANCY SET state=?, preliminary_points=?, " +
-            "where user_id=? AND vacancy_id;";
+    private final static String INSERT_QUERY = "INSERT INTO USER_VACANCY(user_id, vacancy_id, state," +
+            " preliminary_points, values(?,?,?,?);";
+    private final static String UPDATE_QUERY = "UPDATE USER_VACANCY SET state=?, preliminary_points=?, " +
+            "where id=?;";
+
+    private final static String SELECT_BY_VACANCY = "SELECT * FROM USER_VACANCY WHERE vacancy_id=?";
 
     public RecruitingProcessDao(Connection connection) {
-
-        super(connection, new RecruitingProcessRowMapper());
+        super(connection, new RecruitingProcessRowMapper(connection));
     }
 
     @Override
@@ -34,12 +39,14 @@ public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProces
     @Override
     public void save(RecruitingProcess item) throws DaoException {
         ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
-        Long userId = item.getId();
-        Long vacancyId = item.getVacancyId();
+        Long id = item.getId();
+        User user = item.getUser();
+        Long userId = user.getId();
+        Vacancy vacancy = item.getVacancy();
+        Long vacancyId = vacancy.getId();
         String query;
-        if (getById(userId, vacancyId).isPresent()) {
-            paramList.add(userId);
-            paramList.add(vacancyId);
+        if (getById(id).isPresent()) {
+            paramList.add(id);
             query = getUpdateQuery();
         } else {
             paramList.set(0, userId);
@@ -48,6 +55,10 @@ public class RecruitingProcessDao extends AbstractMultipleIdDao<RecruitingProces
         }
         Object[] params = paramList.toArray();
         executeUpdate(query, params);
+    }
+
+    public List<RecruitingProcess> getByVacancyId(Long id) throws DaoException {
+        return executeQuery(SELECT_BY_VACANCY, id);
     }
 
     @Override

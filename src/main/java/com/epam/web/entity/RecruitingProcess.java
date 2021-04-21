@@ -2,38 +2,36 @@ package com.epam.web.entity;
 
 import com.epam.web.enums.ApplicantState;
 
-public class RecruitingProcess implements MultipleId{
+public class RecruitingProcess implements Identifiable{
 
     public final static String TABLE_NAME = "user_vacancy";
-
-    private final Long userId;
-    private final Long vacancyId;
+    private final Long id;
+    private final User user;
+    private final Vacancy vacancy;
     private final ApplicantState state;
     private final Integer preliminaryPoints;
 
-
-    public RecruitingProcess(Long userId, Long vacancyId, ApplicantState state, Integer preliminaryPoints) {
-        this.userId = userId;
-        this.vacancyId = vacancyId;
+    public RecruitingProcess(Long id, User user, Vacancy vacancy, ApplicantState state, Integer preliminaryPoints) {
+        this.id = id;
+        this.user = user;
+        this.vacancy = vacancy;
         this.state = state;
         this.preliminaryPoints = preliminaryPoints;
-
     }
+
 
     @Override
     public Long getId() {
-        return userId;
+        return id;
     }
 
-    @Override
-    public Long getUserId() {
-        return userId;
-    }
-    @Override
-    public Long getVacancyId() {
-        return vacancyId;
+    public User getUser() {
+        return user;
     }
 
+    public Vacancy getVacancy() {
+        return vacancy;
+    }
 
     public ApplicantState getState() {
         return state;

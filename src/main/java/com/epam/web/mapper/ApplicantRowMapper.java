@@ -1,6 +1,6 @@
 package com.epam.web.mapper;
 
-import com.epam.web.dao.DaoException;
+
 import com.epam.web.entity.Applicant;
 import com.epam.web.entity.User;
 import com.epam.web.enums.Gender;
