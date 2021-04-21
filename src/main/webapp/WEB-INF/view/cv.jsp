@@ -15,15 +15,15 @@
     <jsp:include page="fragments/menu.jsp"/>
 </nav>
 
-<c:set var="cvClass" value="container"/>
+<c:set var="mainClass" value="container"/>
 <c:if test="${sessionScope.role == 'APPLICANT'}">
     <nav class="menu">
         <jsp:include page="fragments/menu.jsp"/>
     </nav>
-    <c:set var="cvClass" value="applicant-container"/>
+    <c:set var="mainClass" value="applicant-container"/>
 </c:if>
 
-<main class="${cvClass}">
+<main class="${mainClass}">
 
     <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 

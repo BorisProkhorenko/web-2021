@@ -55,7 +55,7 @@
         <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=deleteVacancy"
               method="post">
             <button>
-                Delete
+                <fmt:message key="label.delete"/>
             </button>
         </form>
     </c:if>

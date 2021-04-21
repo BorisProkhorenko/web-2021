@@ -25,7 +25,7 @@
         <form action="${pageContext.request.contextPath}/controller?command=createVacancy"
               method="POST">
             <button>
-                create
+                <fmt:message key="label.create"/>
             </button>
         </form>
     </div>

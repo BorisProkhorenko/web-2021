@@ -23,7 +23,7 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="salary"><fmt:message key="label.age"/></label>
+                <label for="salary"><fmt:message key="label.salary"/></label>
             </div>
             <div class="col-75">
                 <input type="text" id="salary" name="salary" value="${vacancy.salary}">

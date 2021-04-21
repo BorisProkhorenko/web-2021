@@ -36,7 +36,7 @@
                     <form action="${pageContext.request.contextPath}/controller?command=applicants&id=${vacancy.id}"
                           method="POST">
                         <button>
-                            Applicants
+                            <fmt:message key="label.applicants"/>
                         </button>
                     </form>
                     <form action="${pageContext.request.contextPath}/controller?command=vacancy&id=${vacancy.id}"

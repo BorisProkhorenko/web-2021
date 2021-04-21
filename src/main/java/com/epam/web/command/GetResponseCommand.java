@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class GetResponseCommand implements Command{
     private final ResponseService service;
+    private final static String ID="id";
+    private final static String RESPONSE_ATTRIBUTE="jobResponse";
+    private final static String EMPTY_PAGE="empty";
+
 
     public GetResponseCommand(ResponseService service) {
         this.service = service;
@@ -16,10 +20,10 @@ public class GetResponseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String idParam =  request.getParameter("id");
+        String idParam =  request.getParameter(ID);
         Long id = Long.parseLong(idParam);
         Response jobResponse = service.getById(id);
-        request.setAttribute("jobResponse", jobResponse);
-        return CommandResult.redirect("empty");
+        request.setAttribute(RESPONSE_ATTRIBUTE, jobResponse);
+        return CommandResult.redirect(EMPTY_PAGE);
     }
 }

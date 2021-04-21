@@ -19,6 +19,10 @@ public class ApplicantService extends UserService {
 
     private static final String JPG = "jpg";
 
+    public ApplicantService(DaoHelperFactory daoHelperFactory) {
+        super(daoHelperFactory,Applicant.APPLICANT);
+    }
+
 
     public void updatePhoto(String photo, Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
@@ -40,8 +44,4 @@ public class ApplicantService extends UserService {
         }
     }
 
-    @Override
-    protected String getDaoType() {
-        return Applicant.APPLICANT;
-    }
 }

@@ -9,6 +9,13 @@ import java.util.Optional;
 
 public class UserService extends AbstractService<User> {
 
+    public UserService(DaoHelperFactory daoHelperFactory) {
+        super(daoHelperFactory, User.TABLE_NAME);
+    }
+
+    protected UserService(DaoHelperFactory daoHelperFactory,String daoType) {
+        super(daoHelperFactory, daoType);
+    }
     public Optional<User> login(String username, String password) throws ServiceException {
 
         try (DaoHelper helper = getDaoHelperFactory().create()) {
@@ -21,12 +28,4 @@ public class UserService extends AbstractService<User> {
 
     }
 
-    public List<User> getUsers() throws ServiceException {
-        return super.getAll();
-    }
-
-    @Override
-    protected String getDaoType() {
-        return User.TABLE_NAME;
-    }
 }

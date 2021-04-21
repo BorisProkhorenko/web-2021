@@ -10,6 +10,9 @@ public class VacancyService extends AbstractService<Vacancy> {
 
     private final static int vacanciesOnPage = 2;
 
+    public VacancyService(DaoHelperFactory daoHelperFactory) {
+        super(daoHelperFactory, Vacancy.TABLE_NAME);
+    }
 
 
     public List<Vacancy> getVacanciesByPage(int page) throws ServiceException {
@@ -28,9 +31,4 @@ public class VacancyService extends AbstractService<Vacancy> {
         return vacanciesOnPage;
     }
 
-
-    @Override
-    protected String getDaoType() {
-        return Vacancy.TABLE_NAME;
-    }
 }

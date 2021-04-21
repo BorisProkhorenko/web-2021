@@ -3,8 +3,7 @@ package com.epam.web.controller;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandFactory;
 import com.epam.web.command.CommandResult;
-import com.epam.web.service.ServiceException;
-import org.apache.commons.fileupload.FileUploadException;
+import com.epam.web.dao.DaoHelperFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,11 +14,16 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
-    private final CommandFactory commandFactory = new CommandFactory();
+    private final CommandFactory commandFactory;
     private final static String COMMAND = "command";
     private final static String ERROR_MESSAGE = "errorMessage";
     private final static String ERROR_PAGE = "error.jsp";
     private final static String COMMAND_HEADER = "/controller?command=";
+
+    public Controller() {
+        DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
+        commandFactory = new CommandFactory(daoHelperFactory);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

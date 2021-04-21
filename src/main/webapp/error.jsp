@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<main class="container">
+<main>
+    <h2>Error</h2>
     <c:if test="${errorMessage != null}">
         <div style="color:#FF0000">
                 ${param.errorMessage}

@@ -19,6 +19,7 @@ public class UploadFileCommand implements Command {
     private static final String CV = "cv";
     private static final String ID = "id";
     private static final String DELIMITER = "\\";
+    private static final String INIT_PARAMETER = "file-upload";
     private final ApplicantService service;
     private final ServletFileUpload servletFileUpload;
 
@@ -35,7 +36,7 @@ public class UploadFileCommand implements Command {
         FileItem item = multiParts.get(0);
         String fileName = item.getName();
         ServletContext servletContext = request.getServletContext();
-        String filePath = servletContext.getInitParameter("file-upload") + DELIMITER + fileName;
+        String filePath = servletContext.getInitParameter(INIT_PARAMETER) + DELIMITER + fileName;
         service.uploadFile(item,filePath);
         service.updatePhoto(filePath, id);
 

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 public class GetUserCommand implements Command{
 
     private final UserService service;
+    private final static String ID="id";
+    private final static String USER_ATTRIBUTE="user";
+    private final static String EMPTY_PAGE="empty";
 
     public GetUserCommand(UserService service) {
         this.service = service;
@@ -18,10 +21,10 @@ public class GetUserCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String idParam =  request.getParameter("id");
+        String idParam =  request.getParameter(ID);
         Long id = Long.parseLong(idParam);
         User user = service.getById(id);
-        request.setAttribute("user", user);
-        return CommandResult.redirect("empty");
+        request.setAttribute(USER_ATTRIBUTE, user);
+        return CommandResult.redirect(EMPTY_PAGE);
     }
 }

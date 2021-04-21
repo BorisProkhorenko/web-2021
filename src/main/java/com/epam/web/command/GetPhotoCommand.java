@@ -12,10 +12,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GetPhotoCommand implements Command {
     private final ApplicantService service;
+    private final static String ID = "id";
+    private final static String IMAGE_TYPE = "image/jpg";
+    private final static String CV = "cv";
 
     public GetPhotoCommand(ApplicantService service) {
         this.service = service;
@@ -24,16 +28,18 @@ public class GetPhotoCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServiceException, FileUploadException {
         HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute("id");
+        Long id = (Long) session.getAttribute(ID);
         Applicant applicant = (Applicant) service.getById(id);
         String path = applicant.getPhoto();
-        byte[] imageData = Files.readAllBytes(Paths.get(path));
-        response.setContentType("image/jpg");
-        response.setContentLength(imageData.length);
+        Path photoPath = Paths.get(path);
+        byte[] imageData = Files.readAllBytes(photoPath);
+        response.setContentType(IMAGE_TYPE);
+        int dataLength= imageData.length;
+        response.setContentLength(dataLength);
         try (OutputStream outputStream = response.getOutputStream()) {
             outputStream.write(imageData);
             outputStream.flush();
         }
-        return CommandResult.redirect("cv");
+        return CommandResult.redirect(CV);
     }
 }

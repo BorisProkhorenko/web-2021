@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.service.ApplicantService;
 import com.epam.web.service.ResponseService;
 import com.epam.web.service.UserService;
@@ -40,11 +41,17 @@ public class CommandFactory {
     private final static String EDIT_CV_PAGE = "WEB-INF/view/editCv.jsp";
     private final static String EDIT_VACANCY_PAGE = "WEB-INF/view/editVacancy.jsp";
     private final static String EMPTY_PAGE = "WEB-INF/view/fragments/empty.jsp";
+    private final DaoHelperFactory daoHelperFactory;
+
+    public CommandFactory(DaoHelperFactory daoHelperFactory) {
+        this.daoHelperFactory = daoHelperFactory;
+    }
+
 
     public Command create(String type) {
         switch (type) {
             case LOGIN:
-                return new LoginCommand(new UserService());
+                return new LoginCommand(new UserService(daoHelperFactory));
             case INVALID_LOGIN:
                 return new ShowPageCommand(INDEX_PAGE);
             case MAIN:
@@ -52,15 +59,15 @@ public class CommandFactory {
             case EMPTY:
                 return new ShowPageCommand(EMPTY_PAGE);
             case VACANCY_LIST:
-                return new GetVacanciesByPageCommand(new VacancyService());
+                return new GetVacanciesByPageCommand(new VacancyService(daoHelperFactory));
             case RESPONSE_LIST:
-                return new GetResponsesByUserCommand(new ResponseService());
+                return new GetResponsesByUserCommand(new ResponseService(daoHelperFactory));
             case GET_VACANCY:
-                return new GetVacancyCommand(new VacancyService());
+                return new GetVacancyCommand(new VacancyService(daoHelperFactory));
             case GET_USER:
-                return new GetUserCommand(new UserService());
+                return new GetUserCommand(new UserService(daoHelperFactory));
             case GET_RESPONSE:
-                return new GetResponseCommand(new ResponseService());
+                return new GetResponseCommand(new ResponseService(daoHelperFactory));
             case CV:
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
@@ -74,20 +81,20 @@ public class CommandFactory {
             case EDIT_CV:
                 return new ShowPageCommand(EDIT_CV_PAGE);
             case UPDATE_CV:
-                return new EditCvCommand(new ApplicantService());
+                return new EditCvCommand(new ApplicantService(daoHelperFactory));
             case EDIT_VACANCY:
                 return new ShowPageCommand(EDIT_VACANCY_PAGE);
             case UPDATE_VACANCY:
-                return new EditVacancyCommand(new VacancyService());
+                return new EditVacancyCommand(new VacancyService(daoHelperFactory));
             case CREATE_VACANCY:
                 return new CreateVacancyCommand();
             case DELETE_VACANCY:
-                return new DeleteVacancyCommand(new VacancyService());
+                return new DeleteVacancyCommand(new VacancyService(daoHelperFactory));
             case IMAGE:
-                return new GetPhotoCommand(new ApplicantService());
+                return new GetPhotoCommand(new ApplicantService(daoHelperFactory));
             case PHOTO:
                 ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
-                return new UploadFileCommand(new ApplicantService(), servletFileUpload);
+                return new UploadFileCommand(new ApplicantService(daoHelperFactory), servletFileUpload);
             default:
                 throw new IllegalArgumentException("Unknown type of command" + type);
         }
