@@ -20,6 +20,8 @@ public class CommandFactory {
     private final static String UPDATE_VACANCY = "updateVacancy";
     private final static String CREATE_VACANCY = "createVacancy";
     private final static String DELETE_VACANCY = "deleteVacancy";
+    private final static String CREATE_RESPONSE = "createResponse";
+    private final static String UPDATE_RESPONSE = "updateResponse";
     private final static String PHOTO = "photo";
     private final static String EMPTY = "empty";
     private final static String VACANCY_LIST = "vacancyList";
@@ -27,9 +29,11 @@ public class CommandFactory {
     private final static String GET_VACANCY = "getVacancy";
     private final static String GET_USER = "getUser";
     private final static String GET_RESPONSE = "getResponse";
+    private final static String GET_RECRUITING_PROCESS = "getProcess";
     private final static String IMAGE = "image";
     private final static String APPLICANTS = "applicants";
     private final static String APPLICANT_LIST = "applicantList";
+    private final static String APPLY = "apply";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -39,6 +43,7 @@ public class CommandFactory {
     private final static String VACANCY_PAGE = "WEB-INF/view/vacancy.jsp";
     private final static String EDIT_CV_PAGE = "WEB-INF/view/editCv.jsp";
     private final static String EDIT_VACANCY_PAGE = "WEB-INF/view/editVacancy.jsp";
+    private final static String CREATE_RESPONSE_PAGE = "WEB-INF/view/createResponse.jsp";
     private final static String EMPTY_PAGE = "WEB-INF/view/fragments/empty.jsp";
     private final static String APPLICANTS_PAGE = "WEB-INF/view/applicants.jsp";
     private final DaoHelperFactory daoHelperFactory;
@@ -58,18 +63,26 @@ public class CommandFactory {
                 return new ShowPageCommand(MAIN_PAGE);
             case EMPTY:
                 return new ShowPageCommand(EMPTY_PAGE);
+            case APPLY:
+                RecruitingProcessService processService = new RecruitingProcessService(daoHelperFactory);
+                UserService userService = new UserService(daoHelperFactory);
+                VacancyService vacancyService = new VacancyService(daoHelperFactory);
+                return new ApplyCommand(processService,userService,vacancyService);
             case VACANCY_LIST:
                 return new GetVacanciesByPageCommand(new VacancyService(daoHelperFactory));
             case RESPONSE_LIST:
-                return new GetResponsesByUserCommand(new ResponseService(daoHelperFactory));
+                return new GetResponsesList(new ResponseService(daoHelperFactory));
             case APPLICANT_LIST:
-                return new GetApplicantsByVacancyCommand(new RecruitingProcessService(daoHelperFactory));
+                RecruitingProcessService recruitingProcessService = new RecruitingProcessService(daoHelperFactory);
+                return new GetApplicantsByVacancyCommand(recruitingProcessService, new VacancyService(daoHelperFactory));
             case GET_VACANCY:
                 return new GetVacancyCommand(new VacancyService(daoHelperFactory));
             case GET_USER:
                 return new GetUserCommand(new UserService(daoHelperFactory));
             case GET_RESPONSE:
                 return new GetResponseCommand(new ResponseService(daoHelperFactory));
+            case GET_RECRUITING_PROCESS:
+                return new GetRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory));
             case CV:
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
@@ -94,6 +107,11 @@ public class CommandFactory {
                 return new CreateVacancyCommand();
             case DELETE_VACANCY:
                 return new DeleteVacancyCommand(new VacancyService(daoHelperFactory));
+            case CREATE_RESPONSE:
+                return new ShowPageCommand(CREATE_RESPONSE_PAGE);
+            case UPDATE_RESPONSE:
+                ResponseService responseService = new ResponseService(daoHelperFactory);
+                return new CreateResponseCommand(responseService,new RecruitingProcessService(daoHelperFactory));
             case IMAGE:
                 return new GetPhotoCommand(new ApplicantService(daoHelperFactory));
             case PHOTO:

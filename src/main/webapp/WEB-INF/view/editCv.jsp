@@ -81,6 +81,17 @@
             <input type="submit" value="${buttonValue}">
         </div>
     </form>
+    <br/>
+    <br/>
+    <div class="single-button">
+        <form class="end-page-button"
+              action="${pageContext.request.contextPath}/controller?command=cv"
+              method="post">
+            <button>
+                <fmt:message key="label.back"/>
+            </button>
+        </form>
+    </div>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>

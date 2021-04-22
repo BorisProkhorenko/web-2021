@@ -15,13 +15,26 @@
 <jsp:include page="fragments/header.jsp"/>
 
 
-<nav class="menu">
-    <jsp:include page="fragments/menu.jsp"/>
-</nav>
-
-<main class="applicant-container">
+<c:if test="${sessionScope.role == 'APPLICANT'}">
+    <nav class="menu">
+        <jsp:include page="fragments/menu.jsp"/>
+    </nav>
+    <c:set var="mainClass" value="applicant-container"/>
     <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
-    <c:import url="/controller?command=getResponse&id=${responseId}"/>
+
+</c:if>
+
+<c:if test="${sessionScope.role == 'HR'}">
+    <c:set var="mainClass" value="container"/>
+    <c:import url="/controller?command=getProcess&id=${sessionScope.processId}"/>
+    <c:set var="vacancy" value="${process.vacancy}"/>
+
+</c:if>
+
+<c:import url="/controller?command=getResponse&id=${responseId}"/>
+
+<main class="${mainClass}">
+
 
     <h1>${vacancy.name}</h1>
     <h3><fmt:message key="label.subject"/>:</h3>

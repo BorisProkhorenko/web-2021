@@ -21,12 +21,19 @@ public class ResponseService extends AbstractService<Response> {
     public List<Response> getResponsesByUserId(Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
-            List<Response> items = dao.getByUserId(id);
-            return items;
+            return dao.getByUserId(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
+    public List<Response> getResponsesByProcessId(Long id) throws ServiceException {
+        try (DaoHelper helper = getDaoHelperFactory().create()) {
+            ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
+            return dao.getByProcessId(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 
 }

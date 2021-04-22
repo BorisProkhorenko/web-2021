@@ -11,21 +11,26 @@
 
 <jsp:include page="fragments/header.jsp"/>
 
-<nav class="menu">
-    <jsp:include page="fragments/menu.jsp"/>
-</nav>
 
-<c:set var="mainClass" value="container"/>
 <c:if test="${sessionScope.role == 'APPLICANT'}">
     <nav class="menu">
         <jsp:include page="fragments/menu.jsp"/>
     </nav>
     <c:set var="mainClass" value="applicant-container"/>
+    <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 </c:if>
+
+<c:if test="${sessionScope.role == 'HR'}">
+    <c:set var="mainClass" value="container"/>
+    <c:set var="processId" value="${not empty param.id ? param.id : sessionScope.processId}" scope="session" />
+    <c:import url="/controller?command=getProcess&id=${processId}"/>
+    <c:set var="user" value="${process.user}"/>
+
+</c:if>
+
 
 <main class="${mainClass}">
 
-    <c:import url="/controller?command=getUser&id=${sessionScope.id}"/>
 
     <c:set var="male" value="${Gender.MALE}"/>
     <c:set var="female" value="${Gender.FEMALE}"/>
@@ -45,8 +50,11 @@
     <div class="photo-contacts-cv">
         <div class="photo">
 
-            <img src="${pageContext.request.contextPath}/controller?command=image&id=${sessionScope.id}" height="400" width="400">
-            <jsp:include page="fragments/uploadFile.jsp"/>
+            <img src="${pageContext.request.contextPath}/controller?command=image&id=${user.id}" height="400"
+                 width="400">
+            <c:if test="${sessionScope.role == 'APPLICANT'}">
+                <jsp:include page="fragments/uploadFile.jsp"/>
+            </c:if>
         </div>
         <div class="contacts">
             <h3><fmt:message key="label.contacts"/>:</h3>
@@ -61,13 +69,36 @@
         <h3><fmt:message key="label.skills"/>:</h3>
         <p>${user.skills}</p>
     </div>
-<div class="single-button">
-    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editCv" method="post">
-        <button>
-            <fmt:message key="label.edit"/>
-        </button>
-    </form>
-</div>
+    <c:if test="${sessionScope.role == 'APPLICANT'}">
+        <div class="single-button">
+            <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=editCv"
+                  method="post">
+                <button>
+                    <fmt:message key="label.edit"/>
+                </button>
+            </form>
+        </div>
+    </c:if>
+
+    <c:if test="${sessionScope.role == 'HR'}">
+        <div class="buttons">
+
+            <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=applicants&id=${process.vacancy.id}"
+                  method="post">
+                <button>
+                    <fmt:message key="label.back"/>
+                </button>
+            </form>
+
+            <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=responses"
+                  method="post">
+                <button>
+                    <fmt:message key="label.responses"/>
+                </button>
+            </form>
+
+        </div>
+    </c:if>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>

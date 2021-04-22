@@ -17,7 +17,7 @@ create table User
     name       varchar(45),
     gender     enum("male","female"),
     age        int,
-    photo      varchar(50),
+    photo      varchar(255),
     contacts   varchar(1000),
     education  varchar(1000),
     experience varchar(1000),

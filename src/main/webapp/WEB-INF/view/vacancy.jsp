@@ -37,7 +37,7 @@
         </button>
     </form>
 <c:if test="${sessionScope.role == 'APPLICANT'}">
-    <form class="end-page-button" action="#" method="post">
+    <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=apply" method="post">
         <button>
             <fmt:message key="label.apply"/>
         </button>
@@ -61,6 +61,7 @@
     </c:if>
 </div>
 </main>
+
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>

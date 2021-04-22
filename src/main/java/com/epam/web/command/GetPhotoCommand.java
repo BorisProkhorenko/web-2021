@@ -27,8 +27,8 @@ public class GetPhotoCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServiceException, FileUploadException {
-        HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute(ID);
+        String idParam = request.getParameter(ID);
+        Long id = Long.parseLong(idParam);
         Applicant applicant = (Applicant) service.getById(id);
         String path = applicant.getPhoto();
         Path photoPath = Paths.get(path);

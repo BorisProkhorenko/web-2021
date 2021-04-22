@@ -12,7 +12,7 @@ public class EditVacancyCommand implements Command {
 
     private final VacancyService vacancyService;
     private static final String MAIN = "mainPage";
-    private static final String VACANCY_ID = "vacancyId";
+    private static final Long MOCK_ID = 0L;
     private static final String NAME = "name";
     private static final String SALARY = "salary";
     private static final String DESCRIPTION = "description";
@@ -25,15 +25,12 @@ public class EditVacancyCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        HttpSession session = request.getSession();
-        String idParam = (String) session.getAttribute(VACANCY_ID);
-        Long id = Long.parseLong(idParam);
         String name = request.getParameter(NAME);
         String salary = request.getParameter(SALARY);
         String description = request.getParameter(DESCRIPTION);
         String responsibility = request.getParameter(RESPONSIBILITY);
         String requirements = request.getParameter(REQUIREMENTS);
-        Vacancy vacancy = new Vacancy(id, name, salary, responsibility, description, requirements);
+        Vacancy vacancy = new Vacancy(MOCK_ID, name, salary, responsibility, description, requirements);
         vacancyService.update(vacancy);
         return CommandResult.redirect(MAIN);
     }

@@ -10,18 +10,40 @@
 
 <jsp:include page="fragments/header.jsp"/>
 
-<nav class="menu">
-    <jsp:include page="fragments/menu.jsp"/>
-</nav>
-
-<main class="applicant-container">
-
-
+<c:if test="${sessionScope.role == 'APPLICANT'}">
+    <nav class="menu">
+        <jsp:include page="fragments/menu.jsp"/>
+    </nav>
+    <c:set var="mainClass" value="applicant-container"/>
     <c:import url="/controller?command=responseList"/>
+</c:if>
+
+<c:if test="${sessionScope.role == 'HR'}">
+    <c:set var="mainClass" value="container"/>
+    <c:set var="processId" value="${not empty param.id ? param.id : sessionScope.processId}" scope="session"/>
+    <c:import url="/controller?command=responseList&id=${processId}"/>
+    <c:import url="/controller?command=getProcess&id=${processId}"/>
+    <br/>
+    <h1>${process.user.name}</h1>
+    <h3>${process.vacancy.name}</h3>
+    <br/>
+    <div class="single-button">
+        <form action="${pageContext.request.contextPath}/controller?command=createResponse"
+              method="POST">
+            <button>
+                <fmt:message key="label.create"/>
+            </button>
+        </form>
+    </div>
+
+</c:if>
+
+<main class="${mainClass}">
+
 
     <c:forEach items="${responseList}" var="response">
+        <c:set var="vacancy" value="${response.recruitingProcess.vacancy}"/>
         <div class="list-item">
-            <c:set var="vacancy" value="${response.recruitingProcess.vacancy}"/>
             <strong>${vacancy.name}</strong>
             <br/>
             <b>
@@ -34,7 +56,7 @@
             </b>
             <p>${response.subject}</p>
             <div class="single-button">
-                <form action="${pageContext.request.contextPath}/controller?command=responseDetails&id=${response.id}&vacancyId=${id}"
+                <form action="${pageContext.request.contextPath}/controller?command=responseDetails&id=${response.id}&vacancyId=${vacancy.id}"
                       method="POST">
                     <button>
                         <fmt:message key="label.details"/>
@@ -43,6 +65,20 @@
             </div>
         </div>
     </c:forEach>
+
+    <c:if test="${sessionScope.role == 'HR'}">
+    <br/>
+    <br/>
+    <div class="single-button">
+
+        <form class="end-page-button"
+              action="${pageContext.request.contextPath}/controller?command=applicants&id=${process.vacancy.id}"
+              method="post">
+            <button>
+                <fmt:message key="label.back"/>
+            </button>
+        </form>
+        </c:if>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>

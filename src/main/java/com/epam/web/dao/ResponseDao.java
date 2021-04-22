@@ -20,6 +20,8 @@ public class ResponseDao extends AbstractDao<Response> {
 
     private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=?, where id=?;";
 
+    private final static String SELECT_BY_PROCESS_ID = "select * from response where user_vacancy_id=?;";
+
     private final static String SELECT_BY_USER_ID = "select * from response join user_vacancy on user_vacancy.user_id=?" +
             " and response.user_vacancy_id=user_vacancy.id;";
 
@@ -31,6 +33,10 @@ public class ResponseDao extends AbstractDao<Response> {
 
     public List<Response> getByUserId(Long id) throws DaoException {
         return executeQuery(SELECT_BY_USER_ID, id);
+    }
+
+    public List<Response> getByProcessId(Long id) throws DaoException {
+        return executeQuery(SELECT_BY_PROCESS_ID, id);
     }
 
     @Override

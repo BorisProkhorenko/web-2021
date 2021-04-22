@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <fmt:setLocale value="${sessionScope.lang}" scope="session"/>
 <fmt:setBundle basename="language" scope="session"/>
 
@@ -11,9 +12,10 @@
 <jsp:include page="fragments/header.jsp"/>
 
 <c:import url="/controller?command=applicantList"/>
+
 <main class="container">
 
-    <h1>Vacancy name</h1>
+    <h1>${vacancy.name}</h1>
     <table border="1" width="100%" cellpadding="5">
         <tr>
             <th>Name</th>
@@ -32,13 +34,32 @@
                 <td>${applicant.age}</td>
                 <td>${applicantInProcess.state}</td>
                 <td>${applicantInProcess.preliminaryPoints}</td>
-                <td>To cv</td>
-                <td>To responses</td>
+                <td>
+                    <a href="${pageContext.servletContext.contextPath}/controller?command=cv&id=${applicantInProcess.id}">
+                        To cv
+                    </a>
+                </td>
+                <td>
+                    <a href="${pageContext.servletContext.contextPath}/controller?command=responses&id=${applicantInProcess.id}">
+                        To responses
+                    </a>
+                </td>
                 <td>Edit</td>
             </tr>
 
         </c:forEach>
     </table>
+    <br/>
+    <br/>
+    <div class="single-button">
+        <form class="end-page-button"
+              action="${pageContext.request.contextPath}/controller?command=mainPage"
+              method="post">
+            <button>
+                <fmt:message key="label.back"/>
+            </button>
+        </form>
+    </div>
 </main>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
