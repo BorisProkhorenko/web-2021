@@ -34,6 +34,9 @@ public class CommandFactory {
     private final static String APPLICANTS = "applicants";
     private final static String APPLICANT_LIST = "applicantList";
     private final static String APPLY = "apply";
+    private final static String FEEDBACK = "feedback";
+    private final static String UPDATE_RESPONSE_PROCESS = "updateResponseAndProcess";
+    private final static String UPDATE_PROCESS = "updateProcess";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -46,6 +49,7 @@ public class CommandFactory {
     private final static String CREATE_RESPONSE_PAGE = "WEB-INF/view/createResponse.jsp";
     private final static String EMPTY_PAGE = "WEB-INF/view/fragments/empty.jsp";
     private final static String APPLICANTS_PAGE = "WEB-INF/view/applicants.jsp";
+    private final static String UPDATE_AND_FEEDBACK_PAGE = "WEB-INF/view/updateAndFeedback.jsp";
     private final DaoHelperFactory daoHelperFactory;
 
     public CommandFactory(DaoHelperFactory daoHelperFactory) {
@@ -63,6 +67,12 @@ public class CommandFactory {
                 return new ShowPageCommand(MAIN_PAGE);
             case EMPTY:
                 return new ShowPageCommand(EMPTY_PAGE);
+            case FEEDBACK:
+                return new ShowPageCommand(UPDATE_AND_FEEDBACK_PAGE);
+            case UPDATE_PROCESS:
+                return new UpdateRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory));
+            case UPDATE_RESPONSE_PROCESS:
+                return new UpdateProcessWithFeedbackCommand(new RecruitingProcessService(daoHelperFactory));
             case APPLY:
                 RecruitingProcessService processService = new RecruitingProcessService(daoHelperFactory);
                 UserService userService = new UserService(daoHelperFactory);

@@ -5,8 +5,6 @@ import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 import com.epam.web.mapper.RecruitingProcessRowMapper;
-import com.epam.web.mapper.UserRowMapper;
-import com.epam.web.mapper.VacancyRowMapper;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -19,12 +17,15 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
 
     private final static String INSERT_QUERY = "INSERT INTO USER_VACANCY(user_id, vacancy_id, state," +
             " preliminary_points) values(?,?,?,?);";
-    private final static String UPDATE_QUERY = "UPDATE USER_VACANCY SET state=?, preliminary_points=?, " +
+    private final static String UPDATE_QUERY = "UPDATE USER_VACANCY SET state=?, preliminary_points=? " +
             "where id=?;";
 
     private final static String SELECT_BY_VACANCY = "SELECT * FROM USER_VACANCY WHERE vacancy_id=?";
+
     private final static String SELECT_BY_USER_AND_VACANCY = "SELECT * FROM USER_VACANCY WHERE user_id=?" +
             " AND vacancy_id=?";
+
+    private final static String DELETE_BY_VACANCY = "DELETE FROM USER_VACANCY WHERE vacancy_id=?";
 
     public RecruitingProcessDao(Connection connection) {
         super(connection, new RecruitingProcessRowMapper(connection));
@@ -65,6 +66,10 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
 
     public List<RecruitingProcess> getByUserAndVacancyId(Long userId, Long vacancyId) throws DaoException {
         return executeQuery(SELECT_BY_USER_AND_VACANCY, userId,vacancyId);
+    }
+
+    public void deleteByVacancyId(Long id) throws DaoException {
+        executeUpdate(DELETE_BY_VACANCY,id);
     }
 
     @Override
