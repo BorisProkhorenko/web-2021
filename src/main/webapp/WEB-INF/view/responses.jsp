@@ -23,9 +23,11 @@
     <c:set var="processId" value="${not empty param.id ? param.id : sessionScope.processId}" scope="session"/>
     <c:import url="/controller?command=responseList&id=${processId}"/>
     <c:import url="/controller?command=getProcess&id=${processId}"/>
-    <br/>
-    <h1>${process.user.name}</h1>
-    <h3>${process.vacancy.name}</h3>
+
+    <div class="table-header">
+        <h1>${process.user.name}</h1>
+        <h3>${process.vacancy.name}</h3>
+    </div>
     <br/>
     <div class="single-button">
         <form action="${pageContext.request.contextPath}/controller?command=createResponse"

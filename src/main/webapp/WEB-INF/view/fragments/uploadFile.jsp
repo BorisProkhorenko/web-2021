@@ -8,15 +8,14 @@
 <body>
 <div class="uploading">
 <h4><fmt:message key="label.photo.upload"/>:</h4>
-<fmt:message key="label.file.select"/>:
-<br/>
-<br/>
+
 <form action="${pageContext.request.contextPath}/controller?command=photo" method="post"
       enctype="multipart/form-data">
-    <input type="file" name="uploadFile" accept="image/*" size="50"/>
+    <input type="file" id="file" class="input-file" name="uploadFile" accept="image/*" size="50" />
+    <label class="input-button" for="file"><fmt:message key="label.file.select"/>:</label>
     <br/>
     <br/>
-    <input name="submit" type="submit" value=<fmt:message key="label.submit"/>>
+    <input class="input-button" name="submit" type="submit" value=<fmt:message key="label.submit"/>>
 </form>
 </div>
 </body>

@@ -7,9 +7,11 @@ body {
     height: 100%;
     margin: 0;
 }
-a{
-text-decoration: none;
+
+a {
+    text-decoration: none;
 }
+
 button, .btn {
     transform: translateX(-50%);
     width: 120px;
@@ -25,7 +27,7 @@ button, .btn {
     transition: .3s;
 }
 
-button:hover,.vacancy a:hover{
+button:hover, .vacancy a:hover {
     opacity: .7;
 }
 
@@ -36,7 +38,8 @@ p {
 .applicant-container {
     padding-left: 170px;
 }
-.container, .applicant-container{
+
+.container, .applicant-container {
     min-height: 100%;
 }
 
@@ -217,7 +220,8 @@ p {
     flex-direction: row;
     justify-content: center;
 }
-.pagination a{
+
+.pagination a {
     color: #FFFA00;
     background: black;
     margin-left: 7px;
@@ -226,11 +230,11 @@ p {
     text-decoration: none;
 }
 
-.pagination a:hover{
+.pagination a:hover {
     opacity: .7;
 }
 
-.pagination b{
+.pagination b {
     color: black;
     padding: 5px;
 
@@ -245,6 +249,7 @@ p {
     font-family: Lato, monospace;
     font-size: 25px;
 }
+
 /* The sidebar menu */
 .menu {
     height: 100%;
@@ -291,21 +296,50 @@ p {
     flex-direction: row;
 }
 
-.contacts{
+.contacts {
     margin-left: 5%;
 }
 
+.input-file {
+    /* visibility: hidden etc. wont work */
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.input-file:focus + label {
+    /* keyboard navigation */
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+.input-file + label * {
+    pointer-events: none;
+}
 
-.buttons{
+.input-button{
+    background: black;
+    color: #FFFA00;
+    border: 4px outset black;
+}
+
+.input-button:hover{
+    opacity: .7;
+}
+
+
+.buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 10% ;
+    margin-left: 10%;
 }
 
-.single-button{
-    margin-left: 50% ;
+.single-button {
+    margin-left: 50%;
 }
+
 .end-page-button button {
     width: 150px;
 }
@@ -365,7 +399,38 @@ p {
     height: 200px;
 }
 
+table {
+    background: black;
+    color: #FFFA00;
+}
+td{
+    background: whitesmoke;
+    color: black;
+    text-align: center;
+}
 
+td a{
+    color: #FFFA00;
+    background: black;
+    padding: 10px;
+}
+td input[type=submit]{
+    color: #FFFA00;
+    background: black;
+    padding: 10px;
+    border: none;
+}
+
+td a:hover, td input[type=submit]:hover{
+    opacity: .7;
+}
+.table-header{
+    color: #FFFA00;
+    background: black;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
 
 @media (max-width: 800px) {
 
@@ -393,7 +458,8 @@ p {
     .header, .pagination, .buttons {
         flex-direction: column;
     }
-    .buttons{
+
+    .buttons {
         padding-left: 40%;
     }
 
@@ -414,7 +480,6 @@ p {
         width: 100%;
         margin-top: 0;
     }
-
 
 
 }

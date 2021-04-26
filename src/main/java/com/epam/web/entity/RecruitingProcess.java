@@ -9,14 +9,14 @@ public class RecruitingProcess implements Identifiable{
     private final User user;
     private final Vacancy vacancy;
     private final ApplicantState state;
-    private final Integer preliminaryPoints;
+    private final Integer rating;
 
-    public RecruitingProcess(Long id, User user, Vacancy vacancy, ApplicantState state, Integer preliminaryPoints) {
+    public RecruitingProcess(Long id, User user, Vacancy vacancy, ApplicantState state, Integer rating) {
         this.id = id;
         this.user = user;
         this.vacancy = vacancy;
         this.state = state;
-        this.preliminaryPoints = preliminaryPoints;
+        this.rating = rating;
     }
 
 
@@ -37,8 +37,8 @@ public class RecruitingProcess implements Identifiable{
         return state;
     }
 
-    public Integer getPreliminaryPoints() {
-        return preliminaryPoints;
+    public Integer getRating() {
+        return rating;
     }
 
 }

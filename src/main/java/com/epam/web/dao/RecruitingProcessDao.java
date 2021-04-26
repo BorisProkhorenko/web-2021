@@ -16,8 +16,8 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
 
 
     private final static String INSERT_QUERY = "INSERT INTO USER_VACANCY(user_id, vacancy_id, state," +
-            " preliminary_points) values(?,?,?,?);";
-    private final static String UPDATE_QUERY = "UPDATE USER_VACANCY SET state=?, preliminary_points=? " +
+            " rating) values(?,?,?,?);";
+    private final static String UPDATE_QUERY = "UPDATE USER_VACANCY SET state=?, rating=? " +
             "where id=?;";
 
     private final static String SELECT_BY_VACANCY = "SELECT * FROM USER_VACANCY WHERE vacancy_id=?";
@@ -36,7 +36,7 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
         ApplicantState state = item.getState();
         return Arrays.asList(
                 state.toString(),
-                item.getPreliminaryPoints());
+                item.getRating());
     }
 
     @Override

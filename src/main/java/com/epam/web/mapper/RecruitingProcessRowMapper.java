@@ -19,7 +19,7 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
     public final static String USER_ID = "user_id";
     public final static String VACANCY_ID = "vacancy_id";
     public final static String STATE = "state";
-    public final static String PRELIMINARY_POINTS = "preliminary_points";
+    public final static String RATING = "rating";
     public final UserDao userDao;
     public final VacancyDao vacancyDao;
 
@@ -37,11 +37,11 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
         Optional<Vacancy> optionalVacancy = vacancyDao.getById(vacancy_id);
         String stateAsString = resultSet.getString(STATE);
         ApplicantState state = ApplicantState.fromString(stateAsString);
-        Integer preliminaryPoints = resultSet.getInt(PRELIMINARY_POINTS);
+        Integer rating = resultSet.getInt(RATING);
         if (optionalUser.isPresent() && optionalVacancy.isPresent()) {
             User user = optionalUser.get();
             Vacancy vacancy = optionalVacancy.get();
-            return new RecruitingProcess(id, user, vacancy, state, preliminaryPoints);
+            return new RecruitingProcess(id, user, vacancy, state, rating);
         } else {
             throw new DaoException("Empty user or vacancy");
         }

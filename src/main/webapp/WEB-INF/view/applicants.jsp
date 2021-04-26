@@ -14,17 +14,18 @@
 <c:import url="/controller?command=applicantList"/>
 
 <main class="container">
+    <div class="table-header">
     <h1>${vacancy.name}</h1>
-
+    </div>
     <table border="1" width="100%" cellpadding="5">
         <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>State</th>
-            <th>Preliminary interview points</th>
-            <th>CV</th>
-            <th>Responses</th>
-            <th>Edit</th>
+            <th><fmt:message key="label.name"/></th>
+            <th><fmt:message key="label.age"/></th>
+            <th><fmt:message key="label.state"/></th>
+            <th><fmt:message key="label.rating"/></th>
+            <th><fmt:message key="label.to.cv"/></th>
+            <th><fmt:message key="label.to.responses"/></th>
+            <th><fmt:message key="label.edit"/></th>
         </tr>
         <c:forEach items="${applicantList}" var="applicantInProcess">
             <c:set var="applicant" value="${applicantInProcess.user}"/>
@@ -37,49 +38,49 @@
                         <td>
                             <select id="state" name="state">
                                 <c:if test="${applicantInProcess.state == 'NEW'}">
-                                    <option value="New" selected>New</option>
-                                    <option value="Preliminary">Preliminary Interview</option>
-                                    <option value="Technical">Technical Interview</option>
-                                    <option value="Hired">Hired</option>
-                                    <option value="Rejected">Rejected</option>
+                                    <option value="New" selected><fmt:message key="label.state.new"/></option>
+                                    <option value="Preliminary"><fmt:message key="label.state.preliminary"/></option>
+                                    <option value="Technical"><fmt:message key="label.state.technical"/></option>
+                                    <option value="Hired"><fmt:message key="label.state.hired"/></option>
+                                    <option value="Rejected"><fmt:message key="label.state.rejected"/></option>
 
                                 </c:if>
 
                                 <c:if test="${applicantInProcess.state == 'PRELIMINARY'}">
-                                    <option value="New">New</option>
-                                    <option value="Preliminary" selected>Preliminary Interview</option>
-                                    <option value="Technical">Technical Interview</option>
-                                    <option value="Hired">Hired</option>
-                                    <option value="Rejected">Rejected</option>
+                                    <option value="New"><fmt:message key="label.state.new"/></option>
+                                    <option value="Preliminary" selected><fmt:message key="label.state.preliminary"/></option>
+                                    <option value="Technical"><fmt:message key="label.state.technical"/></option>
+                                    <option value="Hired"><fmt:message key="label.state.hired"/></option>
+                                    <option value="Rejected"><fmt:message key="label.state.rejected"/></option>
 
                                 </c:if>
 
                                 <c:if test="${applicantInProcess.state == 'TECHNICAL'}">
-                                    <option value="New">New</option>
-                                    <option value="Preliminary">Preliminary Interview</option>
-                                    <option value="Technical" selected>Technical Interview</option>
-                                    <option value="Hired">Hired</option>
-                                    <option value="Rejected">Rejected</option>
+                                    <option value="New"><fmt:message key="label.state.new"/></option>
+                                    <option value="Preliminary"><fmt:message key="label.state.preliminary"/></option>
+                                    <option value="Technical" selected><fmt:message key="label.state.technical"/></option>
+                                    <option value="Hired"><fmt:message key="label.state.hired"/></option>
+                                    <option value="Rejected"><fmt:message key="label.state.rejected"/></option>
 
                                 </c:if>
                             </select>
                         </td>
                         <td>
                             <input type="text" class="table-input" name="points"
-                                   value="${applicantInProcess.preliminaryPoints}" pattern="[0-9]{1,3}">
+                                   value="${applicantInProcess.rating}" pattern="[0-9]{1,3}">
                         </td>
                         <td>
                             <a href="${pageContext.servletContext.contextPath}/controller?command=cv&id=${applicantInProcess.id}">
-                                To cv
+                                <fmt:message key="label.to.cv"/>
                             </a>
                         </td>
                         <td>
                             <a href="${pageContext.servletContext.contextPath}/controller?command=responses&id=${applicantInProcess.id}">
-                                To responses
+                                <fmt:message key="label.to.responses"/>
                             </a>
                         </td>
                         <td>
-                            <input type="submit" value="update">
+                            <input type="submit" value=<fmt:message key="label.update"/>>
                         </td>
                     </tr>
                 </form>

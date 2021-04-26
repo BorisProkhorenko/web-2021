@@ -21,10 +21,12 @@ public class ResponseDao extends AbstractDao<Response> {
     private final static String SELECT_BY_PROCESS_ID = "select * from response where user_vacancy_id=?;";
 
     private final static String SELECT_BY_USER_ID = "select * from response join user_vacancy on user_vacancy.user_id=?" +
-            " and response.user_vacancy_id=user_vacancy.id;";
+            " and response.user_vacancy_id=user_vacancy.id ORDER BY DATE;";
 
     private final static String DELETE_BY_VACANCY_ID = "delete response from response inner join user_vacancy" +
             " where response.user_vacancy_id=user_vacancy.id AND user_vacancy.vacancy_id=?";
+
+    private final static String ORDER_BY_DATE = "ORDER BY date";
 
     public ResponseDao(Connection connection) {
 
@@ -38,6 +40,11 @@ public class ResponseDao extends AbstractDao<Response> {
 
     public List<Response> getByProcessId(Long id) throws DaoException {
         return executeQuery(SELECT_BY_PROCESS_ID, id);
+    }
+
+    @Override
+    public List<Response> getAll() throws DaoException {
+        return executeQuery(concatQuery(SELECT_ALL_FROM, ORDER_BY_DATE));
     }
 
     @Override
@@ -67,7 +74,7 @@ public class ResponseDao extends AbstractDao<Response> {
 
 
     public void deleteByVacancyId(Long id) throws DaoException {
-        executeUpdate(DELETE_BY_VACANCY_ID,id);
+        executeUpdate(DELETE_BY_VACANCY_ID, id);
     }
 
     @Override
