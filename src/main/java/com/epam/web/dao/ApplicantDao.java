@@ -15,6 +15,7 @@ public class ApplicantDao extends UserDao {
 
     private final static String UPDATE_PHOTO = "UPDATE USER SET photo=? where id=?";
 
+
     public ApplicantDao(Connection connection) {
         super(connection);
     }

@@ -12,9 +12,10 @@ import java.util.Optional;
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     protected final static String SELECT_ALL_FROM = "SELECT * FROM ";
-    protected final static String WHERE_ID = " WHERE ID = ? ";
-    protected final static String DELETE_FROM = " DELETE FROM ";
-    protected final static String LIMIT = " LIMIT ?, ? ";
+    protected final static String WHERE_ID = "WHERE ID = ? ";
+    protected final static String DELETE_FROM = "DELETE FROM ";
+    protected final static String LIMIT = "LIMIT ?, ? ";
+    protected final static String DELIMITER = " ";
 
     private final Connection connection;
     private final RowMapper<T> mapper;
@@ -72,6 +73,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         String table = getTableName();
         StringBuilder builder = new StringBuilder(action)
                 .append(table)
+                .append(DELIMITER)
                 .append(condition);
         return builder.toString();
     }

@@ -18,9 +18,14 @@
         <h1>
             <fmt:message key="label.welcome"/>
         </h1>
-        <c:if test="${errorMessage == true}">
+        <c:if test="${errorMessage == 'invalidLogin'}">
             <h3 class="error">
-                <fmt:message key="label.loginFormErrorMessage"/>
+                <fmt:message key="label.error.invalidLogin"/>
+            </h3>
+        </c:if>
+        <c:if test="${errorMessage == 'blocked'}">
+            <h3 class="error">
+                <fmt:message key="label.error.blocked"/>
             </h3>
         </c:if>
         <div class="form-group">

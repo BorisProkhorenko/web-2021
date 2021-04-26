@@ -19,6 +19,7 @@ public class UpdateProcessWithFeedbackCommand implements Command {
     private static final Date MOCK_DATE = new Date();
     private static final String SUBJECT = "subject";
     private static final String DETAILS = "details";
+    private static final String PROCESS = "process";
 
     public UpdateProcessWithFeedbackCommand(RecruitingProcessService processService) {
         this.processService = processService;
@@ -29,7 +30,7 @@ public class UpdateProcessWithFeedbackCommand implements Command {
         String subject = request.getParameter(SUBJECT);
         String details = request.getParameter(DETAILS);
         HttpSession session = request.getSession();
-        RecruitingProcess process = (RecruitingProcess) session.getAttribute("process");
+        RecruitingProcess process = (RecruitingProcess) session.getAttribute(PROCESS);
         Response feedback = new Response(MOCK_ID, subject, details,MOCK_DATE,process);
         processService.updateWithFeedback(process,feedback);
         return CommandResult.redirect(APPLICANTS);

@@ -36,7 +36,7 @@ public class User implements Identifiable {
         return role;
     }
 
-    public boolean isBlocked() {
+    public boolean getIsBlocked() {
         return isBlocked;
     }
 }

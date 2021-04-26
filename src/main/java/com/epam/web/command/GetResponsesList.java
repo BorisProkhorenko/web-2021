@@ -18,6 +18,7 @@ public class GetResponsesList implements Command {
     private final static String ID = "id";
     private final static String RESPONSE_LIST_ATTRIBUTE = "responseList";
     private final static String RESPONSES = "responses";
+    private final static String ROLE = "role";
 
     public GetResponsesList(ResponseService service) {
         this.service = service;
@@ -27,7 +28,7 @@ public class GetResponsesList implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
         Long id;
-        Role role = (Role) session.getAttribute("role");
+        Role role = (Role) session.getAttribute(ROLE);
         List<Response> responseList;
         if (role.equals(Role.APPLICANT)) {
             id = (Long) session.getAttribute(ID);

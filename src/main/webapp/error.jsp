@@ -1,14 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.lang}" scope="session"/>
+<fmt:setBundle basename="language" scope="session"/>
+
+<html lang="${sessionScope.lang}">
 <body>
-<main>
-    <h2>Error</h2>
-    <c:if test="${errorMessage != null}">
-        <div style="color:#FF0000">
-                ${errorMessage}
-        </div>
-    </c:if>
+
+<jsp:include page="WEB-INF/view/fragments/header.jsp"/>
+<main class="container">
+    <div class="error">
+        <h1>
+            <fmt:message key="label.error"/>
+        </h1>
+    </div>
+<c:if test="${not empty sessionScope.id}">
+    <a href="${pageContext.request.contextPath}/controller?command=mainPage">
+        <fmt:message key="label.to.main"/>
+    </a>
+</c:if>
+
 </main>
+<jsp:include page="WEB-INF/view/fragments/footer.jsp"/>
 </body>
 </html>

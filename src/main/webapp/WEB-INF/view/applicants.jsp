@@ -66,7 +66,7 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" class="table-input" name="points"
+                            <input type="text" class="table-input" name="rating"
                                    value="${applicantInProcess.rating}" pattern="[0-9]{1,3}">
                         </td>
                         <td>

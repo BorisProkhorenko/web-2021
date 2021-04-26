@@ -1,10 +1,8 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.ApplicantDao;
-import com.epam.web.dao.DaoException;
-import com.epam.web.dao.DaoHelper;
-import com.epam.web.dao.DaoHelperFactory;
+import com.epam.web.dao.*;
 import com.epam.web.entity.Applicant;
+import com.epam.web.entity.User;
 import org.apache.commons.fileupload.FileItem;
 
 import javax.imageio.ImageIO;
@@ -12,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 
 public class ApplicantService extends UserService {

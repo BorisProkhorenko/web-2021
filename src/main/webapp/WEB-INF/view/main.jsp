@@ -33,6 +33,10 @@
         <jsp:include page="fragments/vacancies.jsp"/>
     </main>
 </c:if>
+
+<c:if test="${sessionScope.role == 'ADMIN'}">
+    <jsp:include page="admin.jsp"/>
+</c:if>
 <footer>
     <jsp:include page="fragments/footer.jsp"/>
 </footer>

@@ -21,6 +21,10 @@ public class UserDao extends AbstractDao<User> {
     private final static String UPDATE_QUERY = "UPDATE USER SET username=?, password=MD5(?), role=?, is_blocked=?" +
             "where id=?;";
 
+    private final static String BLOCK_QUERY = "UPDATE USER SET is_blocked=? where id=?;";
+
+    private final static String ORDER_BY_USERNAME = "ORDER BY username, role;";
+
     public UserDao(Connection connection) {
 
         super(connection, new UserRowMapper());
@@ -32,6 +36,10 @@ public class UserDao extends AbstractDao<User> {
                 password);
     }
 
+    public void setUserBlockById(Long id, boolean isBlocked) throws DaoException {
+        executeUpdate(BLOCK_QUERY, isBlocked, id);
+    }
+
     @Override
     protected List<Object> extractParams(User item) {
         Role role = item.getRole();
@@ -39,7 +47,11 @@ public class UserDao extends AbstractDao<User> {
                 item.getUsername(),
                 item.getPassword(),
                 role.toString(),
-                item.isBlocked());
+                item.getIsBlocked());
+    }
+
+    public List<User> getAllSorted() throws DaoException {
+        return executeQuery(concatQuery(SELECT_ALL_FROM, ORDER_BY_USERNAME));
     }
 
     @Override

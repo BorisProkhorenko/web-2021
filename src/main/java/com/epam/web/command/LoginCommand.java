@@ -23,6 +23,7 @@ public class LoginCommand implements Command {
     private static final String MAIN = "mainPage";
     private static final String INVALID = "invalidLogin";
     private final static String ERROR_MESSAGE = "errorMessage";
+    private final static String BLOCKED = "blocked";
 
     public LoginCommand(UserService service) {
         this.service = service;
@@ -36,6 +37,10 @@ public class LoginCommand implements Command {
         HttpSession session = request.getSession();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
+            if(user.getIsBlocked()){
+                session.setAttribute(ERROR_MESSAGE, BLOCKED);
+                return CommandResult.redirect(INVALID);
+            }
             Long id = user.getId();
             Role role = user.getRole();
             session.setAttribute(ID, id);
@@ -43,9 +48,10 @@ public class LoginCommand implements Command {
             session.setAttribute(PAGE, DEFAULT_PAGE);
             return CommandResult.redirect(MAIN);
         } else {
-            session.setAttribute(ERROR_MESSAGE, true);
+            session.setAttribute(ERROR_MESSAGE, INVALID);
             return CommandResult.redirect(INVALID);
         }
     }
+
     
 }

@@ -35,7 +35,7 @@ public class Applicant extends User {
                 user.getUsername(),
                 user.getPassword(),
                 ROLE,
-                user.isBlocked());
+                user.getIsBlocked());
         this.name = name;
         this.gender = gender;
         this.age = age;

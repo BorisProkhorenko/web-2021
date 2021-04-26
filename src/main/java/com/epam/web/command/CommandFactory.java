@@ -26,6 +26,7 @@ public class CommandFactory {
     private final static String EMPTY = "empty";
     private final static String VACANCY_LIST = "vacancyList";
     private final static String RESPONSE_LIST = "responseList";
+    private final static String USER_LIST = "userList";
     private final static String GET_VACANCY = "getVacancy";
     private final static String GET_USER = "getUser";
     private final static String GET_RESPONSE = "getResponse";
@@ -37,6 +38,7 @@ public class CommandFactory {
     private final static String FEEDBACK = "feedback";
     private final static String UPDATE_RESPONSE_PROCESS = "updateResponseAndProcess";
     private final static String UPDATE_PROCESS = "updateProcess";
+    private final static String BLOCK = "block";
 
     private final static String INDEX_PAGE = "index.jsp";
     private final static String MAIN_PAGE = "WEB-INF/view/main.jsp";
@@ -82,6 +84,8 @@ public class CommandFactory {
                 return new GetVacanciesByPageCommand(new VacancyService(daoHelperFactory));
             case RESPONSE_LIST:
                 return new GetResponsesList(new ResponseService(daoHelperFactory));
+            case USER_LIST:
+                return new GetAllUsersCommand(new UserService(daoHelperFactory));
             case APPLICANT_LIST:
                 RecruitingProcessService recruitingProcessService = new RecruitingProcessService(daoHelperFactory);
                 return new GetApplicantsByVacancyCommand(recruitingProcessService, new VacancyService(daoHelperFactory));
@@ -127,6 +131,8 @@ public class CommandFactory {
             case PHOTO:
                 ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
                 return new UploadFileCommand(new ApplicantService(daoHelperFactory), servletFileUpload);
+            case BLOCK:
+                return new BlockCommand(new UserService(daoHelperFactory));
             default:
                 throw new IllegalArgumentException("Unknown type of command" + type);
         }
