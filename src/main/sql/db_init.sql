@@ -10,11 +10,11 @@ GLOBAL time_zone = '+0:00';
 create table User
 (
     id         bigint primary key NOT NULL AUTO_INCREMENT,
-    username   varchar(45),
+    username   varchar(255),
     password   varchar(255),
     role       enum("Admin", "HR", "Applicant"),
     is_blocked boolean,
-    name       varchar(45),
+    name       varchar(255),
     gender     enum("male","female"),
     age        int,
     photo      varchar(255),
@@ -27,7 +27,7 @@ create table User
 create table Vacancy
 (
     id             bigint primary key NOT NULL AUTO_INCREMENT,
-    name           varchar(255),
+    name           varchar(50),
     salary         varchar(50),
     description    varchar(1000),
     responsibility varchar(1000),
@@ -39,7 +39,7 @@ create table User_Vacancy
      user_id            bigint,
      vacancy_id         bigint,
      state              enum("New", "Preliminary", "Technical", "Hired", "Rejected" ),
-     preliminary_points int
+     rating int
 );
 
 create table Response

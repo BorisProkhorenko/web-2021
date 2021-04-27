@@ -5,8 +5,9 @@ import com.epam.web.enums.Role;
 
 public class Applicant extends User {
 
+    public final static String APPLICANT = "applicant";
+
     private final static Role ROLE = Role.APPLICANT;
-    public static final String APPLICANT = "applicant";
     private final String name;
     private final Gender gender;
     private final Integer age;

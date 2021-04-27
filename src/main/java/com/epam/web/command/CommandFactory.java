@@ -2,6 +2,7 @@ package com.epam.web.command;
 
 import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.service.*;
+import com.epam.web.validator.ResponseValidator;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -53,6 +54,7 @@ public class CommandFactory {
     private final static String APPLICANTS_PAGE = "WEB-INF/view/applicants.jsp";
     private final static String UPDATE_AND_FEEDBACK_PAGE = "WEB-INF/view/updateAndFeedback.jsp";
     private final DaoHelperFactory daoHelperFactory;
+    private final ResponseValidator responseValidator = new ResponseValidator();
 
     public CommandFactory(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
@@ -72,11 +74,11 @@ public class CommandFactory {
             case FEEDBACK:
                 return new ShowPageCommand(UPDATE_AND_FEEDBACK_PAGE);
             case UPDATE_PROCESS:
-                return new UpdateRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory));
+                return new UpdateRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory, responseValidator));
             case UPDATE_RESPONSE_PROCESS:
-                return new UpdateProcessWithFeedbackCommand(new RecruitingProcessService(daoHelperFactory));
+                return new UpdateProcessWithFeedbackCommand(new RecruitingProcessService(daoHelperFactory, responseValidator));
             case APPLY:
-                RecruitingProcessService processService = new RecruitingProcessService(daoHelperFactory);
+                RecruitingProcessService processService = new RecruitingProcessService(daoHelperFactory, responseValidator);
                 UserService userService = new UserService(daoHelperFactory);
                 VacancyService vacancyService = new VacancyService(daoHelperFactory);
                 return new ApplyCommand(processService,userService,vacancyService);
@@ -87,7 +89,7 @@ public class CommandFactory {
             case USER_LIST:
                 return new GetAllUsersCommand(new UserService(daoHelperFactory));
             case APPLICANT_LIST:
-                RecruitingProcessService recruitingProcessService = new RecruitingProcessService(daoHelperFactory);
+                RecruitingProcessService recruitingProcessService = new RecruitingProcessService(daoHelperFactory, responseValidator);
                 return new GetApplicantsByVacancyCommand(recruitingProcessService, new VacancyService(daoHelperFactory));
             case GET_VACANCY:
                 return new GetVacancyCommand(new VacancyService(daoHelperFactory));
@@ -96,7 +98,7 @@ public class CommandFactory {
             case GET_RESPONSE:
                 return new GetResponseCommand(new ResponseService(daoHelperFactory));
             case GET_RECRUITING_PROCESS:
-                return new GetRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory));
+                return new GetRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory, responseValidator));
             case CV:
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
@@ -125,7 +127,7 @@ public class CommandFactory {
                 return new ShowPageCommand(CREATE_RESPONSE_PAGE);
             case UPDATE_RESPONSE:
                 ResponseService responseService = new ResponseService(daoHelperFactory);
-                return new CreateResponseCommand(responseService,new RecruitingProcessService(daoHelperFactory));
+                return new CreateResponseCommand(responseService,new RecruitingProcessService(daoHelperFactory, responseValidator));
             case IMAGE:
                 return new GetPhotoCommand(new ApplicantService(daoHelperFactory));
             case PHOTO:

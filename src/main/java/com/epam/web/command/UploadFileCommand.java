@@ -37,8 +37,7 @@ public class UploadFileCommand implements Command {
         String fileName = item.getName();
         ServletContext servletContext = request.getServletContext();
         String filePath = servletContext.getInitParameter(INIT_PARAMETER) + DELIMITER + fileName;
-        service.uploadFile(item,filePath);
-        service.updatePhoto(filePath, id);
+        service.validateAndUpdatePhoto(id, filePath, item);
 
         return CommandResult.redirect(CV);
     }

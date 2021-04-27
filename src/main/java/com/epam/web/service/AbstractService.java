@@ -2,7 +2,7 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.entity.Identifiable;
-import com.epam.web.entity.User;
+import com.epam.web.validator.Validator;
 
 
 import java.util.List;
@@ -11,11 +11,12 @@ import java.util.Optional;
 public abstract class AbstractService<T extends Identifiable> {
 
     private final DaoHelperFactory daoHelperFactory;
+    private final Validator validator;
     private final String daoType;
 
-    public AbstractService(DaoHelperFactory daoHelperFactory, String daoType){
+    public AbstractService(DaoHelperFactory daoHelperFactory, Validator validator, String daoType){
         this.daoHelperFactory = daoHelperFactory;
-
+        this.validator = validator;
         this.daoType = daoType;
     }
 
@@ -46,11 +47,15 @@ public abstract class AbstractService<T extends Identifiable> {
     }
 
     public void update(T item) throws ServiceException {
-        try (DaoHelper helper = getDaoHelperFactory().create()) {
-            AbstractDao<T> dao = helper.createDao(daoType);
-            dao.save(item);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(),e);
+        if (validator.validate(item)) {
+            try (DaoHelper helper = getDaoHelperFactory().create()) {
+                AbstractDao<T> dao = helper.createDao(daoType);
+                dao.save(item);
+            } catch (DaoException e) {
+                throw new ServiceException(e.getMessage(), e);
+            }
+        } else {
+            throw new ServiceException("Validation failed");
         }
     }
 
@@ -71,4 +76,7 @@ public abstract class AbstractService<T extends Identifiable> {
         return daoHelperFactory;
     }
 
+    protected Validator<T> getValidator() {
+        return validator;
+    }
 }

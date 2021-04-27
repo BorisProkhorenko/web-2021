@@ -7,6 +7,7 @@ import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.dao.ResponseDao;
 import com.epam.web.entity.Response;
+import com.epam.web.validator.ResponseValidator;
 
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ResponseService extends AbstractService<Response> {
 
     public ResponseService(DaoHelperFactory daoHelperFactory) {
-        super(daoHelperFactory, Response.TABLE_NAME);
+        super(daoHelperFactory, new ResponseValidator(), Response.TABLE_NAME);
     }
 
     public List<Response> getResponsesByUserId(Long id) throws ServiceException {

@@ -5,6 +5,7 @@ import com.epam.web.dao.*;
 import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
 import com.epam.web.entity.Vacancy;
+import com.epam.web.validator.VacancyValidator;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class VacancyService extends AbstractService<Vacancy> {
     private final static int VACANCIES_ON_PAGE = 2;
 
     public VacancyService(DaoHelperFactory daoHelperFactory) {
-        super(daoHelperFactory, Vacancy.TABLE_NAME);
+        super(daoHelperFactory, new VacancyValidator(), Vacancy.TABLE_NAME);
     }
 
 

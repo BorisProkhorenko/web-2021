@@ -11,7 +11,7 @@
 
 <form action="${pageContext.request.contextPath}/controller?command=photo" method="post"
       enctype="multipart/form-data">
-    <input type="file" id="file" class="input-file" name="uploadFile" accept="image/*" size="50" />
+    <input type="file" id="file" class="input-file" name="uploadFile" accept="image/*" size="50" alt="photo" pattern=".{1,150}">
     <label class="input-button" for="file"><fmt:message key="label.file.select"/>:</label>
     <br/>
     <br/>

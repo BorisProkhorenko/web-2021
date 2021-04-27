@@ -19,7 +19,7 @@
                 <label for="name"><fmt:message key="label.name"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="name" value="${vacancy.name}">
+                <input type="text" id="name" name="name" value="${vacancy.name}" pattern="[а-яА-ЯёЁa-zA-ZäöüÄÖÜß ]{1,50}">
             </div>
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
                 <label for="salary"><fmt:message key="label.salary"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="salary" name="salary" value="${vacancy.salary}">
+                <input type="text" id="salary" name="salary" value="${vacancy.salary}" pattern=".{0,50}">
             </div>
         </div>
         </div>
@@ -36,7 +36,7 @@
                 <label for="description"><fmt:message key="label.description"/></label>
             </div>
             <div class="col-75 big-size">
-                <textarea id="description" name="description">${vacancy.description}</textarea>
+                <textarea id="description" name="description" maxlength="1000">${vacancy.description}</textarea>
             </div>
         </div>
         <div class="row">
@@ -44,7 +44,7 @@
                 <label for="responsibility"><fmt:message key="label.responsibility"/></label>
             </div>
             <div class="col-75 big-size">
-                <textarea id="responsibility" name="responsibility">${vacancy.responsibility}</textarea>
+                <textarea id="responsibility" name="responsibility" maxlength="1000">${vacancy.responsibility}</textarea>
             </div>
         </div>
         <div class="row">
@@ -52,7 +52,7 @@
                 <label for="requirements"><fmt:message key="label.requirements"/></label>
             </div>
             <div class="col-75 big-size">
-                <textarea id="requirements" name="requirements">${vacancy.requirements}</textarea>
+                <textarea id="requirements" name="requirements" maxlength="1000">${vacancy.requirements}</textarea>
             </div>
             <div class="row"><fmt:message key="label.submit" var="buttonValue"/>
                 <input type="submit" value="${buttonValue}">

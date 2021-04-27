@@ -28,7 +28,7 @@
                 <label for="details"><fmt:message key="label.details"/></label>
             </div>
             <div class="col-75 big-size">
-                <textarea id="details" name="details"></textarea>
+                <textarea id="details" name="details" maxlength="1000"></textarea>
             </div>
         </div>
         <div class="row"><fmt:message key="label.submit" var="buttonValue"/>

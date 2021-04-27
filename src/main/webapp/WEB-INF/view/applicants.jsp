@@ -67,7 +67,7 @@
                         </td>
                         <td>
                             <input type="text" class="table-input" name="rating"
-                                   value="${applicantInProcess.rating}" pattern="[0-9]{1,3}">
+                                   value="${applicantInProcess.rating}" pattern="(100){1}|[0-9]{1,2}">
                         </td>
                         <td>
                             <a href="${pageContext.servletContext.contextPath}/controller?command=cv&id=${applicantInProcess.id}">
