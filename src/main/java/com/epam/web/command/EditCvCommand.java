@@ -39,7 +39,6 @@ public class EditCvCommand implements Command {
         String education = request.getParameter(EDUCATION);
         String experience = request.getParameter(EXPERIENCE);
         String skills = request.getParameter(SKILLS);
-
         Gender gender = Gender.fromString(request.getParameter(GENDER));
         User user = applicantService.getById(id);
         Applicant applicant = new Applicant(user, name, gender, age, EMPTY, contacts, education, experience, skills);

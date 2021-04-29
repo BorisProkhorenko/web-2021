@@ -28,26 +28,19 @@ public class Controller extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        process(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        process(request, response);
-    }
-
-    private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandType = request.getParameter(COMMAND);
         Command command = commandFactory.create(commandType);
         String page;
         boolean isRedirect = false;
+
         try {
             CommandResult result = command.execute(request, response);
             page = result.getPage();
             isRedirect = result.isRedirect();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(),e);
+            e.printStackTrace();
             page = ERROR_PAGE;
         }
 
@@ -60,6 +53,5 @@ public class Controller extends HttpServlet {
             dispatcher.forward(request, response);
         }
     }
-
 
 }

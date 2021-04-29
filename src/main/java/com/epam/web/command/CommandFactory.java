@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class CommandFactory {
+
     private final static String LOGIN = "login";
     private final static String INVALID_LOGIN = "invalidLogin";
     private final static String MAIN = "mainPage";

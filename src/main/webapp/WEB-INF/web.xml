@@ -30,6 +30,37 @@
     <servlet-name>main</servlet-name>
   </filter-mapping>
 
+
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.epam.web.filter.EncodingFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.epam.web.filter.AuthenticationFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>AuthorizationFilter</filter-name>
+    <filter-class>com.epam.web.filter.AuthorizationFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>AuthorizationFilter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
   <context-param>
     <description>Location to store uploaded file</description>
     <param-name>file-upload</param-name>
