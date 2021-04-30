@@ -38,7 +38,8 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
     }
 
     public void updateWithFeedback(RecruitingProcess process, Response feedback) throws ServiceException {
-        if (getValidator().validate(process) && responseValidator.validate(feedback)) {
+        if (getValidator().validate(process) &&
+                responseValidator.validate(feedback)) {
             try (DaoHelper helper = getDaoHelperFactory().create()) {
                 helper.startTransaction();
                 RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(getDaoType());

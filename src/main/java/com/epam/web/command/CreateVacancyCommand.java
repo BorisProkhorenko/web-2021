@@ -13,12 +13,12 @@ public class CreateVacancyCommand implements Command{
 
     private static final String VACANCY_ID = "vacancyId";
     private static final String EDIT = "editVacancy";
-    private static final String ZERO = "0";
+    private static final String NULL_ID = "0";
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServiceException, FileUploadException {
         HttpSession session = request.getSession();
-        session.setAttribute(VACANCY_ID,ZERO);
+        session.setAttribute(VACANCY_ID, NULL_ID);
         return CommandResult.redirect(EDIT);
     }
 }

@@ -33,7 +33,6 @@ public class Controller extends HttpServlet {
         Command command = commandFactory.create(commandType);
         String page;
         boolean isRedirect = false;
-
         try {
             CommandResult result = command.execute(request, response);
             page = result.getPage();

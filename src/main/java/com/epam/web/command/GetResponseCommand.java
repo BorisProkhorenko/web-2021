@@ -16,6 +16,7 @@ public class GetResponseCommand implements Command {
     private final static String ID = "id";
     private final static String RESPONSE_ATTRIBUTE = "jobResponse";
     private final static String EMPTY_PAGE = "empty";
+    private final static String ROLE = "role";
 
 
     public GetResponseCommand(ResponseService service) {
@@ -30,8 +31,8 @@ public class GetResponseCommand implements Command {
         RecruitingProcess process = jobResponse.getRecruitingProcess();
         User user = process.getUser();
         HttpSession session = request.getSession();
-        if (session.getAttribute("role") == Role.APPLICANT &&
-                session.getAttribute("id") != user.getId()) {
+        if (session.getAttribute(ROLE) == Role.APPLICANT &&
+                session.getAttribute(ID) != user.getId()) {
             throw new ServiceException("Not available response for actual user");
         }
         request.setAttribute(RESPONSE_ATTRIBUTE, jobResponse);
