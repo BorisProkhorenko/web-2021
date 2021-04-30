@@ -8,8 +8,7 @@
 <html lang="${sessionScope.lang}">
 <body>
 
-<jsp:include page="WEB-INF/view/fragments/header.jsp"/>
-<main class="container">
+<main class="applicant-container">
     <div class="error">
         <h1>
             <fmt:message key="label.error"/>
@@ -22,6 +21,6 @@
 </c:if>
 
 </main>
-<jsp:include page="WEB-INF/view/fragments/footer.jsp"/>
+
 </body>
 </html>

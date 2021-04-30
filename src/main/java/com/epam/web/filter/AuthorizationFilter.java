@@ -50,12 +50,13 @@ public class AuthorizationFilter implements Filter {
     private final static String ROLE = "role";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         List<String> adminCommands = Arrays.asList(LOGOUT, USER_LIST, BLOCK, MAIN, EMPTY);
         roleMap.put(Role.ADMIN, adminCommands);
 
         List<String> applicantCommands = Arrays.asList(LOGOUT, MAIN, CV, RESPONSES, RESPONSE_DETAILS, VACANCY, EDIT_CV,
-                UPDATE_CV, PHOTO, APPLY, IMAGE, EMPTY, VACANCY_LIST, RESPONSE_LIST, GET_USER, GET_RESPONSE, GET_VACANCY);
+                UPDATE_CV, PHOTO, APPLY, IMAGE, EMPTY, VACANCY_LIST, RESPONSE_LIST, GET_USER, GET_RESPONSE,
+                GET_VACANCY, GET_RECRUITING_PROCESS);
         roleMap.put(Role.APPLICANT, applicantCommands);
 
         List<String> hrCommands = Arrays.asList(LOGOUT, MAIN, CV, RESPONSES, RESPONSE_DETAILS, VACANCY, EDIT_VACANCY,

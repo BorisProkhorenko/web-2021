@@ -19,14 +19,23 @@
     <param-value>en_US</param-value>
   </context-param>
 
+  <filter>
+    <filter-name>XssFilter</filter-name>
+    <filter-class>com.epam.web.filter.XssFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>XssFilter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
 
   <filter>
-    <filter-name>WebFilter</filter-name>
+    <filter-name>SessionLocaleFilter</filter-name>
     <filter-class>com.epam.web.filter.SessionLocaleFilter</filter-class>
   </filter>
 
   <filter-mapping>
-    <filter-name>WebFilter</filter-name>
+    <filter-name>SessionLocaleFilter</filter-name>
     <servlet-name>main</servlet-name>
   </filter-mapping>
 
@@ -60,6 +69,8 @@
     <filter-name>AuthorizationFilter</filter-name>
     <servlet-name>main</servlet-name>
   </filter-mapping>
+
+
 
   <context-param>
     <description>Location to store uploaded file</description>

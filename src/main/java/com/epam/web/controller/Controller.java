@@ -40,7 +40,6 @@ public class Controller extends HttpServlet {
             isRedirect = result.isRedirect();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(),e);
-            e.printStackTrace();
             page = ERROR_PAGE;
         }
 

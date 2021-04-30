@@ -15,9 +15,10 @@ create table User
     role       enum("Admin", "HR", "Applicant"),
     is_blocked boolean,
     name       varchar(255),
-    gender     enum("male","female"),
+    gender     enum("male","female") DEFAULT 'male',
     age        int,
-    photo      varchar(255),
+    photo      varchar(255)
+        DEFAULT 'C:/Users/Прохоренко/IdeaProjects/EpamCourse/web-2021/src/main/webapp/icons/avatar.png',
     contacts   varchar(1000),
     education  varchar(1000),
     experience varchar(1000),

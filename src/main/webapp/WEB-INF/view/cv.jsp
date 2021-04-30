@@ -51,7 +51,7 @@
         <div class="photo">
 
             <img src="${pageContext.request.contextPath}/controller?command=image&id=${user.id}" height="400"
-                 width="400">
+                 width="400" alt="photo">
             <c:if test="${sessionScope.role == 'APPLICANT'}">
                 <jsp:include page="fragments/uploadFile.jsp"/>
             </c:if>

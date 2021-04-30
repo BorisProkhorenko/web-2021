@@ -2,12 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="responseId" value="${not empty param.id ? param.id : sessionScope.responseId}" scope="session"/>
-<c:set var="vacancyId" value="${not empty param.vacancyId ? param.vacancyId : sessionScope.vacancyId}" scope="session"/>
+<c:set var="responseId" value="${not empty param.responseId ? param.responseId : sessionScope.responseId}"
+       scope="session"/>
 
 <fmt:setLocale value="${sessionScope.lang}" scope="session"/>
 <fmt:setBundle basename="language" scope="session"/>
 
+<c:import url="/controller?command=getResponse&id=${responseId}"/>
+<c:set var="process" value="${jobResponse.recruitingProcess}"/>
 
 <html lang="${sessionScope.lang}">
 <body>
@@ -20,23 +22,19 @@
         <jsp:include page="fragments/menu.jsp"/>
     </nav>
     <c:set var="mainClass" value="applicant-container"/>
-    <c:import url="/controller?command=getVacancy&id=${vacancyId}"/>
 
 </c:if>
 
 <c:if test="${sessionScope.role == 'HR'}">
     <c:set var="mainClass" value="container"/>
-    <c:import url="/controller?command=getProcess&id=${sessionScope.processId}"/>
-    <c:set var="vacancy" value="${process.vacancy}"/>
 
 </c:if>
 
-<c:import url="/controller?command=getResponse&id=${responseId}"/>
 
 <main class="${mainClass}">
 
 
-    <h1>${vacancy.name}</h1>
+    <h1>${process.vacancy.name}</h1>
     <h3><fmt:message key="label.subject"/>:</h3>
     <p>${jobResponse.subject}</p>
     <h3><fmt:message key="label.details"/>:</h3>

@@ -27,7 +27,7 @@
                 <label for="salary"><fmt:message key="label.salary"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="salary" name="salary" value="${vacancy.salary}" pattern=".{0,50}">
+                <input type="text" id="salary" name="salary" value="${vacancy.salary}" pattern="[0-9а-яА-ЯёЁa-zA-ZäöüÄÖÜß ]{0,50}">
             </div>
         </div>
         </div>

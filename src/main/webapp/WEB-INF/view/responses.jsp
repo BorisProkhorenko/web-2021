@@ -58,11 +58,13 @@
             </b>
             <p>${response.subject}</p>
             <div class="single-button">
-                <form action="${pageContext.request.contextPath}/controller?command=responseDetails&id=${response.id}&vacancyId=${vacancy.id}"
+                <form action="${pageContext.request.contextPath}/controller?command=responseDetails"
                       method="POST">
+                    <input type="hidden" name="responseId" value="${response.id}">
                     <button>
                         <fmt:message key="label.details"/>
                     </button>
+
                 </form>
             </div>
         </div>
