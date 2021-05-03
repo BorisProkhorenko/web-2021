@@ -25,7 +25,7 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
     private final static String SELECT_BY_USER_AND_VACANCY = "SELECT * FROM USER_VACANCY WHERE user_id=?" +
             " AND vacancy_id=?";
 
-    private final static String DELETE_BY_VACANCY = "DELETE FROM USER_VACANCY WHERE vacancy_id=?";
+    private final static String DELETE_VACANCY_LINK = "UPDATE USER_VACANCY SET vacancy_id=NULL WHERE vacancy_id=?";
 
     public RecruitingProcessDao(Connection connection) {
         super(connection, new RecruitingProcessRowMapper(connection));
@@ -68,8 +68,8 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
         return executeQuery(SELECT_BY_USER_AND_VACANCY, userId,vacancyId);
     }
 
-    public void deleteByVacancyId(Long id) throws DaoException {
-        executeUpdate(DELETE_BY_VACANCY,id);
+    public void deleteVacancyLink(Long id) throws DaoException {
+        executeUpdate(DELETE_VACANCY_LINK,id);
     }
 
     @Override

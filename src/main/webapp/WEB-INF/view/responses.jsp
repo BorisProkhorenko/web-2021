@@ -27,6 +27,7 @@
     <div class="table-header">
         <h1>${process.user.name}</h1>
         <h3>${process.vacancy.name}</h3>
+
     </div>
     <br/>
     <div class="single-button">
@@ -46,7 +47,12 @@
     <c:forEach items="${responseList}" var="response">
         <c:set var="vacancy" value="${response.recruitingProcess.vacancy}"/>
         <div class="list-item">
+            <c:if test="${not empty vacancy.name}">
             <strong>${vacancy.name}</strong>
+            </c:if>
+            <c:if test="${empty vacancy.name}">
+                <strong><fmt:message key="label.vacancy.closed"/> </strong>
+            </c:if>
             <br/>
             <b>
                 <c:if test="${sessionScope.lang == 'en'}">

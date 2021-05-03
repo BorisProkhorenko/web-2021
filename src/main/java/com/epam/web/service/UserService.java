@@ -2,7 +2,7 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.entity.User;
-import com.epam.web.validator.UserValidator;
+import com.epam.web.validator.LoginValidator;
 import com.epam.web.validator.Validator;
 
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UserService extends AbstractService<User> {
 
     public UserService(DaoHelperFactory daoHelperFactory) {
-        super(daoHelperFactory, new UserValidator(), User.TABLE_NAME);
+        super(daoHelperFactory, new LoginValidator(), User.TABLE_NAME);
     }
 
     protected UserService(DaoHelperFactory daoHelperFactory, Validator validator, String daoType) {

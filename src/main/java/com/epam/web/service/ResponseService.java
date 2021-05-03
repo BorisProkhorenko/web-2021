@@ -6,7 +6,9 @@ import com.epam.web.dao.DaoHelper;
 
 import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.dao.ResponseDao;
+import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
+import com.epam.web.entity.Vacancy;
 import com.epam.web.validator.ResponseValidator;
 
 

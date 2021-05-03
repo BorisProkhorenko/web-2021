@@ -42,8 +42,11 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
             User user = optionalUser.get();
             Vacancy vacancy = optionalVacancy.get();
             return new RecruitingProcess(id, user, vacancy, state, rating);
+        } else if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            return new RecruitingProcess(id, user, null, state, rating);
         } else {
-            throw new DaoException("Empty user or vacancy");
+            throw new DaoException("Empty user");
         }
 
     }

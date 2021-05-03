@@ -34,7 +34,12 @@
 <main class="${mainClass}">
 
 
-    <h1>${process.vacancy.name}</h1>
+    <c:if test="${not empty process.vacancy.name}">
+        <h1>${process.vacancy.name}</h1>
+    </c:if>
+    <c:if test="${empty process.vacancy.name}">
+        <h1><fmt:message key="label.vacancy.closed"/></h1>
+    </c:if>
     <h3><fmt:message key="label.subject"/>:</h3>
     <p>${jobResponse.subject}</p>
     <h3><fmt:message key="label.details"/>:</h3>

@@ -34,10 +34,8 @@ public class VacancyService extends AbstractService<Vacancy> {
     public void deleteById(Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             helper.startTransaction();
-            ResponseDao responseDao = (ResponseDao) helper.createDao(Response.TABLE_NAME);
-            responseDao.deleteByVacancyId(id);
             RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(RecruitingProcess.TABLE_NAME);
-            processDao.deleteByVacancyId(id);
+            processDao.deleteVacancyLink(id);
             VacancyDao vacancyDao = (VacancyDao) helper.createDao(getDaoType());
             vacancyDao.removeById(id);
             helper.endTransaction();

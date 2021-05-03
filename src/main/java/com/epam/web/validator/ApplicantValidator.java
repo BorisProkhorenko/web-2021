@@ -16,7 +16,7 @@ public class ApplicantValidator implements Validator<Applicant> {
         int age = item.getAge();
         String contacts = item.getContacts();
         int contactsLength = contacts.length();
-        String photo = item.getContacts();
+        String photo = item.getPhoto();
         int photoLength = photo.length();
         String education = item.getEducation();
         int educationLength = education.length();
