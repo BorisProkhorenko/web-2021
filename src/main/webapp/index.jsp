@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label><fmt:message key="label.password"/></label>
-            <input type="text" name="password" class="form-control" required pattern="[a-zA-Z0-9]{1,255}"/>
+            <input type="password" name="password" class="form-control" required pattern="[a-zA-Z0-9]{1,255}"/>
         </div>
         <fmt:message key="label.login" var="buttonValue"/>
         <input type="submit" class="btn" value="${buttonValue}"/>

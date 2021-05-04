@@ -9,10 +9,12 @@ public class PropertyLoader {
     public Properties load(String filename) throws IOException {
         Properties properties = new Properties();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)) {
+        try (InputStream inputStream = getClass().getClassLoader()
+                .getResourceAsStream(filename)) {
+
             properties.load(inputStream);
         }
-            return properties;
+        return properties;
     }
 
 }

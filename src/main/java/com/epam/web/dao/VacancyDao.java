@@ -2,7 +2,6 @@ package com.epam.web.dao;
 
 
 import com.epam.web.entity.Vacancy;
-
 import com.epam.web.mapper.VacancyRowMapper;
 
 import java.sql.Connection;
@@ -14,10 +13,10 @@ public class VacancyDao extends AbstractDao<Vacancy> {
 
 
     private final static String INSERT_QUERY = "INSERT INTO VACANCY(name, salary, responsibility, description, " +
-            "requirements) values(?,?,?,?,?);";
+            "requirements) VALUES(?,?,?,?,?);";
 
     private final static String UPDATE_QUERY = "UPDATE VACANCY SET name=?, salary=?, responsibility=?, description=?, " +
-            "requirements=? where id=?;";
+            "requirements=? WHERE id=?;";
 
     public VacancyDao(Connection connection) {
 

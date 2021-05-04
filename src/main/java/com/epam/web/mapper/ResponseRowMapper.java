@@ -32,7 +32,7 @@ public class ResponseRowMapper implements RowMapper<Response> {
         Date date = resultSet.getTimestamp(DATE);
         Long recruitingProcessId = resultSet.getLong(PROCESS_ID);
         Optional<RecruitingProcess> optionalProcess = recruitingProcessDao.getById(recruitingProcessId);
-        if(optionalProcess.isPresent()){
+        if (optionalProcess.isPresent()) {
             RecruitingProcess process = optionalProcess.get();
             return new Response(id, subject, details, date, process);
         } else {

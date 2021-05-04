@@ -7,14 +7,13 @@ import java.io.IOException;
 
 public class AuthenticationFilter implements Filter {
 
-    private final static String LOGIN_PAGE="index.jsp";
-    private final static String ID="id";
-    private final static String COMMAND="command";
-    private final static String LOGIN_COMMAND="login";
+    private final static String LOGIN_PAGE = "index.jsp";
+    private final static String ID = "id";
+    private final static String COMMAND = "command";
+    private final static String LOGIN_COMMAND = "login";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

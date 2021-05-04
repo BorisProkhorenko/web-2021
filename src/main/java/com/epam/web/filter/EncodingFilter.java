@@ -2,10 +2,8 @@ package com.epam.web.filter;
 
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.Charset;
+
 
 public class EncodingFilter implements Filter {
 
@@ -15,9 +13,9 @@ public class EncodingFilter implements Filter {
 
     private String encoding;
 
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) {
         encoding = config.getInitParameter(REQUEST_ENCODING_PARAM);
-        if (encoding == null){
+        if (encoding == null) {
             encoding = UTF_8;
         }
     }

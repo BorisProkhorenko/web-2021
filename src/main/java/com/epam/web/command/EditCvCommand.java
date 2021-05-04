@@ -29,7 +29,8 @@ public class EditCvCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         HttpSession session = request.getSession();
         Long id = (Long) session.getAttribute(ID);
         String name = request.getParameter(NAME);
@@ -43,7 +44,6 @@ public class EditCvCommand implements Command {
         User user = applicantService.getById(id);
         Applicant applicant = new Applicant(user, name, gender, age, EMPTY, contacts, education, experience, skills);
         applicantService.update(applicant);
-
 
         return CommandResult.redirect(CV);
     }

@@ -29,7 +29,8 @@ public class UploadFileCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, FileUploadException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, FileUploadException {
         HttpSession session = request.getSession();
         Long id = (Long) session.getAttribute(ID);
         List<FileItem> multiParts = servletFileUpload.parseRequest(request);
@@ -37,7 +38,7 @@ public class UploadFileCommand implements Command {
         String fileName = item.getName();
         ServletContext servletContext = request.getServletContext();
         String filePath = servletContext.getInitParameter(INIT_PARAMETER) + DELIMITER + fileName;
-        service.validateAndUpdatePhoto(id, filePath, item);
+        service.SavePhoto(id, filePath, item);
 
         return CommandResult.redirect(CV);
     }

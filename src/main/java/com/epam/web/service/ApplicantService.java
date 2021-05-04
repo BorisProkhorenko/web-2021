@@ -1,6 +1,9 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.*;
+import com.epam.web.dao.ApplicantDao;
+import com.epam.web.dao.DaoException;
+import com.epam.web.dao.DaoHelper;
+import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.entity.Applicant;
 import com.epam.web.validator.ApplicantValidator;
 import org.apache.commons.fileupload.FileItem;
@@ -22,7 +25,7 @@ public class ApplicantService extends UserService {
         super(daoHelperFactory, new ApplicantValidator(), Applicant.APPLICANT);
     }
 
-    public void validateAndUpdatePhoto(Long id, String filepath, FileItem item) throws ServiceException {
+    public void SavePhoto(Long id, String filepath, FileItem item) throws ServiceException {
         if (filepath.length() <= MAX_PHOTO) {
             uploadFile(item, filepath);
             updatePhoto(id, filepath);

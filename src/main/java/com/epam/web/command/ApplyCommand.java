@@ -8,13 +8,11 @@ import com.epam.web.service.RecruitingProcessService;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 import com.epam.web.service.VacancyService;
-import org.apache.commons.fileupload.FileUploadException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+
 
 public class ApplyCommand implements Command {
 
@@ -35,7 +33,9 @@ public class ApplyCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ServiceException, FileUploadException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
+
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(USER_ID);
         String vacancyIdParam = (String) session.getAttribute(VACANCY_ID);

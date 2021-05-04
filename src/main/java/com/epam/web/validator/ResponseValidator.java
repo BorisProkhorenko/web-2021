@@ -3,7 +3,7 @@ package com.epam.web.validator;
 import com.epam.web.entity.Response;
 
 
-public class ResponseValidator implements Validator<Response>{
+public class ResponseValidator implements Validator<Response> {
 
     private final static int MAX_SUBJECT = 255;
     private final static int MAX_DETAILS = 1000;

@@ -11,9 +11,9 @@ import java.util.List;
 public class ApplicantDao extends UserDao {
 
     private final static String UPDATE_QUERY = "UPDATE USER SET name=?, gender=?, age=?, contacts=?, " +
-            "education=?, experience=?, skills=? where id=?";
+            "education=?, experience=?, skills=? WHERE id=?";
 
-    private final static String UPDATE_PHOTO = "UPDATE USER SET photo=? where id=?";
+    private final static String UPDATE_PHOTO = "UPDATE USER SET photo=? WHERE id=?";
 
 
     public ApplicantDao(Connection connection) {

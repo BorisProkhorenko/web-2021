@@ -1,11 +1,9 @@
 package com.epam.web.command;
 
 import com.epam.web.entity.Response;
-
 import com.epam.web.enums.Role;
 import com.epam.web.service.ResponseService;
 import com.epam.web.service.ServiceException;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,8 @@ public class GetResponsesList implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         HttpSession session = request.getSession();
         Long id;
         Role role = (Role) session.getAttribute(ROLE);

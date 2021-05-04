@@ -4,7 +4,7 @@ package com.epam.web.enums;
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum Role  {
+public enum Role {
     ADMIN,
     HR,
     APPLICANT;

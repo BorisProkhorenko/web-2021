@@ -3,8 +3,10 @@ package com.epam.web.dao;
 import com.epam.web.entity.Identifiable;
 import com.epam.web.mapper.RowMapper;
 
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             }
             return entities;
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage(),e);
+            throw new DaoException(e.getMessage(), e);
         }
 
     }
@@ -65,7 +67,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         try (PreparedStatement statement = createStatement(query, params)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage(),e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 

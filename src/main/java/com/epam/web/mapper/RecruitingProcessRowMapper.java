@@ -8,7 +8,6 @@ import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
             User user = optionalUser.get();
             Vacancy vacancy = optionalVacancy.get();
             return new RecruitingProcess(id, user, vacancy, state, rating);
-        } else if(optionalUser.isPresent()){
+        } else if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             return new RecruitingProcess(id, user, null, state, rating);
         } else {

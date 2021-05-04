@@ -3,7 +3,6 @@ package com.epam.web.enums;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public enum ApplicantState {
 

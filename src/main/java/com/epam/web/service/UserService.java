@@ -1,10 +1,12 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.*;
+import com.epam.web.dao.DaoException;
+import com.epam.web.dao.DaoHelper;
+import com.epam.web.dao.DaoHelperFactory;
+import com.epam.web.dao.UserDao;
 import com.epam.web.entity.User;
 import com.epam.web.validator.LoginValidator;
 import com.epam.web.validator.Validator;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +25,7 @@ public class UserService extends AbstractService<User> {
     public List<User> getAll() throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             UserDao userDao = (UserDao) helper.createDao(getDaoType());
-            List<User> userList = userDao.getAllSorted();
-            return userList;
+            return userDao.getAllSorted();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -43,8 +44,7 @@ public class UserService extends AbstractService<User> {
     public Optional<User> login(String username, String password) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             UserDao userDao = (UserDao) helper.createDao(getDaoType());
-            Optional<User> user = userDao.findUserByUsernameAndPassword(username, password);
-            return user;
+            return userDao.findUserByUsernameAndPassword(username, password);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

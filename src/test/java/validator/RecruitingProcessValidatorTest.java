@@ -21,7 +21,7 @@ public class RecruitingProcessValidatorTest {
     @Test
     public void testValidRecruitingProcessShouldReturnTrue() {
         //given
-        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID,MOCK_USER,MOCK_VACANCY,
+        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID, MOCK_USER, MOCK_VACANCY,
                 ApplicantState.NEW, VALID_RATING);
         //when
         boolean isValid = VALIDATOR.validate(recruitingProcess);
@@ -32,7 +32,7 @@ public class RecruitingProcessValidatorTest {
     @Test
     public void testInvalidRecruitingProcessOversizeRatingShouldReturnFalse() {
         //given
-        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID,MOCK_USER,MOCK_VACANCY,
+        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID, MOCK_USER, MOCK_VACANCY,
                 ApplicantState.NEW, OVERSIZE_RATING);
         //when
         boolean isValid = VALIDATOR.validate(recruitingProcess);
@@ -43,7 +43,7 @@ public class RecruitingProcessValidatorTest {
     @Test
     public void testInvalidRecruitingProcessNegativeRatingShouldReturnFalse() {
         //given
-        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID,MOCK_USER,MOCK_VACANCY,
+        RecruitingProcess recruitingProcess = new RecruitingProcess(MOCK_ID, MOCK_USER, MOCK_VACANCY,
                 ApplicantState.NEW, NEGATIVE_RATING);
         //when
         boolean isValid = VALIDATOR.validate(recruitingProcess);

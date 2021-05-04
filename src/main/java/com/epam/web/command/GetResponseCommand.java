@@ -24,7 +24,8 @@ public class GetResponseCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         String idParam = request.getParameter(ID);
         Long id = Long.parseLong(idParam);
         Response jobResponse = service.getById(id);

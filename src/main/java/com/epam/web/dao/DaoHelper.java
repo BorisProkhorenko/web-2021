@@ -2,15 +2,12 @@ package com.epam.web.dao;
 
 import com.epam.web.connection.ProxyConnection;
 import com.epam.web.entity.*;
-import com.epam.web.mapper.UserRowMapper;
-import com.epam.web.mapper.VacancyRowMapper;
-import com.epam.web.service.ApplicantService;
 
 import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
 
-    private ProxyConnection connection;
+    private final ProxyConnection connection;
 
     public DaoHelper(ProxyConnection connection) {
         this.connection = connection;
@@ -42,7 +39,7 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage(),e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 

@@ -13,6 +13,7 @@ public class ApplicantValidatorTest {
     private final static ApplicantValidator VALIDATOR = new ApplicantValidator();
     private final static String VALID_NAME = "Ivan Петров";
     private final static String INVALID_NAME = "Ivan 6Petrov";
+    private final static String EMPTY_NAME = "";
     private final static int VALID_AGE = 20;
     private final static int OVERSIZE_AGE = 100;
     private final static int INSUFFICIENT_AGE = 19;
@@ -35,7 +36,7 @@ public class ApplicantValidatorTest {
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here";
-    private final static User MOCK_USER = new User(1L,"","", Role.ADMIN,false);
+    private final static User MOCK_USER = new User(1L, "", "", Role.ADMIN, false);
 
 
     @Test
@@ -159,6 +160,19 @@ public class ApplicantValidatorTest {
     public void testInvalidApplicantOversizeAgeShouldReturnFalse() {
         //given
         Applicant applicant = new Applicant(MOCK_USER, VALID_NAME, Gender.MALE, OVERSIZE_AGE,
+                VALID_PHOTO, VALID_OTHER,
+                VALID_OTHER, VALID_OTHER,
+                VALID_OTHER);
+        //when
+        boolean isValid = VALIDATOR.validate(applicant);
+        //then
+        Assert.assertFalse(isValid);
+    }
+
+    @Test
+    public void testInvalidApplicantEmptyNameShouldReturnFalse() {
+        //given
+        Applicant applicant = new Applicant(MOCK_USER, EMPTY_NAME, Gender.MALE, VALID_AGE,
                 VALID_PHOTO, VALID_OTHER,
                 VALID_OTHER, VALID_OTHER,
                 VALID_OTHER);

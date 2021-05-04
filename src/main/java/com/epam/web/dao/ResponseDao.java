@@ -4,7 +4,6 @@ import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
 import com.epam.web.mapper.ResponseRowMapper;
 
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,18 +13,17 @@ public class ResponseDao extends AbstractDao<Response> {
 
 
     private final static String INSERT_QUERY = "INSERT INTO RESPONSE(subject, details, " +
-            "user_vacancy_id) values(?,?,?);";
+            "user_vacancy_id) VALUES(?,?,?);";
 
-    private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=? where id=?;";
+    private final static String UPDATE_QUERY = "UPDATE RESPONSE SET subject=?, details=? WHERE id=?;";
 
-    private final static String SELECT_BY_PROCESS_ID = "select * from response where user_vacancy_id=?;";
+    private final static String SELECT_BY_PROCESS_ID = "SELECT * FROM response WHERE user_vacancy_id=?;";
 
-    private final static String SELECT_BY_USER_ID = "select * from response join user_vacancy on user_vacancy.user_id=?" +
-            " and response.user_vacancy_id=user_vacancy.id ORDER BY DATE DESC;";
+    private final static String SELECT_BY_USER_ID = "SELECT * FROM response JOIN user_vacancy ON" +
+            " user_vacancy.user_id=? AND response.user_vacancy_id=user_vacancy.id ORDER BY DATE DESC;";
 
-    private final static String DELETE_BY_VACANCY_ID = "delete response from response inner join user_vacancy" +
-            " where response.user_vacancy_id=user_vacancy.id AND user_vacancy.vacancy_id=?";
-
+    private final static String DELETE_BY_VACANCY_ID = "DELETE response FROM response INNER JOIN user_vacancy" +
+            " WHERE response.user_vacancy_id=user_vacancy.id AND user_vacancy.vacancy_id=?";
 
 
     public ResponseDao(Connection connection) {

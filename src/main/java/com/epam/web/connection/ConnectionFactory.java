@@ -43,7 +43,7 @@ public class ConnectionFactory {
             password = properties.getProperty(PASSWORD);
 
         } catch (ClassNotFoundException | IOException e) {
-            throw new ConnectionPoolException(e.getMessage(),e);
+            throw new ConnectionPoolException(e.getMessage(), e);
         }
     }
 }

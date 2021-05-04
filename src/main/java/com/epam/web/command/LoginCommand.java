@@ -5,7 +5,6 @@ import com.epam.web.enums.Role;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,14 +29,15 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         String username = request.getParameter(USERNAME);
         String password = request.getParameter(PASSWORD);
         Optional<User> optionalUser = service.login(username, password);
         HttpSession session = request.getSession();
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            if(user.getIsBlocked()){
+            if (user.getIsBlocked()) {
                 session.setAttribute(ERROR_MESSAGE, BLOCKED);
                 return CommandResult.redirect(INVALID);
             }
@@ -53,5 +53,5 @@ public class LoginCommand implements Command {
         }
     }
 
-    
+
 }

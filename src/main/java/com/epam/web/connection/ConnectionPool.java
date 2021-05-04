@@ -56,7 +56,7 @@ public class ConnectionPool {
                 availableConnections.add(proxyConnection);
             }
         } catch (SQLException e) {
-            throw new ConnectionPoolException(e.getMessage(),e);
+            throw new ConnectionPoolException(e.getMessage(), e);
         }
     }
 
@@ -85,7 +85,7 @@ public class ConnectionPool {
             return connection;
 
         } catch (InterruptedException e) {
-            throw new ConnectionPoolException(e.getMessage(),e);
+            throw new ConnectionPoolException(e.getMessage(), e);
 
         } finally {
             connectionsLock.unlock();

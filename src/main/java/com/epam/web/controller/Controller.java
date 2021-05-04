@@ -28,7 +28,8 @@ public class Controller extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String commandType = request.getParameter(COMMAND);
         Command command = commandFactory.create(commandType);
         String page;
@@ -38,10 +39,9 @@ public class Controller extends HttpServlet {
             page = result.getPage();
             isRedirect = result.isRedirect();
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(), e);
             page = ERROR_PAGE;
         }
-
         if (isRedirect) {
             String contextPath = getServletContext().getContextPath();
             String pagePath = contextPath + COMMAND_HEADER + page;

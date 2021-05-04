@@ -2,7 +2,7 @@ package com.epam.web.entity;
 
 import com.epam.web.enums.ApplicantState;
 
-public class RecruitingProcess implements Identifiable{
+public class RecruitingProcess implements Identifiable {
 
     public final static String TABLE_NAME = "user_vacancy";
     private final Long id;

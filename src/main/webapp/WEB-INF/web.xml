@@ -20,6 +20,16 @@
   </context-param>
 
   <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.epam.web.filter.EncodingFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
     <filter-name>XssFilter</filter-name>
     <filter-class>com.epam.web.filter.XssFilter</filter-class>
   </filter>
@@ -40,15 +50,7 @@
   </filter-mapping>
 
 
-  <filter>
-    <filter-name>EncodingFilter</filter-name>
-    <filter-class>com.epam.web.filter.EncodingFilter</filter-class>
-  </filter>
 
-  <filter-mapping>
-    <filter-name>EncodingFilter</filter-name>
-    <servlet-name>main</servlet-name>
-  </filter-mapping>
 
   <filter>
     <filter-name>AuthenticationFilter</filter-name>

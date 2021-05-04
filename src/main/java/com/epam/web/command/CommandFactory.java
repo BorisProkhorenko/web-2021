@@ -54,18 +54,26 @@ public class CommandFactory {
     private final static String EMPTY_PAGE = "WEB-INF/view/fragments/empty.jsp";
     private final static String APPLICANTS_PAGE = "WEB-INF/view/applicants.jsp";
     private final static String UPDATE_AND_FEEDBACK_PAGE = "WEB-INF/view/updateAndFeedback.jsp";
-    private final DaoHelperFactory daoHelperFactory;
-    private final ResponseValidator responseValidator = new ResponseValidator();
+    private final UserService userService;
+    private final ApplicantService applicantService;
+    private final VacancyService vacancyService;
+    private final ResponseService responseService;
+    private final RecruitingProcessService processService;
 
     public CommandFactory(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        userService = new UserService(daoHelperFactory);
+        applicantService = new ApplicantService(daoHelperFactory);
+        vacancyService = new VacancyService(daoHelperFactory);
+        responseService = new ResponseService(daoHelperFactory);
+        processService = new RecruitingProcessService(daoHelperFactory, new ResponseValidator());
+
     }
 
 
     public Command create(String type) {
         switch (type) {
             case LOGIN:
-                return new LoginCommand(new UserService(daoHelperFactory));
+                return new LoginCommand(userService);
             case INVALID_LOGIN:
                 return new ShowPageCommand(INDEX_PAGE);
             case MAIN:
@@ -75,36 +83,27 @@ public class CommandFactory {
             case FEEDBACK:
                 return new ShowPageCommand(UPDATE_AND_FEEDBACK_PAGE);
             case UPDATE_PROCESS:
-                return new UpdateRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory,
-                        responseValidator));
+                return new UpdateRecruitingProcessCommand(processService);
             case UPDATE_RESPONSE_PROCESS:
-                return new UpdateProcessWithFeedbackCommand(new RecruitingProcessService(daoHelperFactory,
-                        responseValidator));
+                return new UpdateProcessWithFeedbackCommand(processService);
             case APPLY:
-                RecruitingProcessService processService = new RecruitingProcessService(daoHelperFactory,
-                        responseValidator);
-                UserService userService = new UserService(daoHelperFactory);
-                VacancyService vacancyService = new VacancyService(daoHelperFactory);
-                return new ApplyCommand(processService,userService,vacancyService);
+                return new ApplyCommand(processService, userService, vacancyService);
             case VACANCY_LIST:
-                return new GetVacanciesByPageCommand(new VacancyService(daoHelperFactory));
+                return new GetVacanciesByPageCommand(vacancyService);
             case RESPONSE_LIST:
-                return new GetResponsesList(new ResponseService(daoHelperFactory));
+                return new GetResponsesList(responseService);
             case USER_LIST:
-                return new GetAllUsersCommand(new UserService(daoHelperFactory));
+                return new GetAllUsersCommand(userService);
             case APPLICANT_LIST:
-                RecruitingProcessService recruitingProcessService = new RecruitingProcessService(daoHelperFactory,
-                        responseValidator);
-                return new GetApplicantsByVacancyCommand(recruitingProcessService, new VacancyService(daoHelperFactory));
+                return new GetApplicantsByVacancyCommand(processService, vacancyService);
             case GET_VACANCY:
-                return new GetVacancyCommand(new VacancyService(daoHelperFactory));
+                return new GetVacancyCommand(vacancyService);
             case GET_USER:
-                return new GetUserCommand(new UserService(daoHelperFactory));
+                return new GetUserCommand(userService);
             case GET_RESPONSE:
-                return new GetResponseCommand(new ResponseService(daoHelperFactory));
+                return new GetResponseCommand(responseService);
             case GET_RECRUITING_PROCESS:
-                return new GetRecruitingProcessCommand(new RecruitingProcessService(daoHelperFactory,
-                        responseValidator));
+                return new GetRecruitingProcessCommand(processService);
             case CV:
                 return new ShowPageCommand(CV_PAGE);
             case RESPONSES:
@@ -120,28 +119,26 @@ public class CommandFactory {
             case EDIT_CV:
                 return new ShowPageCommand(EDIT_CV_PAGE);
             case UPDATE_CV:
-                return new EditCvCommand(new ApplicantService(daoHelperFactory));
+                return new EditCvCommand(applicantService);
             case EDIT_VACANCY:
                 return new ShowPageCommand(EDIT_VACANCY_PAGE);
             case UPDATE_VACANCY:
-                return new EditVacancyCommand(new VacancyService(daoHelperFactory));
+                return new EditVacancyCommand(vacancyService);
             case CREATE_VACANCY:
                 return new CreateVacancyCommand();
             case DELETE_VACANCY:
-                return new DeleteVacancyCommand(new VacancyService(daoHelperFactory));
+                return new DeleteVacancyCommand(vacancyService);
             case CREATE_RESPONSE:
                 return new ShowPageCommand(CREATE_RESPONSE_PAGE);
             case UPDATE_RESPONSE:
-                ResponseService responseService = new ResponseService(daoHelperFactory);
-                return new CreateResponseCommand(responseService,new RecruitingProcessService(daoHelperFactory,
-                        responseValidator));
+                return new CreateResponseCommand(responseService, processService);
             case IMAGE:
-                return new GetPhotoCommand(new ApplicantService(daoHelperFactory));
+                return new GetPhotoCommand(applicantService);
             case PHOTO:
                 ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
-                return new UploadFileCommand(new ApplicantService(daoHelperFactory), servletFileUpload);
+                return new UploadFileCommand(applicantService, servletFileUpload);
             case BLOCK:
-                return new BlockCommand(new UserService(daoHelperFactory));
+                return new BlockCommand(userService);
             default:
                 throw new IllegalArgumentException("Unknown type of command" + type);
         }

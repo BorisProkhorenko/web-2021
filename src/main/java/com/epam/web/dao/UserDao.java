@@ -4,7 +4,7 @@ import com.epam.web.entity.User;
 import com.epam.web.enums.Role;
 import com.epam.web.mapper.UserRowMapper;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +16,12 @@ public class UserDao extends AbstractDao<User> {
             " AND PASSWORD = MD5(?)";
 
     private final static String INSERT_QUERY = "INSERT INTO USER(username, password, role, is_blocked)" +
-            " values(?,?,MD5(?),?);";
+            " VALUES(?,?,MD5(?),?);";
 
     private final static String UPDATE_QUERY = "UPDATE USER SET username=?, password=MD5(?), role=?, is_blocked=?" +
-            "where id=?;";
+            "WHERE id=?;";
 
-    private final static String BLOCK_QUERY = "UPDATE USER SET is_blocked=? where id=?;";
+    private final static String BLOCK_QUERY = "UPDATE USER SET is_blocked=? WHERE id=?;";
 
     private final static String ORDER_BY_USERNAME = "ORDER BY username, role;";
 
