@@ -19,6 +19,11 @@ public class PaginationTag extends SimpleTagSupport {
     private final static String LANG_ATTRIBUTE = "lang";
     private final static String BUNDLE = "language";
     private final static String REPLACEABLE_PART = "##";
+    private final static String B_OPEN = "<b>";
+    private final static String B_CLOSE = "</b>";
+    private final static String A_OPEN = "<a href=\"";
+    private final static String TAG_END = "\">";
+    private final static String A_CLOSE = "</a>";
 
     private String uri;
     private int currPage;
@@ -57,7 +62,7 @@ public class PaginationTag extends SimpleTagSupport {
             }
             for (int i = pgStart; i < pgEnd; i++) {
                 if (i == currPage) {
-                    out.write("<b>" + i + "</b>");
+                    out.write(B_OPEN + i + B_CLOSE);
                 } else {
                     out.write(constructLink(i));
                 }
@@ -111,11 +116,11 @@ public class PaginationTag extends SimpleTagSupport {
 
     private String constructLink(int page, String text) {
         StringBuilder link = new StringBuilder();
-        link.append("<a href=\"")
+        link.append(A_OPEN)
                 .append(uri.replace(REPLACEABLE_PART, String.valueOf(page)))
-                .append("\">")
+                .append(TAG_END)
                 .append(text)
-                .append("</a>");
+                .append(A_CLOSE);
         return link.toString();
     }
 
