@@ -14,25 +14,25 @@ create table User
     password   varchar(255),
     role       enum("Admin", "HR", "Applicant"),
     is_blocked boolean,
-    name       varchar(255),
+    name       varchar(1800),
     gender     enum("male","female") DEFAULT 'male',
     age        int,
-    photo      varchar(255)
+    photo      varchar(1800)
         DEFAULT 'C:/Users/Прохоренко/IdeaProjects/EpamCourse/web-2021/src/main/webapp/icons/avatar.png',
-    contacts   varchar(1000),
-    education  varchar(1000),
-    experience varchar(1000),
-    skills     varchar(1000)
+    contacts   text(7000),
+    education  text(7000),
+    experience text(7000),
+    skills     text(7000)
 );
 
 create table Vacancy
 (
     id             bigint primary key NOT NULL AUTO_INCREMENT,
-    name           varchar(50),
-    salary         varchar(50),
-    description    varchar(1000),
-    responsibility varchar(1000),
-    requirements   varchar(1000)
+    name           varchar(350),
+    salary         varchar(350),
+    description    text(7000),
+    responsibility text(7000),
+    requirements   text(7000)
 );
 
 create table User_Vacancy
@@ -47,8 +47,8 @@ create table Response
 (
     id         bigint primary key NOT NULL AUTO_INCREMENT,
     date       timestamp DEFAULT CURRENT_TIMESTAMP,
-    subject    varchar(255),
-    details    varchar(1000),
+    subject    varchar(1800),
+    details    varchar(7000),
     user_vacancy_id    bigint
 );
 

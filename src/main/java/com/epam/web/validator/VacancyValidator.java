@@ -5,15 +5,13 @@ import com.epam.web.entity.Vacancy;
 
 public class VacancyValidator implements Validator<Vacancy> {
 
-    private final static String NAME_PATTERN = "[а-яА-ЯёЁa-zA-ZäöüÄÖÜß ]{1,50}";
-    private final static int MAX_SALARY = 50;
-    private final static int MAX = 1000;
+    private final static String NAME_SALARY_PATTERN = ".{1,350}";
+    private final static int MAX = 7000;
 
     @Override
     public boolean validate(Vacancy item) {
         String name = item.getName();
         String salary = item.getSalary();
-        int salaryLength = salary.length();
         String responsibility = item.getResponsibility();
         int responsibilityLength = responsibility.length();
         String description = item.getDescription();
@@ -21,8 +19,8 @@ public class VacancyValidator implements Validator<Vacancy> {
         String requirements = item.getRequirements();
         int requirementsLength = requirements.length();
 
-        return name.matches(NAME_PATTERN) && salaryLength <= MAX_SALARY && requirementsLength <= MAX &&
-                responsibilityLength <= MAX && descriptionLength <= MAX;
+        return name.matches(NAME_SALARY_PATTERN) && salary.matches(NAME_SALARY_PATTERN)
+                && requirementsLength <= MAX && responsibilityLength <= MAX && descriptionLength <= MAX;
 
     }
 }

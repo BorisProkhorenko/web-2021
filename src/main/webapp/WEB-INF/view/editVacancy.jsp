@@ -19,7 +19,7 @@
                 <label for="name"><fmt:message key="label.name"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="name" name="name" value="${vacancy.name}" pattern="[а-яА-ЯёЁa-zA-ZäöüÄÖÜß ]{1,50}">
+                <input type="text" id="name" name="name" value="${vacancy.name}" pattern=".{1,50}">
             </div>
         </div>
         <div class="row">

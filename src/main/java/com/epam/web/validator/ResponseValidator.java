@@ -5,8 +5,8 @@ import com.epam.web.entity.Response;
 
 public class ResponseValidator implements Validator<Response> {
 
-    private final static int MAX_SUBJECT = 255;
-    private final static int MAX_DETAILS = 1000;
+    private final static int MAX_SUBJECT = 1800;
+    private final static int MAX_DETAILS = 7000;
 
     @Override
     public boolean validate(Response item) {
