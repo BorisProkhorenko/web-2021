@@ -1,7 +1,9 @@
-.error {
+/*error page*/
+.error h1 {
     color: red
 }
 
+/*commons*/
 html,
 body {
     height: 100%;
@@ -12,6 +14,11 @@ a {
     text-decoration: none;
 }
 
+p {
+    margin-block-end: 2px;
+}
+
+/*commons button*/
 button, .btn {
     transform: translateX(-50%);
     width: 120px;
@@ -31,10 +38,7 @@ button:hover, .vacancy a:hover {
     opacity: .7;
 }
 
-p {
-    margin-block-end: 2px;
-}
-
+/*containers*/
 .applicant-container {
     padding-left: 170px;
 }
@@ -43,6 +47,7 @@ p {
     min-height: 100%;
 }
 
+/*login page*/
 .login {
     margin: auto;
     width: 500px;
@@ -106,6 +111,7 @@ p {
     padding-top: 10%;
 }
 
+/*header*/
 .header {
     display: flex;
     flex-direction: row;
@@ -214,6 +220,7 @@ p {
     border-top: 7px solid #FFFA00;
 }
 
+/*pagination*/
 .pagination {
     margin-top: 20px;
     display: flex;
@@ -240,6 +247,7 @@ p {
 
 }
 
+/*footer*/
 .footer {
     padding: 10px 0 10px 20%;
     margin-top: 25px;
@@ -277,6 +285,7 @@ p {
     color: #FFFA00;
 }
 
+/*vacancies/responses list*/
 .list-item {
     padding-top: 5px;
     margin-top: 15px;
@@ -290,7 +299,7 @@ p {
     padding-left: 5px;
 }
 
-
+/*cv page*/
 .photo-contacts-cv {
     display: flex;
     flex-direction: row;
@@ -301,7 +310,6 @@ p {
 }
 
 .input-file {
-    /* visibility: hidden etc. wont work */
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -309,22 +317,19 @@ p {
     position: absolute;
     z-index: -1;
 }
-.input-file:focus + label {
-    /* keyboard navigation */
-    outline: 1px dotted #000;
-    outline: -webkit-focus-ring-color auto 5px;
-}
+
 .input-file + label * {
     cursor: pointer;
 }
 
-.input-button{
+/*buttons classes*/
+.input-button {
     background: black;
     color: #FFFA00;
     border: 4px outset black;
 }
 
-.input-button:hover{
+.input-button:hover {
     opacity: .7;
 }
 
@@ -399,32 +404,36 @@ p {
     height: 200px;
 }
 
+/*tables*/
 table {
     background: black;
     color: #FFFA00;
 }
-td{
+
+td {
     background: whitesmoke;
     color: black;
     text-align: center;
 }
 
-td a{
+td a {
     color: #FFFA00;
     background: black;
     padding: 10px;
 }
-td input[type=submit]{
+
+td input[type=submit] {
     color: #FFFA00;
     background: black;
     padding: 10px;
     border: none;
 }
 
-td a:hover, td input[type=submit]:hover{
+td a:hover, td input[type=submit]:hover {
     opacity: .7;
 }
-.table-header{
+
+.table-header {
     color: #FFFA00;
     background: black;
     text-align: center;

@@ -12,13 +12,27 @@
 
 <main class="container">
 
-    <form action="${pageContext.request.contextPath}/controller?command=updateResponseAndProcess" class="edit-form" method="post">
+    <form action="${pageContext.request.contextPath}/controller?command=updateResponseAndProcess" class="edit-form"
+          method="post">
         <div class="row">
             <div class="col-25">
                 <label for="subject"><fmt:message key="label.subject"/></label>
             </div>
             <div class="col-75">
-                <input type="text" id="subject" name="subject" value="${sessionScope.msg}" readonly>
+                <c:if test="${sessionScope.process.state == 'TECHNICAL' || sessionScope.process.state == 'PRELIMINARY'}">
+                    <fmt:message key="label.subject.interview" var="msg"/>
+                    <input type="text" id="subject" name="subject" value="${msg}" readonly>
+                </c:if>
+
+                <c:if test="${sessionScope.process.state == 'HIRED'}">
+                    <fmt:message key="label.subject.hired" var="msg"/>
+                    <input type="text" id="subject" name="subject" value="${msg}" readonly>
+                </c:if>
+
+                <c:if test="${sessionScope.process.state == 'REJECTED'}">
+                    <fmt:message key="label.subject.rejected" var="msg"/>
+                    <input type="text" id="subject" name="subject" value="${msg}" readonly>
+                </c:if>
             </div>
         </div>
 

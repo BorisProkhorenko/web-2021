@@ -15,15 +15,11 @@ import java.io.IOException;
 public class UpdateRecruitingProcessCommand implements Command {
 
     private final RecruitingProcessService processService;
-    private final static String INTERVIEW_MSG = "You are scheduled for an interview";
-    private final static String REJECT_MSG = "Sorry, but our company cannot offer you this position";
-    private final static String HIRED_MSG = "Congratulations on your new job in our company!";
     private final static String ID = "id";
     private final static String RATING = "rating";
     private final static String STATE = "state";
     private final static String APPLICANTS = "applicants";
     private final static String PROCESS = "process";
-    private final static String MESSAGE = "msg";
     private final static String FEEDBACK = "feedback";
 
     public UpdateRecruitingProcessCommand(RecruitingProcessService processService) {
@@ -47,22 +43,10 @@ public class UpdateRecruitingProcessCommand implements Command {
             processService.update(newProcess);
             return CommandResult.redirect(APPLICANTS);
         } else {
-            String msg = getMsgByState(state);
             HttpSession session = request.getSession();
             session.setAttribute(PROCESS, newProcess);
-            session.setAttribute(MESSAGE, msg);
             return CommandResult.redirect(FEEDBACK);
         }
     }
 
-    private String getMsgByState(ApplicantState state) {
-        switch (state) {
-            case REJECTED:
-                return REJECT_MSG;
-            case HIRED:
-                return HIRED_MSG;
-            default:
-                return INTERVIEW_MSG;
-        }
-    }
 }
