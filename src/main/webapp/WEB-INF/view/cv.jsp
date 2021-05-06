@@ -22,7 +22,7 @@
 
 <c:if test="${sessionScope.role == 'HR'}">
     <c:set var="mainClass" value="container"/>
-    <c:set var="processId" value="${not empty param.id ? param.id : sessionScope.processId}" scope="session" />
+    <c:set var="processId" value="${not empty param.id ? param.id : sessionScope.processId}" scope="session"/>
     <c:import url="/controller?command=getProcess&id=${processId}"/>
     <c:set var="user" value="${process.user}"/>
 
@@ -52,6 +52,7 @@
 
             <img src="${pageContext.request.contextPath}/controller?command=image&id=${user.id}" height="400"
                  width="400" alt="photo">
+
             <c:if test="${sessionScope.role == 'APPLICANT'}">
                 <jsp:include page="fragments/uploadFile.jsp"/>
             </c:if>
@@ -83,7 +84,8 @@
     <c:if test="${sessionScope.role == 'HR'}">
         <div class="buttons">
 
-            <form class="end-page-button" action="${pageContext.request.contextPath}/controller?command=applicants&id=${process.vacancy.id}"
+            <form class="end-page-button"
+                  action="${pageContext.request.contextPath}/controller?command=applicants&id=${process.vacancy.id}"
                   method="post">
                 <button>
                     <fmt:message key="label.back"/>

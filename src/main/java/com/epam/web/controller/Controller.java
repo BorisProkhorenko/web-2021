@@ -3,7 +3,6 @@ package com.epam.web.controller;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandFactory;
 import com.epam.web.command.CommandResult;
-import com.epam.web.dao.DaoHelperFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,8 +22,7 @@ public class Controller extends HttpServlet {
     private final static String COMMAND_HEADER = "/controller?command=";
 
     public Controller() {
-        DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
-        commandFactory = new CommandFactory(daoHelperFactory);
+        commandFactory = new CommandFactory();
     }
 
     @Override

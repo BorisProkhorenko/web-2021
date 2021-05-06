@@ -17,8 +17,7 @@ create table User
     name       varchar(1800),
     gender     enum("male","female") DEFAULT 'male',
     age        int,
-    photo      varchar(1800)
-        DEFAULT 'C:/Users/Прохоренко/IdeaProjects/EpamCourse/web-2021/src/main/webapp/icons/avatar.png',
+    photo      varchar(1800) DEFAULT '',
     contacts   text(7000),
     education  text(7000),
     experience text(7000),

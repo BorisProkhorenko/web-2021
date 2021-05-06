@@ -60,7 +60,8 @@ public class CommandFactory {
     private final ResponseService responseService;
     private final RecruitingProcessService processService;
 
-    public CommandFactory(DaoHelperFactory daoHelperFactory) {
+    public CommandFactory() {
+        DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
         userService = new UserService(daoHelperFactory);
         applicantService = new ApplicantService(daoHelperFactory);
         vacancyService = new VacancyService(daoHelperFactory);
