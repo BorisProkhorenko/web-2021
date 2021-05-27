@@ -5,8 +5,8 @@ import com.epam.web.entity.Applicant;
 public class ApplicantValidator implements Validator<Applicant> {
 
     private final static String NAME_PATTERN = "[a-zA-Z0-9&#; ]{1,1600}";
-    private final static int MIN_AGE = 20;
-    private final static int MAX_AGE = 99;
+    private final static int MIN_AGE = 16;
+    private final static int MAX_AGE = 100;
     private final static int MAX_PHOTO = 1800;
     private final static int MAX = 7000;
 
