@@ -1,10 +1,9 @@
-package validator;
+package com.epam.web.validator;
 
 import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
-import com.epam.web.validator.RecruitingProcessValidator;
 import org.junit.Assert;
 import org.junit.Test;
 

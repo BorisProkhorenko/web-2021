@@ -1,6 +1,5 @@
-package loader;
+package com.epam.web.loader;
 
-import com.epam.web.loader.PropertyLoader;
 import org.junit.Assert;
 import org.junit.Test;
 

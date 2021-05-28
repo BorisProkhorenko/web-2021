@@ -1,8 +1,7 @@
-package validator;
+package com.epam.web.validator;
 
 import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
-import com.epam.web.validator.ResponseValidator;
 import org.junit.Assert;
 import org.junit.Test;
 

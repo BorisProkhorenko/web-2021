@@ -1,12 +1,10 @@
-package service;
+package com.epam.web.service;
 
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.dao.VacancyDao;
 import com.epam.web.entity.Vacancy;
-import com.epam.web.service.ServiceException;
-import com.epam.web.service.VacancyService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

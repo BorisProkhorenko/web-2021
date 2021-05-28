@@ -1,12 +1,10 @@
-package service;
+package com.epam.web.service;
 
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.DaoHelperFactory;
-import com.epam.web.dao.ResponseDao;
-import com.epam.web.entity.Response;
-import com.epam.web.service.ResponseService;
-import com.epam.web.service.ServiceException;
+import com.epam.web.dao.UserDao;
+import com.epam.web.entity.User;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,29 +17,29 @@ import java.util.Optional;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
-public class ResponseServiceTest {
+public class UserServiceTest {
 
 
     private static DaoHelperFactory mockDaoHelperFactory;
     private static DaoHelper mockDaoHelper;
-    private static ResponseDao mockDao;
-    private static ResponseService responseService;
-    private static Response mockResponse;
+    private static UserDao mockDao;
+    private static UserService userService;
+    private static User mockUser;
     private final static Long MOCK_ID = 1L;
 
     @BeforeClass
     public static void initialize() throws DaoException {
 
-        mockDao = Mockito.mock(ResponseDao.class);
+        mockDao = Mockito.mock(UserDao.class);
         mockDaoHelper = Mockito.mock(DaoHelper.class);
         mockDaoHelperFactory = Mockito.mock(DaoHelperFactory.class);
         when(mockDaoHelperFactory.create())
                 .thenReturn(mockDaoHelper);
-        when(mockDaoHelper.createDao(Response.TABLE_NAME))
+        when(mockDaoHelper.createDao(User.TABLE_NAME))
                 .thenReturn(mockDao);
-        responseService = new ResponseService(mockDaoHelperFactory);
+        userService = new UserService(mockDaoHelperFactory);
 
-        mockResponse = Mockito.mock(Response.class);
+        mockUser = Mockito.mock(User.class);
 
     }
 
@@ -49,23 +47,23 @@ public class ResponseServiceTest {
     @Test
     public void testGetAll() throws DaoException, ServiceException {
         //given
-        when(mockDao.getAll())
+        when(mockDao.getAllSorted())
                 .thenReturn(new ArrayList<>());
         //when
-        List<Response> responseList = responseService.getAll();
+        List<User> userList = userService.getAll();
         //then
-        Assert.assertNotNull(responseList);
+        Assert.assertNotNull(userList);
     }
 
     @Test
     public void testGetById() throws DaoException, ServiceException {
         //given
         when(mockDao.getById(anyLong()))
-                .thenReturn(Optional.of(mockResponse));
+                .thenReturn(Optional.of(mockUser));
         //when
-        Optional<Response> optionalResponse = Optional.of(responseService.getById(MOCK_ID));
+        Optional<User> optionalUser = Optional.of(userService.getById(MOCK_ID));
         //then
-        Assert.assertTrue(optionalResponse.isPresent());
+        Assert.assertTrue(optionalUser.isPresent());
     }
 
     @Test(expected = ServiceException.class)
@@ -74,6 +72,8 @@ public class ResponseServiceTest {
         when(mockDao.getById(anyLong()))
                 .thenReturn(Optional.empty());
         //when
-        Optional<Response> optionalResponse = Optional.of(responseService.getById(MOCK_ID));
+        Optional<User> optionalUser = Optional.of(userService.getById(MOCK_ID));
     }
+
+
 }

@@ -1,10 +1,9 @@
-package validator;
+package com.epam.web.validator;
 
 import com.epam.web.entity.Applicant;
 import com.epam.web.entity.User;
 import com.epam.web.enums.Gender;
 import com.epam.web.enums.Role;
-import com.epam.web.validator.ApplicantValidator;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,7 +1,6 @@
-package validator;
+package com.epam.web.validator;
 
 import com.epam.web.entity.Vacancy;
-import com.epam.web.validator.VacancyValidator;
 import org.junit.Assert;
 import org.junit.Test;
 
