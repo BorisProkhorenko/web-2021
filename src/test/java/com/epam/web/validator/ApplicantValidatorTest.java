@@ -15,7 +15,7 @@ public class ApplicantValidatorTest {
     private final static String EMPTY_NAME = "";
     private final static int VALID_AGE = 20;
     private final static int OVERSIZE_AGE = 100;
-    private final static int INSUFFICIENT_AGE = 19;
+    private final static int INSUFFICIENT_AGE = 15;
     private final static String VALID_OTHER = " Some text Some textSome textSome" +
             "Some textSome textSome textSome textSome textSome textSome textSome textSome textSome text" +
             "Some textSome textSome textSome textSome textSome textSome textSome textSome textSome text" +
