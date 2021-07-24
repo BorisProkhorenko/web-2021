@@ -6,7 +6,6 @@ import com.epam.web.entity.Response;
 import com.epam.web.validator.RecruitingProcessValidator;
 import com.epam.web.validator.ResponseValidator;
 
-
 import java.util.List;
 
 public class RecruitingProcessService extends AbstractService<RecruitingProcess> {
@@ -48,6 +47,7 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
                 responseDao.save(feedback);
                 helper.endTransaction();
             } catch (DaoException e) {
+
                 throw new ServiceException(e.getMessage(), e);
             }
         } else if (!getValidator().validate(process)) {

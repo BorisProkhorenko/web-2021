@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
+public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
 
 
     private final static String INSERT_QUERY = "INSERT INTO USER_VACANCY(user_id, vacancy_id, state," +
@@ -65,11 +65,11 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess>{
     }
 
     public List<RecruitingProcess> getByUserAndVacancyId(Long userId, Long vacancyId) throws DaoException {
-        return executeQuery(SELECT_BY_USER_AND_VACANCY, userId,vacancyId);
+        return executeQuery(SELECT_BY_USER_AND_VACANCY, userId, vacancyId);
     }
 
     public void deleteVacancyLink(Long id) throws DaoException {
-        executeUpdate(DELETE_VACANCY_LINK,id);
+        executeUpdate(DELETE_VACANCY_LINK, id);
     }
 
     @Override

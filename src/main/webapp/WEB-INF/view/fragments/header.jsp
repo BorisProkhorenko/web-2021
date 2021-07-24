@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="lang" value="${not empty param.lang ? param.lang : not empty sessionScope.lang ? sessionScope.lang : pageContext.request.locale}" scope="session" />
+<c:set var="lang"
+       value="${not empty param.lang ? param.lang : not empty sessionScope.lang ? sessionScope.lang : pageContext.request.locale}"
+       scope="session"/>
 
 <fmt:setLocale value="${lang}" scope="session"/>
 <fmt:setBundle basename="language" scope="session"/>
@@ -12,11 +14,11 @@
 </head>
 
 <header class="header">
-<div class="header-section">
-    <div class="header-item headerLogo">
-        <em>HR</em>
+    <div class="header-section">
+        <div class="header-item headerLogo">
+            <em>HR</em>
+        </div>
     </div>
-</div>
     <div class="header-section">
 
         <div class="header-item headerButton">

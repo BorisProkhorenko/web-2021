@@ -42,16 +42,16 @@
             <td>
                 <br/>
                 <c:if test="${user.role != 'ADMIN'}">
-                <form action="${pageContext.request.contextPath}/controller?command=block&id=${user.id}&isBlocked=${user.isBlocked}"
-                      class="table-form" method="post">
-                    <c:if test="${user.isBlocked}">
-                        <input type="submit" value=<fmt:message key="label.unblock"/>>
-                    </c:if>
-                    <c:if test="${!user.isBlocked}">
-                        <input type="submit" value=<fmt:message key="label.block"/>>
-                    </c:if>
+                    <form action="${pageContext.request.contextPath}/controller?command=block&id=${user.id}&isBlocked=${user.isBlocked}"
+                          class="table-form" method="post">
+                        <c:if test="${user.isBlocked}">
+                            <input type="submit" value=<fmt:message key="label.unblock"/>>
+                        </c:if>
+                        <c:if test="${!user.isBlocked}">
+                            <input type="submit" value=<fmt:message key="label.block"/>>
+                        </c:if>
 
-                </form>
+                    </form>
                 </c:if>
             </td>
             </c:forEach>

@@ -52,4 +52,12 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
+    public void rollbackTransaction() throws DaoException {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
 }

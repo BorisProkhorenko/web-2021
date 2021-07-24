@@ -48,7 +48,7 @@
         <c:set var="vacancy" value="${response.recruitingProcess.vacancy}"/>
         <div class="list-item">
             <c:if test="${not empty vacancy.name}">
-            <strong>${vacancy.name}</strong>
+                <strong>${vacancy.name}</strong>
             </c:if>
             <c:if test="${empty vacancy.name}">
                 <strong><fmt:message key="label.vacancy.closed"/> </strong>

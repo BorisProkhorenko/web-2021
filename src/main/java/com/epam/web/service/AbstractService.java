@@ -10,7 +10,7 @@ import com.epam.web.validator.Validator;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractService<T extends Identifiable> {
+public abstract class AbstractService<T extends Identifiable> implements Service<T> {
 
     private final DaoHelperFactory daoHelperFactory;
     private final Validator validator;

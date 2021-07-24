@@ -15,7 +15,7 @@
 
 <main class="container">
     <div class="table-header">
-    <h1>${vacancy.name}</h1>
+        <h1>${vacancy.name}</h1>
     </div>
     <table border="1" width="100%" cellpadding="5">
         <tr>
@@ -48,7 +48,8 @@
 
                                 <c:if test="${applicantInProcess.state == 'PRELIMINARY'}">
                                     <option value="New"><fmt:message key="label.state.new"/></option>
-                                    <option value="Preliminary" selected><fmt:message key="label.state.preliminary"/></option>
+                                    <option value="Preliminary" selected><fmt:message
+                                            key="label.state.preliminary"/></option>
                                     <option value="Technical"><fmt:message key="label.state.technical"/></option>
                                     <option value="Hired"><fmt:message key="label.state.hired"/></option>
                                     <option value="Rejected"><fmt:message key="label.state.rejected"/></option>
@@ -58,7 +59,8 @@
                                 <c:if test="${applicantInProcess.state == 'TECHNICAL'}">
                                     <option value="New"><fmt:message key="label.state.new"/></option>
                                     <option value="Preliminary"><fmt:message key="label.state.preliminary"/></option>
-                                    <option value="Technical" selected><fmt:message key="label.state.technical"/></option>
+                                    <option value="Technical" selected><fmt:message
+                                            key="label.state.technical"/></option>
                                     <option value="Hired"><fmt:message key="label.state.hired"/></option>
                                     <option value="Rejected"><fmt:message key="label.state.rejected"/></option>
 

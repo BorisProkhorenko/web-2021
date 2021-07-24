@@ -1,6 +1,5 @@
 package com.epam.web.mapper;
 
-import com.epam.web.dao.DaoException;
 import com.epam.web.entity.User;
 import com.epam.web.enums.Role;
 
@@ -17,7 +16,7 @@ public class UserRowMapper implements RowMapper<User> {
 
 
     @Override
-    public User map(ResultSet resultSet) throws SQLException, DaoException {
+    public User map(ResultSet resultSet) throws SQLException{
 
         Long id = resultSet.getLong(ID);
         String username = resultSet.getString(USERNAME);

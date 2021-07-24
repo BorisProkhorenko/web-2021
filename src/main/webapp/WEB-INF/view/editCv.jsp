@@ -41,8 +41,8 @@
             <div class="col-75">
                 <select id="gender" name="gender">
                     <c:if test="${user.gender != 'FEMALE'}">
-                    <option value="male" selected><fmt:message key="label.male"/></option>
-                    <option value="female"><fmt:message key="label.female"/></option>
+                        <option value="male" selected><fmt:message key="label.male"/></option>
+                        <option value="female"><fmt:message key="label.female"/></option>
                     </c:if>
 
                     <c:if test="${user.gender == 'FEMALE'}">

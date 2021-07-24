@@ -14,11 +14,11 @@
             <fmt:message key="label.error"/>
         </h1>
     </div>
-<c:if test="${not empty sessionScope.id}">
-    <a href="${pageContext.request.contextPath}/controller?command=mainPage">
-        <fmt:message key="label.to.main"/>
-    </a>
-</c:if>
+    <c:if test="${not empty sessionScope.id}">
+        <a href="${pageContext.request.contextPath}/controller?command=mainPage&pageIndex=1">
+            <fmt:message key="label.to.main"/>
+        </a>
+    </c:if>
 
 </main>
 

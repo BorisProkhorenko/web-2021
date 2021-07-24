@@ -12,7 +12,7 @@
 
 <main class="vacancy">
 
-  <c:import url="/controller?command=vacancyList"/>
+    <c:import url="/controller?command=vacancyList"/>
 
     <c:forEach items="${vacancyList}" var="vacancy">
         <div class="list-item">
