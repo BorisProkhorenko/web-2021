@@ -40,20 +40,34 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
         if (getValidator().validate(process) &&
                 responseValidator.validate(feedback)) {
             try (DaoHelper helper = getDaoHelperFactory().create()) {
-                helper.startTransaction();
-                RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(getDaoType());
-                ResponseDao responseDao = (ResponseDao) helper.createDao(Response.TABLE_NAME);
-                processDao.save(process);
-                responseDao.save(feedback);
-                helper.endTransaction();
-            } catch (DaoException e) {
-
-                throw new ServiceException(e.getMessage(), e);
+                makeUpdateTransaction(helper, process, feedback);
             }
+
         } else if (!getValidator().validate(process)) {
             throw new ServiceException("invalid recruiting process");
         } else {
             throw new ServiceException("invalid feedback response");
+        }
+    }
+
+    public void makeUpdateTransaction(DaoHelper helper, RecruitingProcess process, Response feedback) throws ServiceException {
+        try {
+            helper.startTransaction();
+            RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(getDaoType());
+            ResponseDao responseDao = (ResponseDao) helper.createDao(Response.TABLE_NAME);
+            processDao.save(process);
+            responseDao.save(feedback);
+            helper.endTransaction();
+        } catch (DaoException e) {
+
+            try {
+                helper.rollbackTransaction();
+
+            } catch (DaoException exception) {
+                throw new ServiceException(e.getMessage(), e);
+            }
+
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
