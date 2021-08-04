@@ -10,18 +10,76 @@ import org.junit.Test;
 public class ApplicantValidatorTest {
 
     private final static ApplicantValidator VALIDATOR = new ApplicantValidator();
-    private final static String VALID_NAME = "Ivan Петров";
-    private final static String INVALID_NAME = "Ivan 6Petrov";
+    private final static String VALID_NAME = "Ivan Petrov";
+    private final static String INVALID_NAME = "Ivan %Petrov";
     private final static String EMPTY_NAME = "";
     private final static int VALID_AGE = 20;
-    private final static int OVERSIZE_AGE = 100;
+    private final static int OVERSIZE_AGE = 101;
     private final static int INSUFFICIENT_AGE = 15;
-    private final static String VALID_OTHER = " Some text Some textSome textSome" +
+    private final static String VALID_OTHER = " Some text Some textSome t                                                                                                                   extSome" +
             "Some textSome textSome textSome textSome textSome textSome textSome textSome textSome text" +
             "Some textSome textSome textSome textSome textSome textSome textSome textSome textSome text" +
             "Some textSome textSome textSome textSome textSome textSome textSome textSome text";
     private final static String VALID_PHOTO = "C:/Users/IdeaProjects/EpamCourse/web-2021/src/main/webapp/avatar.png";
-    private final static String OVERSIZE_OTHER = "Some text here Some text hereSome text hereSome text hereSome text here" +
+    private final static String OVERSIZE_OTHER = "Some text here Some text hereSome text hereSome text" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
+            "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
@@ -35,7 +93,7 @@ public class ApplicantValidatorTest {
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here" +
             "Some text hereSome text hereSome text hereSome text hereSome text hereSome text hereSome text here";
-    private final static User MOCK_USER = new User(1L, "", "", Role.ADMIN, false);
+    private final static User MOCK_USER = new User(1L, "user", "user", Role.ADMIN, false);
 
 
     @Test
@@ -67,7 +125,7 @@ public class ApplicantValidatorTest {
     @Test
     public void testInvalidApplicantOversizeNameShouldReturnFalse() {
         //given
-        Applicant applicant = new Applicant(MOCK_USER, VALID_OTHER, Gender.MALE, VALID_AGE,
+        Applicant applicant = new Applicant(MOCK_USER, OVERSIZE_OTHER, Gender.MALE, VALID_AGE,
                 VALID_PHOTO, VALID_OTHER,
                 VALID_OTHER, VALID_OTHER,
                 VALID_OTHER);
@@ -81,7 +139,7 @@ public class ApplicantValidatorTest {
     public void testInvalidApplicantOversizePhotoShouldReturnFalse() {
         //given
         Applicant applicant = new Applicant(MOCK_USER, VALID_NAME, Gender.MALE, VALID_AGE,
-                VALID_OTHER, VALID_OTHER,
+                OVERSIZE_OTHER, VALID_OTHER,
                 VALID_OTHER, VALID_OTHER,
                 VALID_OTHER);
         //when

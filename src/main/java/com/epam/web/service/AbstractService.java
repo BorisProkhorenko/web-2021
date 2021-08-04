@@ -6,12 +6,15 @@ import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.DaoHelperFactory;
 import com.epam.web.entity.Identifiable;
 import com.epam.web.validator.Validator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractService<T extends Identifiable> implements Service<T> {
 
+    static final Logger LOGGER = LogManager.getLogger();
     private final DaoHelperFactory daoHelperFactory;
     private final Validator validator;
     private final String daoType;
@@ -28,6 +31,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
             AbstractDao<T> dao = helper.createDao(daoType);
             return dao.getAll();
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(), e);
         }
     }
@@ -43,6 +47,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
                 throw new ServiceException("Item not found");
             }
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -53,6 +58,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
                 AbstractDao<T> dao = helper.createDao(daoType);
                 dao.save(item);
             } catch (DaoException e) {
+                LOGGER.error(e.getMessage(),e);
                 throw new ServiceException(e.getMessage(), e);
             }
         } else {
@@ -65,6 +71,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
             AbstractDao<T> dao = helper.createDao(daoType);
             dao.removeById(id);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(), e);
         }
     }

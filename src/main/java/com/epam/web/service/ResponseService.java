@@ -22,6 +22,7 @@ public class ResponseService extends AbstractService<Response> {
             ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
             return dao.getByUserId(id);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -31,6 +32,7 @@ public class ResponseService extends AbstractService<Response> {
             ResponseDao dao = (ResponseDao) helper.createDao(getDaoType());
             return dao.getByProcessId(id);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }

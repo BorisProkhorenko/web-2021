@@ -39,6 +39,7 @@ public class ApplicantService extends UserService {
             ApplicantDao applicantDao = (ApplicantDao) helper.createDao(getDaoType());
             applicantDao.updatePhoto(photo, id);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(), e);
         }
     }
@@ -49,6 +50,7 @@ public class ApplicantService extends UserService {
             BufferedImage image = ImageIO.read(fileContent);
             ImageIO.write(image, JPG, new File(path));
         } catch (IOException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(), e);
         }
     }

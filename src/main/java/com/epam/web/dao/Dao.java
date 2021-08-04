@@ -19,6 +19,7 @@ import java.util.Optional;
  */
 public interface Dao<T extends Identifiable> {
 
+
     /**
      * Method allows to get {@link Identifiable} object from Data Base table by it's
      *

@@ -26,6 +26,7 @@ public class VacancyService extends AbstractService<Vacancy> {
             VacancyDao dao = (VacancyDao) helper.createDao(getDaoType());
             return dao.getWithLimit(skipped, VACANCIES_ON_PAGE);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -40,6 +41,7 @@ public class VacancyService extends AbstractService<Vacancy> {
             vacancyDao.removeById(id);
             helper.endTransaction();
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(), e);
         }
     }

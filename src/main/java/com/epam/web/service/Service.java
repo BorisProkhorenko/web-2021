@@ -20,6 +20,7 @@ import java.util.List;
  */
 public interface Service<T extends Identifiable> {
 
+
     /**
      * Method allows to get all from Data Base table using DAO Layer
      *

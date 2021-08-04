@@ -27,6 +27,7 @@ public class UserService extends AbstractService<User> {
             UserDao userDao = (UserDao) helper.createDao(getDaoType());
             return userDao.getAllSorted();
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -37,6 +38,7 @@ public class UserService extends AbstractService<User> {
             isBlocked = !isBlocked;
             userDao.setUserBlockById(id, isBlocked);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -46,6 +48,7 @@ public class UserService extends AbstractService<User> {
             UserDao userDao = (UserDao) helper.createDao(getDaoType());
             return userDao.findUserByUsernameAndPassword(username, password);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
 

@@ -23,6 +23,7 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
             List<RecruitingProcess> items = dao.getByUserAndVacancyId(userId, vacancyId);
             return items.isEmpty();
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -32,6 +33,7 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
             RecruitingProcessDao dao = (RecruitingProcessDao) helper.createDao(getDaoType());
             return dao.getByVacancyId(id);
         } catch (DaoException e) {
+            LOGGER.error(e.getMessage(),e);
             throw new ServiceException(e);
         }
     }
@@ -59,11 +61,12 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
             responseDao.save(feedback);
             helper.endTransaction();
         } catch (DaoException e) {
-
+            LOGGER.error("Transaction failed - trying to rollback. Cause - " + e.getMessage(),e);
             try {
                 helper.rollbackTransaction();
 
             } catch (DaoException exception) {
+                LOGGER.error(e.getMessage(),e);
                 throw new ServiceException(e.getMessage(), e);
             }
 
