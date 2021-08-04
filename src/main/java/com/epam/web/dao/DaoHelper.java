@@ -39,6 +39,7 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
+            AbstractDao.LOGGER.error(e.getMessage(),e);
             throw new DaoException(e.getMessage(), e);
         }
     }
@@ -48,6 +49,7 @@ public class DaoHelper implements AutoCloseable {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
+            AbstractDao.LOGGER.error(e.getMessage(),e);
             throw new DaoException(e);
         }
     }
@@ -57,6 +59,7 @@ public class DaoHelper implements AutoCloseable {
             connection.rollback();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
+            AbstractDao.LOGGER.error(e.getMessage(),e);
             throw new DaoException(e);
         }
     }

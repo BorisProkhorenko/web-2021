@@ -2,6 +2,8 @@ package com.epam.web.dao;
 
 import com.epam.web.entity.Identifiable;
 import com.epam.web.mapper.RowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
+    protected static final Logger LOGGER = LogManager.getLogger();
     protected final static String SELECT_ALL_FROM = "SELECT * FROM ";
     protected final static String WHERE_ID = "WHERE ID = ? ";
     protected final static String DELETE_FROM = "DELETE FROM ";
@@ -37,6 +40,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             }
             return entities;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             throw new DaoException(e.getMessage(), e);
         }
 
@@ -67,6 +71,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         try (PreparedStatement statement = createStatement(query, params)) {
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             throw new DaoException(e.getMessage(), e);
         }
     }
