@@ -23,7 +23,7 @@ public class DaoHelper implements AutoCloseable {
         this.connection = connection;
     }
 
-    public AbstractDao getDao(String daoType) throws DaoException {
+    public Dao getDao(String daoType) throws DaoException {
         switch (daoType) {
             case User.TABLE_NAME:
                 return getUserDao();
