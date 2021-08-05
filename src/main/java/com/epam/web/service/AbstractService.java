@@ -28,7 +28,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
     public List<T> getAll() throws ServiceException {
 
         try (DaoHelper helper = daoHelperFactory.create()) {
-            AbstractDao<T> dao = helper.createDao(daoType);
+            AbstractDao<T> dao = helper.getDao(daoType);
             return dao.getAll();
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);
@@ -39,7 +39,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
     public T getById(Long id) throws ServiceException {
 
         try (DaoHelper helper = daoHelperFactory.create()) {
-            AbstractDao<T> dao = helper.createDao(daoType);
+            AbstractDao<T> dao = helper.getDao(daoType);
             Optional<T> item = dao.getById(id);
             if (item.isPresent()) {
                 return item.get();
@@ -55,7 +55,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
     public void update(T item) throws ServiceException {
         if (validator.validate(item)) {
             try (DaoHelper helper = getDaoHelperFactory().create()) {
-                AbstractDao<T> dao = helper.createDao(daoType);
+                AbstractDao<T> dao = helper.getDao(daoType);
                 dao.save(item);
             } catch (DaoException e) {
                 LOGGER.error(e.getMessage(),e);
@@ -68,7 +68,7 @@ public abstract class AbstractService<T extends Identifiable> implements Service
 
     public void deleteById(Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            AbstractDao<T> dao = helper.createDao(daoType);
+            AbstractDao<T> dao = helper.getDao(daoType);
             dao.removeById(id);
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);

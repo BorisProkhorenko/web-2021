@@ -35,7 +35,7 @@ public class ResponseServiceTest {
         mockDaoHelperFactory = Mockito.mock(DaoHelperFactory.class);
         when(mockDaoHelperFactory.create())
                 .thenReturn(mockDaoHelper);
-        when(mockDaoHelper.createDao(Response.TABLE_NAME))
+        when(mockDaoHelper.getDao(Response.TABLE_NAME))
                 .thenReturn(mockDao);
         responseService = new ResponseService(mockDaoHelperFactory);
 

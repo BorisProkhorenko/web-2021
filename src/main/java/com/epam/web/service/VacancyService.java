@@ -23,7 +23,7 @@ public class VacancyService extends AbstractService<Vacancy> {
         }
         int skipped = page * VACANCIES_ON_PAGE;
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            VacancyDao dao = (VacancyDao) helper.createDao(getDaoType());
+            VacancyDao dao = (VacancyDao) helper.getDao(getDaoType());
             return dao.getWithLimit(skipped, VACANCIES_ON_PAGE);
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);
@@ -35,9 +35,9 @@ public class VacancyService extends AbstractService<Vacancy> {
     public void deleteById(Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
             helper.startTransaction();
-            RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(RecruitingProcess.TABLE_NAME);
+            RecruitingProcessDao processDao = (RecruitingProcessDao) helper.getDao(RecruitingProcess.TABLE_NAME);
             processDao.deleteVacancyLink(id);
-            VacancyDao vacancyDao = (VacancyDao) helper.createDao(getDaoType());
+            VacancyDao vacancyDao = (VacancyDao) helper.getDao(getDaoType());
             vacancyDao.removeById(id);
             helper.endTransaction();
         } catch (DaoException e) {

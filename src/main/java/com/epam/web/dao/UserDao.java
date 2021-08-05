@@ -4,12 +4,17 @@ import com.epam.web.entity.User;
 import com.epam.web.enums.Role;
 import com.epam.web.mapper.UserRowMapper;
 
-import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class UserDao extends AbstractDao<User> {
+
+    private final static AtomicReference<UserDao> INSTANCE = new AtomicReference<>();
+    private final static Lock INSTANCE_LOCK = new ReentrantLock();
 
 
     private final static String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM USER WHERE USERNAME = ?" +
@@ -25,9 +30,26 @@ public class UserDao extends AbstractDao<User> {
 
     private final static String ORDER_BY_USERNAME = "ORDER BY username, role;";
 
-    public UserDao(Connection connection) {
+    protected UserDao() {
 
-        super(connection, new UserRowMapper());
+        super(new UserRowMapper());
+    }
+
+    public static UserDao getInstance() {
+        if (INSTANCE.get() == null) {
+            INSTANCE_LOCK.lock();
+
+            try {
+                if (INSTANCE.get() == null) {
+                    UserDao dao = new UserDao();
+                    INSTANCE.getAndSet(dao);
+                }
+
+            } finally {
+                INSTANCE_LOCK.unlock();
+            }
+        }
+        return INSTANCE.get();
     }
 
     public Optional<User> findUserByUsernameAndPassword(String username, String password) throws DaoException {

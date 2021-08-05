@@ -21,12 +21,15 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     protected final static String DELETE_FROM = "DELETE FROM ";
     protected final static String LIMIT = "LIMIT ?, ? ";
     protected final static String DELIMITER = " ";
-
-    private final Connection connection;
+    private Connection connection;
     private final RowMapper<T> mapper;
 
     protected AbstractDao(Connection connection, RowMapper<T> mapper) {
         this.connection = connection;
+        this.mapper = mapper;
+    }
+
+    protected AbstractDao( RowMapper<T> mapper) {
         this.mapper = mapper;
     }
 
@@ -123,6 +126,14 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     @Override
     public void removeById(Long id) throws DaoException {
         executeUpdate(concatQuery(DELETE_FROM, WHERE_ID), id);
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
     protected abstract String getTableName();

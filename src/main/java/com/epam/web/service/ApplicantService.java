@@ -36,7 +36,7 @@ public class ApplicantService extends UserService {
 
     private void updatePhoto(Long id, String photo) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            ApplicantDao applicantDao = (ApplicantDao) helper.createDao(getDaoType());
+            ApplicantDao applicantDao = (ApplicantDao) helper.getDao(getDaoType());
             applicantDao.updatePhoto(photo, id);
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);

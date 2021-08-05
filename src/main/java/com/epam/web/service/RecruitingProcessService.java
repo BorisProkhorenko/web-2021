@@ -19,7 +19,7 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
 
     public boolean isEmpty(Long userId, Long vacancyId) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            RecruitingProcessDao dao = (RecruitingProcessDao) helper.createDao(getDaoType());
+            RecruitingProcessDao dao = (RecruitingProcessDao) helper.getDao(getDaoType());
             List<RecruitingProcess> items = dao.getByUserAndVacancyId(userId, vacancyId);
             return items.isEmpty();
         } catch (DaoException e) {
@@ -30,7 +30,7 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
 
     public List<RecruitingProcess> getByVacancyId(Long id) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            RecruitingProcessDao dao = (RecruitingProcessDao) helper.createDao(getDaoType());
+            RecruitingProcessDao dao = (RecruitingProcessDao) helper.getDao(getDaoType());
             return dao.getByVacancyId(id);
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);
@@ -55,8 +55,8 @@ public class RecruitingProcessService extends AbstractService<RecruitingProcess>
     public void makeUpdateTransaction(DaoHelper helper, RecruitingProcess process, Response feedback) throws ServiceException {
         try {
             helper.startTransaction();
-            RecruitingProcessDao processDao = (RecruitingProcessDao) helper.createDao(getDaoType());
-            ResponseDao responseDao = (ResponseDao) helper.createDao(Response.TABLE_NAME);
+            RecruitingProcessDao processDao = (RecruitingProcessDao) helper.getDao(getDaoType());
+            ResponseDao responseDao = (ResponseDao) helper.getDao(Response.TABLE_NAME);
             processDao.save(process);
             responseDao.save(feedback);
             helper.endTransaction();

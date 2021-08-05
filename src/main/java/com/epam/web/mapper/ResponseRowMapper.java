@@ -5,7 +5,6 @@ import com.epam.web.dao.RecruitingProcessDao;
 import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -18,11 +17,8 @@ public class ResponseRowMapper implements RowMapper<Response> {
     public final static String DETAILS = "details";
     public final static String DATE = "date";
     public final static String PROCESS_ID = "user_vacancy_id";
-    private final RecruitingProcessDao recruitingProcessDao;
+    private final RecruitingProcessDao recruitingProcessDao = RecruitingProcessDao.getInstance();
 
-    public ResponseRowMapper(Connection connection) {
-        recruitingProcessDao = new RecruitingProcessDao(connection);
-    }
 
     @Override
     public Response map(ResultSet resultSet) throws SQLException, DaoException {

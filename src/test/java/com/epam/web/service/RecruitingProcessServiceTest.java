@@ -35,7 +35,7 @@ public class RecruitingProcessServiceTest {
         mockDaoHelperFactory = Mockito.mock(DaoHelperFactory.class);
         when(mockDaoHelperFactory.create())
                 .thenReturn(mockDaoHelper);
-        when(mockDaoHelper.createDao(RecruitingProcess.TABLE_NAME))
+        when(mockDaoHelper.getDao(RecruitingProcess.TABLE_NAME))
                 .thenReturn(mockDao);
         recruitingProcessService = new RecruitingProcessService(mockDaoHelperFactory, new ResponseValidator());
 

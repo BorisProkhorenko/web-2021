@@ -35,7 +35,7 @@ public class VacancyServiceTest {
         mockDaoHelperFactory = Mockito.mock(DaoHelperFactory.class);
         when(mockDaoHelperFactory.create())
                 .thenReturn(mockDaoHelper);
-        when(mockDaoHelper.createDao(Vacancy.TABLE_NAME))
+        when(mockDaoHelper.getDao(Vacancy.TABLE_NAME))
                 .thenReturn(mockDao);
         vacancyService = new VacancyService(mockDaoHelperFactory);
 

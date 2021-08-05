@@ -35,7 +35,7 @@ public class UserServiceTest {
         mockDaoHelperFactory = Mockito.mock(DaoHelperFactory.class);
         when(mockDaoHelperFactory.create())
                 .thenReturn(mockDaoHelper);
-        when(mockDaoHelper.createDao(User.TABLE_NAME))
+        when(mockDaoHelper.getDao(User.TABLE_NAME))
                 .thenReturn(mockDao);
         userService = new UserService(mockDaoHelperFactory);
 

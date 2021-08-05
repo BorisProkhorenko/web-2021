@@ -4,13 +4,17 @@ import com.epam.web.entity.RecruitingProcess;
 import com.epam.web.entity.Response;
 import com.epam.web.mapper.ResponseRowMapper;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ResponseDao extends AbstractDao<Response> {
 
+    private final static AtomicReference<ResponseDao> INSTANCE = new AtomicReference<>();
+    private final static Lock INSTANCE_LOCK = new ReentrantLock();
 
     private final static String INSERT_QUERY = "INSERT INTO RESPONSE(subject, details, " +
             "user_vacancy_id) VALUES(?,?,?);";
@@ -26,9 +30,26 @@ public class ResponseDao extends AbstractDao<Response> {
             " WHERE response.user_vacancy_id=user_vacancy.id AND user_vacancy.vacancy_id=?";
 
 
-    public ResponseDao(Connection connection) {
+    public ResponseDao() {
 
-        super(connection, new ResponseRowMapper(connection));
+        super(new ResponseRowMapper());
+    }
+
+    public static ResponseDao getInstance() {
+        if (INSTANCE.get() == null) {
+            INSTANCE_LOCK.lock();
+
+            try {
+                if (INSTANCE.get() == null) {
+                    ResponseDao dao = new ResponseDao();
+                    INSTANCE.getAndSet(dao);
+                }
+
+            } finally {
+                INSTANCE_LOCK.unlock();
+            }
+        }
+        return INSTANCE.get();
     }
 
 

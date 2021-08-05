@@ -6,14 +6,18 @@ import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 import com.epam.web.mapper.RecruitingProcessRowMapper;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
 
+    private final static AtomicReference<RecruitingProcessDao> INSTANCE = new AtomicReference<>();
+    private final static Lock INSTANCE_LOCK = new ReentrantLock();
 
     private final static String INSERT_QUERY = "INSERT INTO USER_VACANCY(user_id, vacancy_id, state," +
             " rating) VALUES(?,?,?,?);";
@@ -27,8 +31,25 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
 
     private final static String DELETE_VACANCY_LINK = "UPDATE USER_VACANCY SET vacancy_id=NULL WHERE vacancy_id=?";
 
-    public RecruitingProcessDao(Connection connection) {
-        super(connection, new RecruitingProcessRowMapper(connection));
+    public RecruitingProcessDao() {
+        super(new RecruitingProcessRowMapper());
+    }
+
+    public static RecruitingProcessDao getInstance() {
+        if (INSTANCE.get() == null) {
+            INSTANCE_LOCK.lock();
+
+            try {
+                if (INSTANCE.get() == null) {
+                    RecruitingProcessDao dao = new RecruitingProcessDao();
+                    INSTANCE.getAndSet(dao);
+                }
+
+            } finally {
+                INSTANCE_LOCK.unlock();
+            }
+        }
+        return INSTANCE.get();
     }
 
     @Override

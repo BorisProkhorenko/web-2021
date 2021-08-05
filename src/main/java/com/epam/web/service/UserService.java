@@ -24,7 +24,7 @@ public class UserService extends AbstractService<User> {
     @Override
     public List<User> getAll() throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            UserDao userDao = (UserDao) helper.createDao(getDaoType());
+            UserDao userDao = (UserDao) helper.getDao(getDaoType());
             return userDao.getAllSorted();
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);
@@ -34,7 +34,7 @@ public class UserService extends AbstractService<User> {
 
     public void changeBlock(Long id, boolean isBlocked) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            UserDao userDao = (UserDao) helper.createDao(getDaoType());
+            UserDao userDao = (UserDao) helper.getDao(getDaoType());
             isBlocked = !isBlocked;
             userDao.setUserBlockById(id, isBlocked);
         } catch (DaoException e) {
@@ -45,7 +45,7 @@ public class UserService extends AbstractService<User> {
 
     public Optional<User> login(String username, String password) throws ServiceException {
         try (DaoHelper helper = getDaoHelperFactory().create()) {
-            UserDao userDao = (UserDao) helper.createDao(getDaoType());
+            UserDao userDao = (UserDao) helper.getDao(getDaoType());
             return userDao.findUserByUsernameAndPassword(username, password);
         } catch (DaoException e) {
             LOGGER.error(e.getMessage(),e);

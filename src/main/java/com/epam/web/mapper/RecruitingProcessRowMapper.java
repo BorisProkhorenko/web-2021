@@ -8,7 +8,6 @@ import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -19,13 +18,9 @@ public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> 
     public final static String VACANCY_ID = "vacancy_id";
     public final static String STATE = "state";
     public final static String RATING = "rating";
-    public final UserDao userDao;
-    public final VacancyDao vacancyDao;
+    public final UserDao userDao = UserDao.getInstance();
+    public final VacancyDao vacancyDao = VacancyDao.getInstance();
 
-    public RecruitingProcessRowMapper(Connection connection) {
-        userDao = new UserDao(connection);
-        vacancyDao = new VacancyDao(connection);
-    }
 
     @Override
     public RecruitingProcess map(ResultSet resultSet) throws SQLException, DaoException {
