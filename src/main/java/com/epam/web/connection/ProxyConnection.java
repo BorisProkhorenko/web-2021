@@ -60,6 +60,10 @@ public class ProxyConnection implements Connection {
         pool.returnConnection(this);
     }
 
+    public void destroy() throws SQLException {
+        connection.close();
+    }
+
     @Override
     public boolean isClosed() throws SQLException {
         return connection.isClosed();

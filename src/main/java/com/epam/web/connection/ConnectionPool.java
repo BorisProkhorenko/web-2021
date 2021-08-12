@@ -1,6 +1,9 @@
 package com.epam.web.connection;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
@@ -11,6 +14,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
+
+    private static final Logger LOGGER = LogManager.getLogger();
+
     private final Queue<ProxyConnection> availableConnections;
     private final Queue<ProxyConnection> connectionsInUse;
 
@@ -55,8 +61,25 @@ public class ConnectionPool {
                 ProxyConnection proxyConnection = new ProxyConnection(connection, this);
                 availableConnections.add(proxyConnection);
             }
+
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            shutdown();
             throw new ConnectionPoolException(e.getMessage(), e);
+
+        }
+    }
+
+
+    private void checkConnections() {
+        connectionsLock.lock();
+        try {
+            if (availableConnections.isEmpty() && connectionsInUse.isEmpty()) {
+                createConnections();
+            }
+        } finally {
+            connectionsLock.unlock();
+
         }
     }
 
@@ -75,7 +98,9 @@ public class ConnectionPool {
         }
     }
 
+
     public ProxyConnection getConnection() {
+        checkConnections();
         try {
             connectionsSemaphore.acquire();
             connectionsLock.lock();
@@ -85,10 +110,33 @@ public class ConnectionPool {
             return connection;
 
         } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage(), e);
+            shutdown();
             throw new ConnectionPoolException(e.getMessage(), e);
 
         } finally {
             connectionsLock.unlock();
         }
     }
+
+
+    public void shutdown() {
+        connectionsLock.lock();
+
+        try {
+            connectionsInUse.forEach(this::returnConnection);
+            for (ProxyConnection connection : availableConnections) {
+                connection.destroy();
+            }
+            availableConnections.clear();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+
+        } finally {
+            connectionsLock.unlock();
+        }
+    }
+
+
 }

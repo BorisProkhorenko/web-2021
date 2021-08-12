@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ApplicantRowMapper extends UserRowMapper {
-    public final static String NAME = "name";
-    public final static String GENDER = "gender";
-    public final static String AGE = "age";
-    public final static String PHOTO = "photo";
-    public final static String CONTACTS = "contacts";
-    public final static String EDUCATION = "education";
-    public final static String EXPERIENCE = "experience";
-    public final static String SKILLS = "skills";
+    private final static String NAME = "name";
+    private final static String GENDER = "gender";
+    private final static String AGE = "age";
+    private final static String PHOTO = "photo";
+    private final static String CONTACTS = "contacts";
+    private final static String EDUCATION = "education";
+    private final static String EXPERIENCE = "experience";
+    private final static String SKILLS = "skills";
 
 
     @Override

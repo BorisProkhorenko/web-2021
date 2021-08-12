@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 public class VacancyRowMapper implements RowMapper<Vacancy> {
 
-    public final static String ID = "id";
-    public final static String NAME = "name";
-    public final static String SALARY = "salary";
-    public final static String RESPONSIBILITY = "responsibility";
-    public final static String DESCRIPTION = "description";
-    public final static String REQUIREMENTS = "requirements";
+    private final static String ID = "id";
+    private final static String NAME = "name";
+    private final static String SALARY = "salary";
+    private final static String RESPONSIBILITY = "responsibility";
+    private final static String DESCRIPTION = "description";
+    private final static String REQUIREMENTS = "requirements";
 
 
     @Override

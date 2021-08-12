@@ -31,7 +31,7 @@ public class RecruitingProcessDao extends AbstractDao<RecruitingProcess> {
 
     private final static String DELETE_VACANCY_LINK = "UPDATE USER_VACANCY SET vacancy_id=NULL WHERE vacancy_id=?";
 
-    public RecruitingProcessDao() {
+    private RecruitingProcessDao() {
         super(new RecruitingProcessRowMapper());
     }
 

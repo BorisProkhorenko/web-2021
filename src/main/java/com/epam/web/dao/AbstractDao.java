@@ -24,12 +24,8 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     private Connection connection;
     private final RowMapper<T> mapper;
 
-    protected AbstractDao(Connection connection, RowMapper<T> mapper) {
-        this.connection = connection;
-        this.mapper = mapper;
-    }
 
-    protected AbstractDao( RowMapper<T> mapper) {
+    protected AbstractDao(RowMapper<T> mapper) {
         this.mapper = mapper;
     }
 

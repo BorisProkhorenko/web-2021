@@ -1,5 +1,6 @@
 package com.epam.web.mapper;
 
+import com.epam.web.connection.ConnectionPool;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.UserDao;
 import com.epam.web.dao.VacancyDao;
@@ -8,19 +9,31 @@ import com.epam.web.entity.User;
 import com.epam.web.entity.Vacancy;
 import com.epam.web.enums.ApplicantState;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
 public class RecruitingProcessRowMapper implements RowMapper<RecruitingProcess> {
-    public final static String ID = "id";
-    public final static String USER_ID = "user_id";
-    public final static String VACANCY_ID = "vacancy_id";
-    public final static String STATE = "state";
-    public final static String RATING = "rating";
+    private final static String ID = "id";
+    private final static String USER_ID = "user_id";
+    private final static String VACANCY_ID = "vacancy_id";
+    private final static String STATE = "state";
+    private final static String RATING = "rating";
     public final UserDao userDao = UserDao.getInstance();
     public final VacancyDao vacancyDao = VacancyDao.getInstance();
 
+    public RecruitingProcessRowMapper() {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        if (vacancyDao.getConnection() == null){
+            Connection connection = connectionPool.getConnection();
+            vacancyDao.setConnection(connection);
+        }
+        if (userDao.getConnection() == null){
+            Connection connection = connectionPool.getConnection();
+            userDao.setConnection(connection);
+        }
+    }
 
     @Override
     public RecruitingProcess map(ResultSet resultSet) throws SQLException, DaoException {

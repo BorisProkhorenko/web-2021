@@ -24,7 +24,6 @@ public class VacancyDao extends AbstractDao<Vacancy> {
 
 
     private VacancyDao() {
-
         super(new VacancyRowMapper());
     }
 

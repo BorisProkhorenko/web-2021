@@ -31,7 +31,6 @@ public class UserDao extends AbstractDao<User> {
     private final static String ORDER_BY_USERNAME = "ORDER BY username, role;";
 
     protected UserDao() {
-
         super(new UserRowMapper());
     }
 

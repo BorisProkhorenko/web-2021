@@ -3,6 +3,7 @@ package com.epam.web.controller;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandFactory;
 import com.epam.web.command.CommandResult;
+import com.epam.web.connection.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,6 +49,12 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.shutdown();
     }
 
 }

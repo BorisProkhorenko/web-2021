@@ -30,8 +30,7 @@ public class ResponseDao extends AbstractDao<Response> {
             " WHERE response.user_vacancy_id=user_vacancy.id AND user_vacancy.vacancy_id=?";
 
 
-    public ResponseDao() {
-
+    private ResponseDao() {
         super(new ResponseRowMapper());
     }
 

@@ -2,6 +2,8 @@ package com.epam.web.connection;
 
 
 import com.epam.web.loader.PropertyLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,6 +13,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
+    private static final Logger LOGGER = LogManager.getLogger();
     private final static String PROPERTY_FILE = "db.properties";
     private final static String DRIVER = "db.driver";
     private final static String URL = "db.url";
@@ -43,6 +46,7 @@ public class ConnectionFactory {
             password = properties.getProperty(PASSWORD);
 
         } catch (ClassNotFoundException | IOException e) {
+            LOGGER.error(e.getMessage(), e);
             throw new ConnectionPoolException(e.getMessage(), e);
         }
     }

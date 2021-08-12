@@ -8,11 +8,11 @@ import java.sql.SQLException;
 
 public class UserRowMapper implements RowMapper<User> {
 
-    public final static String ID = "id";
-    public final static String USERNAME = "username";
-    public final static String PASSWORD = "password";
-    public final static String ROLE = "role";
-    public final static String IS_BLOCKED = "is_blocked";
+    private final static String ID = "id";
+    private final static String USERNAME = "username";
+    private final static String PASSWORD = "password";
+    private final static String ROLE = "role";
+    private final static String IS_BLOCKED = "is_blocked";
 
 
     @Override
