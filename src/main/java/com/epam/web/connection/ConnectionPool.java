@@ -20,7 +20,7 @@ public class ConnectionPool {
     private final Queue<ProxyConnection> availableConnections;
     private final Queue<ProxyConnection> connectionsInUse;
 
-    private final static int POOL_SIZE = 10;
+    private final static int POOL_SIZE = 5;
     private final static AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
     private final static Lock INSTANCE_LOCK = new ReentrantLock();
 
@@ -71,19 +71,6 @@ public class ConnectionPool {
     }
 
 
-    private void checkConnections() {
-        connectionsLock.lock();
-        try {
-            if (availableConnections.isEmpty() && connectionsInUse.isEmpty()) {
-                createConnections();
-            }
-        } finally {
-            connectionsLock.unlock();
-
-        }
-    }
-
-
     public void returnConnection(ProxyConnection connection) {
         connectionsLock.lock();
         try {
@@ -100,7 +87,7 @@ public class ConnectionPool {
 
 
     public ProxyConnection getConnection() {
-        checkConnections();
+
         try {
             connectionsSemaphore.acquire();
             connectionsLock.lock();
