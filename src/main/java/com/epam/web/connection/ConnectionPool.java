@@ -71,21 +71,6 @@ public class ConnectionPool {
     }
 
 
-    public void returnConnection(ProxyConnection connection) {
-        connectionsLock.lock();
-        try {
-            if (connectionsInUse.contains(connection)) {
-                connectionsInUse.remove(connection);
-                availableConnections.add(connection);
-
-                connectionsSemaphore.release();
-            }
-        } finally {
-            connectionsLock.unlock();
-        }
-    }
-
-
     public ProxyConnection getConnection() {
 
         try {
@@ -101,6 +86,20 @@ public class ConnectionPool {
             shutdown();
             throw new ConnectionPoolException(e.getMessage(), e);
 
+        } finally {
+            connectionsLock.unlock();
+        }
+    }
+
+
+    public void returnConnection(ProxyConnection connection) {
+        connectionsLock.lock();
+        try {
+            if (connectionsInUse.contains(connection)) {
+                connectionsInUse.remove(connection);
+                availableConnections.add(connection);
+                connectionsSemaphore.release();
+            }
         } finally {
             connectionsLock.unlock();
         }
