@@ -9,11 +9,6 @@ public class XssFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) {
-    }
-
-
-    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException,
             ServletException {
 
@@ -21,7 +16,4 @@ public class XssFilter implements Filter {
         chain.doFilter(new XssRequestWrapper(request), servletResponse);
     }
 
-    @Override
-    public void destroy() {
-    }
 }

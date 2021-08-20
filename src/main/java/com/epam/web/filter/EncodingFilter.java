@@ -31,7 +31,5 @@ public class EncodingFilter implements Filter {
         next.doFilter(request, response);
     }
 
-    public void destroy() {
-    }
 }
 

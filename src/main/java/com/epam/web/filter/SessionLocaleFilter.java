@@ -2,6 +2,7 @@ package com.epam.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -15,20 +16,15 @@ public class SessionLocaleFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession();
 
         if (req.getParameter(LOCALE) != null) {
-            req.getSession().setAttribute(LANG, req.getParameter(LOCALE));
+            String localeParam = req.getParameter(LOCALE);
+            session.setAttribute(LANG, localeParam);
         }
         chain.doFilter(request, response);
     }
 
-    @Override
-    public void destroy() {
-    }
-
-    @Override
-    public void init(FilterConfig arg0) {
-    }
 }
 
 

@@ -73,7 +73,6 @@ public class XssRequestWrapper extends HttpServletRequestWrapper {
     private String stripXss(String value) {
         if (value != null) {
 
-
             value = value.replaceAll(REPLACE, EMPTY);
 
             for (Pattern scriptPattern : patterns) {

@@ -7,7 +7,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
+import java.util.HashSet;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
@@ -18,7 +20,7 @@ public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final Queue<ProxyConnection> availableConnections;
-    private final Queue<ProxyConnection> connectionsInUse;
+    private final Set<ProxyConnection> connectionsInUse;
 
     private final static int POOL_SIZE = 5;
     private final static AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
@@ -30,7 +32,7 @@ public class ConnectionPool {
 
     private ConnectionPool() throws ConnectionPoolException {
         availableConnections = new ArrayDeque<>();
-        connectionsInUse = new ArrayDeque<>();
+        connectionsInUse = new HashSet<>();
         connectionsSemaphore = new Semaphore(POOL_SIZE);
         connectionFactory = new ConnectionFactory();
         createConnections();

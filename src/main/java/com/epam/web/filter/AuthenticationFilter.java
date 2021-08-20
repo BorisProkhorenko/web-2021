@@ -12,9 +12,6 @@ public class AuthenticationFilter implements Filter {
     private final static String COMMAND = "command";
     private final static String LOGIN_COMMAND = "login";
 
-    @Override
-    public void init(FilterConfig filterConfig) {
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -32,8 +29,4 @@ public class AuthenticationFilter implements Filter {
         }
     }
 
-    @Override
-    public void destroy() {
-
-    }
 }

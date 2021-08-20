@@ -6,7 +6,10 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AuthorizationFilter implements Filter {
 
@@ -89,8 +92,4 @@ public class AuthorizationFilter implements Filter {
         dispatcher.forward(servletRequest, servletResponse);
     }
 
-    @Override
-    public void destroy() {
-
-    }
 }
