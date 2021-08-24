@@ -56,9 +56,7 @@ public class PaginationTag extends SimpleTagSupport {
         Writer out = getJspContext().getOut();
         ResourceBundle bundle = getBundle();
         try {
-            if (currPage < 1 || currPage >= pgEnd) {
-                throw new JspException("Invalid page parameter in uri");
-            }
+
             if (currPage > 1) {
                 out.write(constructLink(1, bundle.getString(FIRST)));
                 out.write(constructLink(currPage - 1, bundle.getString(PREVIOUS)));

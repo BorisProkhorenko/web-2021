@@ -30,6 +30,10 @@ public class GetVacanciesByPageCommand implements Command {
         String page = (String) session.getAttribute(PAGE_INDEX);
         int pageIndex = Integer.parseInt(page);
         List<Vacancy> vacancyList = service.getVacanciesByPage(pageIndex);
+        if(vacancyList.isEmpty() && pageIndex!=1){
+            session.setAttribute(PAGE_INDEX,"1");
+            return execute(request,response);
+        }
         request.setAttribute(VACANCY_LIST, vacancyList);
         request.setAttribute(VACANCIES_ON_PAGE, service.getVacanciesOnPage());
         List<Vacancy> all = service.getAll();
