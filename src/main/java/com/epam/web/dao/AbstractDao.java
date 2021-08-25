@@ -106,12 +106,10 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     public void save(T item) throws DaoException {
         ArrayList<Object> paramList = new ArrayList<>(extractParams(item));
         Long id = item.getId();
-        String query;
+        String query = getInsertQuery();
         if (getById(id).isPresent()) {
             paramList.add(id);
             query = getUpdateQuery();
-        } else {
-            query = getInsertQuery();
         }
         Object[] params = paramList.toArray();
         executeUpdate(query, params);

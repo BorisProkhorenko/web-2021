@@ -26,14 +26,15 @@ public class VacancyService extends AbstractService<Vacancy> {
             VacancyDao dao = (VacancyDao) helper.getDao(getDaoType());
             return dao.getWithLimit(skipped, VACANCIES_ON_PAGE);
         } catch (DaoException e) {
-            LOGGER.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(), e);
             throw new ServiceException(e);
         }
     }
 
     @Override
     public void deleteById(Long id) throws ServiceException {
-        try (DaoHelper helper = getDaoHelperFactory().create()) {
+        DaoHelper helper = getDaoHelperFactory().create();
+        try {
             helper.startTransaction();
             RecruitingProcessDao processDao = (RecruitingProcessDao) helper.getDao(RecruitingProcess.TABLE_NAME);
             processDao.deleteVacancyLink(id);
@@ -41,8 +42,17 @@ public class VacancyService extends AbstractService<Vacancy> {
             vacancyDao.removeById(id);
             helper.endTransaction();
         } catch (DaoException e) {
-            LOGGER.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(), e);
+            try {
+                helper.rollbackTransaction();
+
+            } catch (DaoException exception) {
+                LOGGER.error(e.getMessage(), e);
+                throw new ServiceException(e.getMessage(), e);
+            }
             throw new ServiceException(e.getMessage(), e);
+        } finally {
+            helper.close();
         }
     }
 
